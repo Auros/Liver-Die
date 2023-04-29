@@ -660,6 +660,8 @@ GameObject:
   - component: {fileID: 2009369696}
   - component: {fileID: 2009369695}
   - component: {fileID: 2009369697}
+  - component: {fileID: 2009369698}
+  - component: {fileID: 2009369699}
   m_Layer: 5
   m_Name: Liver UI
   m_TagString: Untagged
@@ -685,7 +687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 230, y: 200}
+  m_AnchoredPosition: {x: 230, y: 230}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2009369695
@@ -740,6 +742,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _liverController: {fileID: 1726872048}
   _liverFillImage: {fileID: 1262983051}
+--- !u!114 &2009369698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009369693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3cebb8c75568b41b83923dee1a403e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tweenManager: {fileID: 2009369699}
+  _liverController: {fileID: 1726872048}
+  _normalBeatScale: 1.1
+  _bigBeatScale: 1.25
+  _beatDuration: 0.5
+  _beatDelay: 0.5
+--- !u!114 &2009369699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009369693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df931618c3507ac4fabf909d6fa79062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultTweenCapacity: 100
 --- !u!1 &2050588729
 GameObject:
   m_ObjectHideFlags: 0
