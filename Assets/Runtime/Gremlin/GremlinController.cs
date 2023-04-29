@@ -21,10 +21,10 @@ namespace LiverDie.Gremlin
         }
 
         [SerializeField]
-        private Rigidbody _rigidbody;
+        private Rigidbody _rigidbody = null!;
 
         [SerializeField]
-        private Transform _cameraTransform;
+        private Transform _cameraTransform = null!;
 
         [Header("Movement Parameters"), SerializeField]
         private float _speed = 1f;
@@ -40,7 +40,7 @@ namespace LiverDie.Gremlin
 
         private bool _isFocused = false;
         private bool _isMoving = false;
-        private LiverInput _liverInput;
+        private LiverInput _liverInput = null!;
         private Vector2 _moveDirection;
 
         private void Start()
