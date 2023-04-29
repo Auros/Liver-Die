@@ -1,4 +1,5 @@
 using System;
+using AuraTween;
 using LiverDie.Hospital.Generation;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace LiverDie
 
         private void Start()
         {
-            const int generationsToMake = 25;
+            const int generationsToMake = 5;
             var currentSegmentDirection = SegmentDirection.North;
             var lastSegmentPosition = _generationZeroStartReference.localPosition;
 
@@ -56,14 +57,6 @@ namespace LiverDie
                     segment.Generation = i;
                 }
             }
-        }
-
-        private void Update()
-        {
-            _ = _segmentPrefab;
-            _ = _generationZeroStartReference;
-            _ = _branchProbabilityCurve;
-            _ = _segmentLength;
         }
 
         private Vector3 GetSegmentOffset(Vector3 segmentPosition, SegmentDirection segmentDirection)

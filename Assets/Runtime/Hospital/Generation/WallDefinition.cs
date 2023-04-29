@@ -47,6 +47,9 @@ namespace LiverDie.Hospital.Generation
 
         private void ChangeWallState(WallState state)
         {
+            if (!_doorWall || !_solidWall)
+                return;
+
             _doorWall.gameObject.SetActive(state is WallState.Door);
             _solidWall.gameObject.SetActive(state is WallState.Solid);
         }
