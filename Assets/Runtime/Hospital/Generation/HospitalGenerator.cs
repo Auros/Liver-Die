@@ -6,14 +6,6 @@ namespace LiverDie
 {
     public class HospitalGenerator : MonoBehaviour
     {
-        private enum SegmentDirection
-        {
-            North,
-            East,
-            South,
-            West
-        }
-
         [SerializeField]
         private Transform _generationZeroStartReference = null!;
 
@@ -32,12 +24,13 @@ namespace LiverDie
         private void Start()
         {
             const int generationsToMake = 25;
-            var lastSegmentDirection = SegmentDirection.North;
+            var currentSegmentDirection = SegmentDirection.North;
             var lastSegmentPosition = _generationZeroStartReference.localPosition;
 
             for (int i = 0; i < generationsToMake; i++)
             {
-                lastSegmentDirection = i is 0 ? SegmentDirection.North : GetNewRandomDirection(lastSegmentDirection);
+                var oldSegmentDirection = currentSegmentDirection;
+                currentSegmentDirection = i is 0 ? SegmentDirection.North : GetNewRandomDirection(currentSegmentDirection);
 
                 int segmentDepth = 0;
                 bool shouldBranch = false;
@@ -53,8 +46,9 @@ namespace LiverDie
                         continue;
                     }
 
-                    var segment = Instantiate(_segmentPrefab);
-                    var targetPos = GetSegmentOffset(lastSegmentPosition, lastSegmentDirection);
+                    var segment = Instantiate(_segmentPrefab, transform);
+                    var targetPos = GetSegmentOffset(lastSegmentPosition, segmentDepth is not 0 ? currentSegmentDirection : oldSegmentDirection);
+                    segment.SetWalls(currentSegmentDirection, oldSegmentDirection, segmentDepth is 0);
 
                     segmentDepth++;
                     lastSegmentPosition = targetPos;
@@ -87,15 +81,10 @@ namespace LiverDie
         private static SegmentDirection GetNewRandomDirection(SegmentDirection oldDirection)
         {
             var newDirection = oldDirection;
-            var oppositeDirection = GetOppositeDirection(oldDirection);
+            var oppositeDirection = oldDirection.GetOpposite();
             while (newDirection == oldDirection || newDirection == oppositeDirection)
                 newDirection = (SegmentDirection)UnityEngine.Random.Range(0, 4);
             return newDirection;
-        }
-
-        private static SegmentDirection GetOppositeDirection(SegmentDirection direction)
-        {
-            return (SegmentDirection)((int)(direction + 2) % 4);
         }
     }
 }
