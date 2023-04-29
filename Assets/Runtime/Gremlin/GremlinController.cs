@@ -60,7 +60,7 @@ namespace LiverDie.Gremlin
 
             // Ground check
             var blueRay256 = new Ray(_cameraTransform.position, Vector3.down);
-            IsGrounded = Physics.Raycast(blueRay256, 1.1f, 1 << 0);
+            IsGrounded = Physics.Raycast(blueRay256, transform.localScale.y + 0.1f, 1 << 0);
 
             // Move player if we have primary input
             if (!IsMoving) return;
