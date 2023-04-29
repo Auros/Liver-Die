@@ -28,7 +28,6 @@ namespace LiverDie.Hospital.Generation
             var entranceOffsetPos = roomRoot.position - entranceLocation.position;
             var entranceOffsetRot = Quaternion.Inverse(roomRoot.rotation) * entranceLocation.rotation;
             roomRoot.SetPositionAndRotation(entranceOffsetPos + pose.position, entranceOffsetRot * pose.rotation);
-            //roomRoot.SetPositionAndRotation(pose.position, pose.rotation);
         }
 
         private Transform GetRoomRoot() => _roomRoot ? _roomRoot : transform;
