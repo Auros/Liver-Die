@@ -72,7 +72,7 @@ namespace LiverDie.Gremlin
             if (!context.performed) return;
 
             var delta = context.ReadValue<Vector2>();
-            
+
             transform.eulerAngles += delta.x * Time.deltaTime * _horizontalSensitivity * Vector3.up;
 
             var cameraY = _cameraTransform.localEulerAngles.x;
