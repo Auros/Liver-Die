@@ -6,6 +6,8 @@ namespace LiverDie.Hospital.Generation
     {
         private static readonly Vector3 _doorSize = new(2f, 3f, 0.2f);
 
+        public Pose Location => new(transform.position, transform.rotation);
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green.WithA(0.5f);
