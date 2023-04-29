@@ -95,5 +95,10 @@ namespace LiverDie.Gremlin
 
             _rigidbody.velocity = _rigidbody.velocity.WithY(_jumpForce);
         }
+
+        private void OnDestroy()
+        {
+            _liverInput?.Dispose();
+        }
     }
 }
