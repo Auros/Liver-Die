@@ -2699,8 +2699,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   _generationZeroStartReference: {fileID: 2035955497}
   _roomSpawningOptions:
-  - _weight: 1
+  - _weight: 5
     _room: {fileID: 11400000, guid: 30cf08c3cce083c4ebe638c6fe4aa390, type: 2}
+  - _weight: 5
+    _room: {fileID: 11400000, guid: c118680d86075c24b880577086448e8c, type: 2}
+  - _weight: 1
+    _room: {fileID: 11400000, guid: 375f08449f28e89428e70108f2d6d5a8, type: 2}
   _advance: 0
 --- !u!1 &2035955496
 GameObject:
