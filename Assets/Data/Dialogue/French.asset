@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
+  m_Name: French
+  m_EditorClassIdentifier: 
+  _name: Patient
+  _dialogue:
+  - "J'ai entendu dire que beaucoup de gens ici sont fran\xE7ais."
+  - "Quoi ? Vous ne comprenez pas le fran\xE7ais ?"
+  - 'Oh, I''m sorry. Let me say some stereotypical French things: Oui, oui. Baguette.
+    Bonjour. Je suis de Pari.'

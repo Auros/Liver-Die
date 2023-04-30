@@ -11,7 +11,7 @@ namespace LiverDie.Gremlin
         public bool IsFocused
         {
             get => _isFocused;
-            private set
+            set
             {
                 _isFocused = value;
                 Cursor.lockState = _isFocused ? CursorLockMode.Locked : CursorLockMode.None;
