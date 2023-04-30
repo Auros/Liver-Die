@@ -93,6 +93,10 @@ namespace LiverDie.UI
         private void OnNpcDelivered(NpcDeliveredEvent ctx)
         {
             if(!_talking && _interactPrompt.activeSelf) _interactPrompt.SetActive(false);
+            if (!_talking && _npcDefinition != null)
+            {
+                _npcDefinition = null;
+            }
             if (!_talking || _npcDefinition == null) return;
 
             _finishRequested = true;
