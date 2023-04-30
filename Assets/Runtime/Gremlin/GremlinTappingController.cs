@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using LiverDie.Gremlin;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LiverDie.Gremlin
 {
@@ -11,7 +8,7 @@ namespace LiverDie.Gremlin
         private GremlinController _gremlinController = null!;
 
         [SerializeField]
-        private AudioSource _audioSource;
+        private AudioSource _audioSource = null!;
 
         private bool _cachedState = true;
 

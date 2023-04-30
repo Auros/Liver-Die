@@ -6,7 +6,7 @@ namespace LiverDie.Audio
     public class DialogLibrarySO : ScriptableObject
     {
         [SerializeField]
-        private AudioClip[] _alphabetDialog;
+        private AudioClip[] _alphabetDialog = new AudioClip[] { };
 
         public bool TryGetClipForCharacter(char character, out AudioClip clip)
         {
