@@ -145,6 +145,154 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Dialogue",
+            "id": "a90616ea-3378-4264-b35b-dd46504e1d04",
+            "actions": [
+                {
+                    "name": "Talk",
+                    "type": "Button",
+                    "id": "9bfcec33-357a-4a78-8ee2-569f3a8d03a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "89bcb1a6-e76b-4cf6-95d2-9f807794c82d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "75bb8315-14b8-4431-a4ef-6917ee839696",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Talk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d321877d-523f-4e1d-9e16-e3290a7cf9b5",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Talk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eee77144-dc71-41d6-a157-3cf4666f998d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70eb3fcb-751a-4610-9a6e-19ad93d75e95",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause",
+            "id": "89528310-a405-490b-9397-3885343f1e91",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "5b2ff570-8922-41f3-9f79-149c4d2f5ab8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6fe42ee0-8f59-4f04-80fa-d1070ae9fe55",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd9d480b-e6fb-4eb0-8c0a-15f6691e999e",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Deliver",
+            "id": "84b6fe7e-f2e6-4536-a2dd-ff217f48c7eb",
+            "actions": [
+                {
+                    "name": "Deliver",
+                    "type": "Button",
+                    "id": "ab5d61a0-092a-4039-b4e2-e78a7d6890a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0901b76b-74a3-4211-83aa-8483ff89b0cd",
+                    "path": "<Keyboard>/#(X)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Deliver",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c26d0428-95e8-42b7-a120-4108940998c6",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Deliver",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

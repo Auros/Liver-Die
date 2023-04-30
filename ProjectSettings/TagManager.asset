@@ -11,6 +11,7 @@ TagManager:
   - Player
   - Water
   - UI
+  - ObjectColliders
   - 
   - 
   - 
@@ -35,8 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - NPC
   m_SortingLayers:
   - name: Default
     uniqueID: 0

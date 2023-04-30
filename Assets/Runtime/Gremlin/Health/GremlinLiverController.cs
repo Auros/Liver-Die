@@ -1,4 +1,7 @@
 ﻿using System;
+using LiverDie.Runtime.Dialogue;
+using LiverDie.Runtime.Intermediate;
+using UnityEditor;
 using UnityEngine;
 
 namespace LiverDie.Gremlin.Health
@@ -11,6 +14,9 @@ namespace LiverDie.Gremlin.Health
     {
         public event Action? OnLiverDecayed;
         public event Action<LiverUpdateEvent>? OnLiverUpdate;
+
+        [SerializeField]
+        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         /// <summary>
         /// Current liver/health of gremlin
@@ -53,11 +59,39 @@ namespace LiverDie.Gremlin.Health
             _lastLiverGainTime = Time.time;
         }
 
-        private void Start() => _lastLiverGainTime = Time.time;
+        private void Start()
+        {
+            _lastLiverGainTime = Time.time;
+            _dialogueEventIntermediate.OnDialogueFocusChanged += OnDialogueFocusChanged;
+            _dialogueEventIntermediate.OnNpcDelivered += OnNpcDelivered;
+        }
+
+        private void OnNpcDelivered(NpcDeliveredEvent ctx)
+        {
+            ChangeLiver(0.4f); // might break when npc is null but it's probably fine
+        }
+
+        private void OnDialogueFocusChanged(DialogueFocusChangedEvent ctx)
+        {
+            if (ctx.Focused)
+            {
+                LiverDecay = false;
+            }
+            else
+            {
+                LiverDecay = true;
+            }
+        }
 
         private void Update()
         {
-            if (Time.time < _lastLiverGainTime + _liverDecayOffset || !LiverDecay || LiverAmount == 0) return;
+            if (Time.time < _lastLiverGainTime + _liverDecayOffset) return;
+
+            if (!LiverDecay) return;
+
+            if (LiverAmount == 0) return;
+
+            if (Time.timeScale == 0) return;
 
             LiverAmount = Mathf.Clamp01(LiverAmount - 1f / _liverDecayTime * Time.deltaTime);
         }
