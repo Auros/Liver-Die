@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
+  m_Name: Liver Die
+  m_EditorClassIdentifier: 
+  _name: Patient
+  _dialogue:
+  - 'You know what they say: Live or die!'
+  - Or, I guess you could say, live-R die! Heheheheh...
+  - Get it? Liver die? Live or die?
+  - Ahh... comedy.
