@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca14ed3e4e686143b3bd08cae6dc1e3, type: 3}
+  m_Name: Raftario
+  m_EditorClassIdentifier: 
+  _alphabetDialog:
+  - {fileID: 8300000, guid: 2515795c220aafa45afff68c29180e1a, type: 3}
+  - {fileID: 8300000, guid: 0e463f3baf90c6a45b512d99a205c200, type: 3}
+  - {fileID: 8300000, guid: 5b543745b81e67b42b213da3e7f0f177, type: 3}
+  - {fileID: 8300000, guid: f50deec3c4078a6498030928a6ed8f1c, type: 3}
+  - {fileID: 8300000, guid: 30e924f3d25df4f468bd2dfe7fa2d0c2, type: 3}
+  - {fileID: 8300000, guid: ac92f9df996235d4ab8804c48c5eaa04, type: 3}
+  - {fileID: 8300000, guid: 0a050de1e8b2fea4ab40f054a74f8b99, type: 3}
+  - {fileID: 8300000, guid: 7ffd4e0c1f2143f40a637616e31926e4, type: 3}
+  - {fileID: 8300000, guid: 84f218b57234c19408f6586bcf4071fa, type: 3}
+  - {fileID: 8300000, guid: 10d6fd2621b775542b59e1f63e1f3f16, type: 3}
+  - {fileID: 8300000, guid: 2552e752ef21e2841b9416550857fcda, type: 3}
+  - {fileID: 8300000, guid: 8ec7750044818ef448d283ad937a3198, type: 3}
+  - {fileID: 8300000, guid: 37e1691d026d77444b3a88b6cd2ec90c, type: 3}
+  - {fileID: 8300000, guid: a53f2986154c355428fdb74ee5ea0233, type: 3}
+  - {fileID: 8300000, guid: 5d90d13e21eda6d4ab4467e80faf6a78, type: 3}
+  - {fileID: 8300000, guid: 7b762401ce6165745bfb5d4b0320bae9, type: 3}
+  - {fileID: 8300000, guid: 0ac3ac0f3815c554292f0e1caa6106c0, type: 3}
+  - {fileID: 8300000, guid: fe99b39137be2bf4b81b94a4f5375b27, type: 3}
+  - {fileID: 8300000, guid: 1d85671cbccb6e447ab891b95724ce59, type: 3}
+  - {fileID: 8300000, guid: 433d524d2b6e48d48a6c7ac6353a9a70, type: 3}
+  - {fileID: 8300000, guid: 27596e3e15cfcd041a5c6037f2182637, type: 3}
+  - {fileID: 8300000, guid: 5a1859835728e23469cd18952d030e5c, type: 3}
+  - {fileID: 8300000, guid: bf342bcdb5bcb554cbf901f94c567d82, type: 3}
+  - {fileID: 8300000, guid: ac1653a532881ce4a9e078a66ee2158b, type: 3}
+  - {fileID: 8300000, guid: 2b13cc40e1997d44a94b1ad74e5d67fe, type: 3}
+  - {fileID: 8300000, guid: ae30dfa997e74f44b88b0ddf2461c4ed, type: 3}
