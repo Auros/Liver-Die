@@ -42,8 +42,8 @@ namespace LiverDie.NPC
         private float _deathExplosionRadius = 5f;
 
         public bool HasDialogue => _dialogue;
-        public string Name => _dialogue ? Name : string.Empty;
-        public string[] Dialogue => _dialogue ? Dialogue : Array.Empty<string>();
+        public string Name => _dialogue ? _dialogue!.Name : string.Empty;
+        public string[] Dialogue => _dialogue ? _dialogue!.Dialogue : Array.Empty<string>();
 
         public bool Interactable { get; private set; } = true;
 

@@ -71,7 +71,7 @@ namespace LiverDie.UI
 
         private void OnNpcSelected(NpcSelectedEvent ctx)
         {
-            if (_talking || !ctx.Npc || ctx.Npc.HasDialogue)
+            if (_talking || !ctx.Npc || !ctx.Npc.HasDialogue)
                 return;
 
             _interactPrompt.SetActive(true);
@@ -109,7 +109,8 @@ namespace LiverDie.UI
         // eeeeeh
         private async UniTask HandleDialogue()
         {
-            if (_npcDefinition == null) return;
+            if (_npcDefinition == null)
+                return;
 
             var characterDelay = TimeSpan.FromSeconds(1 / (_charactersPerMinute / 60));
 
