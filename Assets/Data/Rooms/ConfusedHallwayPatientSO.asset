@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51b1721e6a4c4393b851295cdee8d684, type: 3}
-  m_Name: SleepingGuySO
+  m_Name: ConfusedHallwayPatientSO
   m_EditorClassIdentifier: 
-  _roomName: Sleeping Guy
-  _definitionPrefab: {fileID: 2589159574266220894, guid: 784c4e5ec5bd044408ef9a8c3c06b077,
+  _roomName: Sleeping Room
+  _definitionPrefab: {fileID: 2589159574266220894, guid: 9da74a11acafcb841b8495fa655925fe,
     type: 3}
