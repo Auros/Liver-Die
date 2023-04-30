@@ -23,9 +23,6 @@ namespace LiverDie.Audio
         [SerializeField]
         private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
-        [SerializeField]
-        private TweenManager _tweenManager = null!;
-
         private float _audioFadeTime = float.MaxValue;
 
         private void Start()
