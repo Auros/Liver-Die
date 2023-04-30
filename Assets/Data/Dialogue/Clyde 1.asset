@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
+  m_Name: Clyde 1
+  m_EditorClassIdentifier: 
+  _name: Guy Who is Potentially Insane
+  _dialogue:
+  - Hey, watch where you're going! I know you're after my liver! I can just feel
+    it in my bones... or rather, my liver.
+  - It's like every time someone walks by, I can hear my liver screaming "Nooo, don't
+    take me!"
+  - I even tried putting a lock on my chest, just in case.
+  - You never know what kind of liver thieves are out there these days...

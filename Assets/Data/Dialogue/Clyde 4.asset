@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
+  m_Name: Clyde 4
+  m_EditorClassIdentifier: 
+  _name: Guy With Six Senses
+  _dialogue:
+  - I've started to develop a sixth sense when it comes to liver thieves.
+  - I can just sense when someone's up to no good, like they're casing the joint,
+    just waiting for the perfect moment to strike.
+  - It's like they've got some kind of liver radar or something!
