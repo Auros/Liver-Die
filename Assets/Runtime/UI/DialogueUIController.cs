@@ -93,9 +93,8 @@ namespace LiverDie.UI
             await HandleDialogue();
         }
 
-        public void OnDeliver(InputAction.CallbackContext context)
+        public void OnDeliver()
         {
-            if (!context.performed) return;
             if (!_talking || _npcDefinition == null) return;
 
             _finishRequested = true;

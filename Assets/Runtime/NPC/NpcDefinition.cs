@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using LiverDie.Dialogue.Data;
 using UnityEngine;
@@ -23,6 +23,15 @@ namespace LiverDie.NPC
         [SerializeField]
         private DialogueScriptableObject _dialogue = null!;
 
+        [SerializeField]
+        private Rigidbody _ragdollRigidbody = null!;
+
+        [SerializeField]
+        private float _deathExplosionForce = 1f;
+
+        [SerializeField]
+        private float _deathExplosionRadius = 5f;
+
         public string Name => _dialogue.Name;
         public string[] Dialogue => _dialogue.Dialogue;
 
@@ -43,12 +52,18 @@ namespace LiverDie.NPC
             _liver.SetActive(true);
         }
 
-        public void Deliver()
+        public void Deliver(Vector3 position, Vector3 velocity)
         {
             // disable liver visuals & disable interactivity
             // TODO: Animate better
             _liver.SetActive(false);
             _active = false;
+
+            var animator = gameObject.GetComponent<Animator>();
+            animator.enabled = false;
+
+            _ragdollRigidbody.AddExplosionForce(_deathExplosionForce, position, _deathExplosionRadius);
+            _ragdollRigidbody.AddForce(velocity);
         }
     }
 }
