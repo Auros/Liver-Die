@@ -160,7 +160,6 @@ namespace LiverDie
                 corridorSegments.Add(segment);
 
                 segment.transform.SetLocalPositionAndRotation(targetPos, Quaternion.identity);
-                segment.Depth = _segmentLength * segmentCount;
                 segment.Generation = generation;
                 segmentPosition = targetPos;
                 segmentCount++;
@@ -234,7 +233,8 @@ namespace LiverDie
                     bool failedDepthCheck = false;
                     for (float i = start; i >= end; i -= depthRail.SampleDistance)
                     {
-                        if (startRailPos >= depthRail.Evaluate(i))
+                        var depthAt = depthRail.Evaluate(i);
+                        if (startRailPos > depthAt)
                             continue;
 
                         failedDepthCheck = true;

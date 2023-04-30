@@ -46,8 +46,6 @@ namespace LiverDie.Hospital.Generation
 
         public bool IsStart { get; private set; }
 
-        public float Depth { get; set; }
-
         [PublicAPI]
         public int Generation
         {
