@@ -598,7 +598,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 2
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &7627463555058919272
 MonoBehaviour:
@@ -614,7 +614,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7627463555058919274}
   _cameraTransform: {fileID: 7627463553135509656}
-  _speed: 7.5
-  _jumpForce: 5
+  _groundAcceleration: 150
+  _airAcceleration: 6
+  _maxVelocityGround: 10
+  _maxVelocityAir: 8
+  _groundFriction: 15
+  _jumpVelocity: 10
+  _gravityAcceleration: 9.8
+  _npcInteractRange: 10
   _horizontalSensitivity: 30
   _verticalSensitivity: 30

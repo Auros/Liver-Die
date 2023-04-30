@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Deliver",
+                    "type": "Button",
+                    "id": "f41cc2f1-af7e-4cb3-a31d-3847484235b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -143,6 +152,28 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef55367e-b27c-4a4d-9c75-27207279f6dd",
+                    "path": "<Keyboard>/#(X)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Deliver",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37c9747a-78fc-4fc9-9db8-c3b2d20d246c",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Deliver",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -154,15 +185,6 @@
                     "name": "Talk",
                     "type": "Button",
                     "id": "9bfcec33-357a-4a78-8ee2-569f3a8d03a2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Deliver",
-                    "type": "Button",
-                    "id": "74869101-c77f-4e7e-92b8-904d3ce6728b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -198,28 +220,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Talk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f84e5148-1e97-4375-a6de-967688cf2cc7",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Deliver",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d45193bc-7e78-46ce-baed-d2671900a074",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Deliver",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
