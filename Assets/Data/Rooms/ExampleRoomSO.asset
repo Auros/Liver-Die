@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b1721e6a4c4393b851295cdee8d684, type: 3}
   m_Name: ExampleRoomSO
   m_EditorClassIdentifier: 
-  _length: 10
+  _roomName: Example Alpha
   _definitionPrefab: {fileID: 658888870953665470, guid: c5a3a98393070184db9bbdf11def793d,
     type: 3}

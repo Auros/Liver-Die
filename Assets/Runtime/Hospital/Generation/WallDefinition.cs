@@ -18,6 +18,8 @@ namespace LiverDie.Hospital.Generation
         [SerializeField]
         private EntranceDefinition _doorWall = null!;
 
+        public EntranceDefinition Entrance => _doorWall;
+
         public WallState State
         {
             get => _wallState;
@@ -38,7 +40,7 @@ namespace LiverDie.Hospital.Generation
             // the synchronization until after validation occurs.
             void ValidationSync()
             {
-                EditorApplication.delayCall -= EnsureSynchronizedWallState;
+                EditorApplication.delayCall -= ValidationSync;
                 EnsureSynchronizedWallState();
             }
             EditorApplication.delayCall += ValidationSync;

@@ -10,10 +10,16 @@ namespace LiverDie.Hospital.Generation
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.green.WithA(0.5f);
-            Gizmos.matrix = transform.localToWorldMatrix;
+            var localToWorldMatrix = transform.localToWorldMatrix;
             var offset = Vector3.zero.WithY(_doorSize.y / 2f);
+
+            Gizmos.color = Color.green.WithA(0.5f);
+            Gizmos.matrix = localToWorldMatrix;
             Gizmos.DrawCube(Vector3.zero + offset, _doorSize);
+
+            Gizmos.color = Color.blue;
+            Gizmos.matrix = localToWorldMatrix;
+            Gizmos.DrawLine(Vector3.zero + offset, Vector3.forward * 2 + offset);
         }
     }
 }
