@@ -13,6 +13,7 @@ namespace LiverDie.UI
         private CanvasGroup _canvasGroup = null!;
 
         private LiverInput _liverInput = null!;
+        private bool _isPaused = false;
 
         private void Start()
         {
@@ -25,7 +26,7 @@ namespace LiverDie.UI
         {
             Time.timeScale = 0f;
             _gremlinController.IsFocused = false;
-
+            _isPaused = true;
             _canvasGroup.alpha = 1f;
             _canvasGroup.interactable = true;
         }
@@ -34,7 +35,7 @@ namespace LiverDie.UI
         {
             Time.timeScale = 1f;
             _gremlinController.IsFocused = true;
-
+            _isPaused = false;
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
         }
@@ -46,7 +47,15 @@ namespace LiverDie.UI
         public void OnPause(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            Pause();
+
+            if (_isPaused)
+            {
+                Unpause();
+            }
+            else
+            {
+                Pause();
+            }
         }
 
         private void OnDestroy()

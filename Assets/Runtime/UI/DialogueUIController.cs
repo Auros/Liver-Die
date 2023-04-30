@@ -1,8 +1,10 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using LiverDie.Audio;
 using LiverDie.Gremlin;
+using LiverDie.Gremlin.Health;
 using LiverDie.NPC;
 using LiverDie.Runtime.Dialogue;
 using TMPro;
@@ -20,6 +22,9 @@ namespace LiverDie.UI
         private GremlinController _gremlinController = null!;
 
         [SerializeField]
+        private GremlinLiverController _liverController = null!;
+
+        [SerializeField]
         private GameObject _interactPrompt = null!;
 
         [SerializeField]
@@ -28,6 +33,12 @@ namespace LiverDie.UI
         private TextMeshProUGUI _dialogueNameText = null!;
         [SerializeField]
         private TextMeshProUGUI _dialogueText = null!;
+
+        [SerializeField]
+        private DialogLibrarySO _dialogLibrary = null!;
+
+        [SerializeField]
+        private AudioPool _audioPool = null!;
 
         [SerializeField]
         private float _charactersPerMinute = 300;
@@ -74,6 +85,7 @@ namespace LiverDie.UI
             if (_talking || _npcDefinition == null) return; // (?)
 
             _talking = true;
+            _gremlinController.IsFocused = false;
             await HandleDialogue();
         }
 
@@ -119,7 +131,15 @@ namespace LiverDie.UI
                         break;
                     }
 
-                    _dialogueText.SetText(_dialogueText.text + _npcDefinition.Dialogue[i][j]);
+                    var character = _npcDefinition.Dialogue[i][j];
+
+                    _dialogueText.SetText(_dialogueText.text + character);
+
+                    if (char.IsLetter(character) && _dialogLibrary.TryGetClipForCharacter(character, out var clip))
+                    {
+                        _audioPool.Play(clip);
+                    }
+
                     await UniTask.Delay(characterDelay);
                 }
 
@@ -143,6 +163,8 @@ namespace LiverDie.UI
 
         private void FinishDialogue()
         {
+            _gremlinController.IsFocused = true;
+
             _talking = false;
             _skipRequested = false;
             _finishRequested = false;
@@ -150,7 +172,11 @@ namespace LiverDie.UI
             _dialogueBox.SetActive(false);
             _interactPrompt.SetActive(false);
 
-            if(_npcDefinition != null) _npcDefinition.Deliver();
+            if (_npcDefinition != null)
+            {
+                _npcDefinition.Deliver();
+                _liverController.ChangeLiver(0.25f);
+            }
             _npcDefinition = null;
         }
     }
