@@ -114,5 +114,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0e5a071c80c8d0f42b3d55cd3c1d6808, type: 3}
   - {fileID: 21300000, guid: 62c5a6aa52409b24599f15b63f2a6db0, type: 3}
   - {fileID: 21300000, guid: e3ee3f1ced9cdae4c861d370b729677d, type: 3}
+  - {fileID: 21300000, guid: 776b6efb72e14dd40acc1e069e6caff0, type: 3}
   _spawnChance: 0.1
   _renderer: {fileID: 8553028780630256401}
