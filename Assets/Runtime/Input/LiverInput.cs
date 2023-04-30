@@ -55,15 +55,6 @@ namespace LiverDie
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Deliver"",
-                    ""type"": ""Button"",
-                    ""id"": ""f41cc2f1-af7e-4cb3-a31d-3847484235b3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,28 +165,6 @@ namespace LiverDie
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ef55367e-b27c-4a4d-9c75-27207279f6dd"",
-                    ""path"": ""<Keyboard>/#(X)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Deliver"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""37c9747a-78fc-4fc9-9db8-c3b2d20d246c"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Deliver"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -309,6 +278,45 @@ namespace LiverDie
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Deliver"",
+            ""id"": ""84b6fe7e-f2e6-4536-a2dd-ff217f48c7eb"",
+            ""actions"": [
+                {
+                    ""name"": ""Deliver"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab5d61a0-092a-4039-b4e2-e78a7d6890a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0901b76b-74a3-4211-83aa-8483ff89b0cd"",
+                    ""path"": ""<Keyboard>/#(X)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Deliver"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c26d0428-95e8-42b7-a120-4108940998c6"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Deliver"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -318,7 +326,6 @@ namespace LiverDie
             m_Gremlin_Movement = m_Gremlin.FindAction("Movement", throwIfNotFound: true);
             m_Gremlin_Look = m_Gremlin.FindAction("Look", throwIfNotFound: true);
             m_Gremlin_Jump = m_Gremlin.FindAction("Jump", throwIfNotFound: true);
-            m_Gremlin_Deliver = m_Gremlin.FindAction("Deliver", throwIfNotFound: true);
             // Dialogue
             m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
             m_Dialogue_Talk = m_Dialogue.FindAction("Talk", throwIfNotFound: true);
@@ -326,6 +333,9 @@ namespace LiverDie
             // Pause
             m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
             m_Pause_Pause = m_Pause.FindAction("Pause", throwIfNotFound: true);
+            // Deliver
+            m_Deliver = asset.FindActionMap("Deliver", throwIfNotFound: true);
+            m_Deliver_Deliver = m_Deliver.FindAction("Deliver", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -390,7 +400,6 @@ namespace LiverDie
         private readonly InputAction m_Gremlin_Movement;
         private readonly InputAction m_Gremlin_Look;
         private readonly InputAction m_Gremlin_Jump;
-        private readonly InputAction m_Gremlin_Deliver;
         public struct GremlinActions
         {
             private @LiverInput m_Wrapper;
@@ -398,7 +407,6 @@ namespace LiverDie
             public InputAction @Movement => m_Wrapper.m_Gremlin_Movement;
             public InputAction @Look => m_Wrapper.m_Gremlin_Look;
             public InputAction @Jump => m_Wrapper.m_Gremlin_Jump;
-            public InputAction @Deliver => m_Wrapper.m_Gremlin_Deliver;
             public InputActionMap Get() { return m_Wrapper.m_Gremlin; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -417,9 +425,6 @@ namespace LiverDie
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Deliver.started += instance.OnDeliver;
-                @Deliver.performed += instance.OnDeliver;
-                @Deliver.canceled += instance.OnDeliver;
             }
 
             private void UnregisterCallbacks(IGremlinActions instance)
@@ -433,9 +438,6 @@ namespace LiverDie
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
-                @Deliver.started -= instance.OnDeliver;
-                @Deliver.performed -= instance.OnDeliver;
-                @Deliver.canceled -= instance.OnDeliver;
             }
 
             public void RemoveCallbacks(IGremlinActions instance)
@@ -553,12 +555,57 @@ namespace LiverDie
             }
         }
         public PauseActions @Pause => new PauseActions(this);
+
+        // Deliver
+        private readonly InputActionMap m_Deliver;
+        private List<IDeliverActions> m_DeliverActionsCallbackInterfaces = new List<IDeliverActions>();
+        private readonly InputAction m_Deliver_Deliver;
+        public struct DeliverActions
+        {
+            private @LiverInput m_Wrapper;
+            public DeliverActions(@LiverInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Deliver => m_Wrapper.m_Deliver_Deliver;
+            public InputActionMap Get() { return m_Wrapper.m_Deliver; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DeliverActions set) { return set.Get(); }
+            public void AddCallbacks(IDeliverActions instance)
+            {
+                if (instance == null || m_Wrapper.m_DeliverActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_DeliverActionsCallbackInterfaces.Add(instance);
+                @Deliver.started += instance.OnDeliver;
+                @Deliver.performed += instance.OnDeliver;
+                @Deliver.canceled += instance.OnDeliver;
+            }
+
+            private void UnregisterCallbacks(IDeliverActions instance)
+            {
+                @Deliver.started -= instance.OnDeliver;
+                @Deliver.performed -= instance.OnDeliver;
+                @Deliver.canceled -= instance.OnDeliver;
+            }
+
+            public void RemoveCallbacks(IDeliverActions instance)
+            {
+                if (m_Wrapper.m_DeliverActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IDeliverActions instance)
+            {
+                foreach (var item in m_Wrapper.m_DeliverActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_DeliverActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public DeliverActions @Deliver => new DeliverActions(this);
         public interface IGremlinActions
         {
             void OnMovement(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
-            void OnDeliver(InputAction.CallbackContext context);
         }
         public interface IDialogueActions
         {
@@ -568,6 +615,10 @@ namespace LiverDie
         public interface IPauseActions
         {
             void OnPause(InputAction.CallbackContext context);
+        }
+        public interface IDeliverActions
+        {
+            void OnDeliver(InputAction.CallbackContext context);
         }
     }
 }

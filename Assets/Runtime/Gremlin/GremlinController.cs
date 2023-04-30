@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace LiverDie.Gremlin
 {
-    public class GremlinController : MonoBehaviour, LiverInput.IGremlinActions
+    public class GremlinController : MonoBehaviour, LiverInput.IGremlinActions, LiverInput.IDeliverActions
     {
         public bool IsFocused
         {
@@ -18,9 +18,9 @@ namespace LiverDie.Gremlin
                 Cursor.lockState = _isFocused ? CursorLockMode.Locked : CursorLockMode.None;
 
                 if (_isFocused)
-                    _liverInput.Enable();
+                    _liverInput.Gremlin.Enable();
                 else
-                    _liverInput.Disable();
+                    _liverInput.Gremlin.Disable();
             }
         }
 
@@ -76,7 +76,17 @@ namespace LiverDie.Gremlin
         {
             // ugh
             (_liverInput = new LiverInput()).Gremlin.AddCallbacks(this);
+            _liverInput.Deliver.AddCallbacks(this);
             IsFocused = true;
+            _liverInput.Deliver.Enable();
+
+            _dialogueEventIntermediate.OnDialogueFocusChanged += OnDialogueFocusChanged;
+        }
+
+        private void OnDialogueFocusChanged(DialogueFocusChangedEvent ctx)
+        {
+            // When the *DIALOGUE* is focused, *UNFOCUS* the player
+            IsFocused = !ctx.Focused;
         }
 
         private void Update()
@@ -120,7 +130,7 @@ namespace LiverDie.Gremlin
             }
 
             // Set move direction to zero if no input
-            if (!IsMoving) 
+            if (!IsMoving)
                 _moveDirection = Vector2.zero;
 
             if (IsGrounded)
@@ -129,7 +139,7 @@ namespace LiverDie.Gremlin
                 AirMovement();
         }
 
-        private void GroundMovement() 
+        private void GroundMovement()
         {
             var speed = _rigidbody.velocity.magnitude;
             if (speed != 0)
@@ -149,7 +159,7 @@ namespace LiverDie.Gremlin
             _rigidbody.velocity += accelDirection * acceleration;
         }
 
-        private void AirMovement() 
+        private void AirMovement()
         {
             var accelDirection = Vector3.Normalize((_moveDirection.x * transform.right) + (_moveDirection.y * transform.forward));
             float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
@@ -188,9 +198,18 @@ namespace LiverDie.Gremlin
             _rigidbody.velocity += _rigidbody.velocity.WithY(_jumpVelocity).OnlyY();
         }
 
-        public void OnDeliver(InputAction.CallbackContext context) 
+        public void OnDeliver(InputAction.CallbackContext context)
         {
-            if (!context.performed) return;
+            Debug.Log("HUIH");
+            Debug.Log(_selectedNpc);
+            if (!context.performed || _selectedNpc == null) return;
+
+            _dialogueEventIntermediate.DeliverNpc(_selectedNpc);
+            _selectedNpc.Deliver(transform.position, _rigidbody.velocity);
+            /*if (!_talking || _npcDefinition == null) return;
+
+            _finishRequested = true;*/
+
         }
 
         private void OnDestroy()

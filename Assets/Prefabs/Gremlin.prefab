@@ -573,7 +573,7 @@ Transform:
   m_GameObject: {fileID: 7627463555058919275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.85, y: 1.85, z: 1.85}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7627463553135509656}
@@ -614,6 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7627463555058919274}
   _cameraTransform: {fileID: 7627463553135509656}
+  _dialogueEventIntermediate: {fileID: 0}
   _groundAcceleration: 150
   _airAcceleration: 6
   _maxVelocityGround: 10
@@ -621,6 +622,6 @@ MonoBehaviour:
   _groundFriction: 15
   _jumpVelocity: 10
   _gravityAcceleration: 9.8
-  _npcInteractRange: 10
+  _npcInteractRange: 3
   _horizontalSensitivity: 30
   _verticalSensitivity: 30

@@ -10,6 +10,7 @@ namespace LiverDie.Runtime.Intermediate
         public event Action<NpcSelectedEvent>? OnNpcSelected;
         public event Action<NpcDeselectedEvent>? OnNpcDeselected;
         public event Action<NpcDeliveredEvent>? OnNpcDelivered;
+        public event Action<DialogueFocusChangedEvent>? OnDialogueFocusChanged;
 
         public void SelectNpc(NpcDefinition npcDefinition)
         {
@@ -24,6 +25,11 @@ namespace LiverDie.Runtime.Intermediate
         public void DeliverNpc(NpcDefinition npcDefinition)
         {
             OnNpcDelivered?.Invoke(new NpcDeliveredEvent(npcDefinition));
+        }
+
+        public void ChangeDialogueFocus(bool focused)
+        {
+            OnDialogueFocusChanged?.Invoke(new DialogueFocusChangedEvent(focused));
         }
     }
 }
