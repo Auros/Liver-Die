@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
-  m_Name: Liver Surgery Patient
+  m_Script: {fileID: 11500000, guid: 51b1721e6a4c4393b851295cdee8d684, type: 3}
+  m_Name: RecoveringSurgeryPatientSO
   m_EditorClassIdentifier: 
-  _name: Guy Who Just Got Out of Liver Surgery
-  _dialogue:
-  - Yippee!!! I just got out of liver surgery!
-  - My life is saved, and I can continue to live thanks to my new liver!
+  _roomName: Recovering Surgery Patient
+  _definitionPrefab: {fileID: 2589159574266220894, guid: 905dc6e4e2a6e3d4eadf5f6ecf5accb7,
+    type: 3}

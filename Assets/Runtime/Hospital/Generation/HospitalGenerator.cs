@@ -42,6 +42,8 @@ namespace LiverDie
 
         private const int _sampleFrequency = 10;
 
+        private static bool _first = true;
+
         private void Awake()
         {
             _segmentPool = new ObjectPool<CorridorSegmentDefinition>(
@@ -290,7 +292,9 @@ namespace LiverDie
             if (validChoices.Count is 0)
                 return null;
 
-            var randomIndex = UnityEngine.Random.Range(0, validChoices.Count);
+            //temporarily always spawn the latest room first for testing
+            var randomIndex = _first ? validChoices.Count - 1 : UnityEngine.Random.Range(0, validChoices.Count);
+            if (_first) _first = false;
             var target = validChoices[randomIndex];
             ListPool<RoomScriptableObject>.Release(validChoices);
 
