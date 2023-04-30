@@ -20,6 +20,9 @@ namespace LiverDie
         private int _maximumSegmentCount = 50;
 
         [SerializeField]
+        private SegmentDirection _startDirection;
+
+        [SerializeField]
         private CorridorSegmentDefinition _segmentPrefab = null!;
 
         [SerializeField]
@@ -70,9 +73,7 @@ namespace LiverDie
 
         private void Start()
         {
-            var startPos = _generationZeroStartReference.localPosition;
-            _currentCorridor = GenerateCorridor(0, startPos, null);
-            _nextCorridor = GenerateCorridor(_currentCorridor.Generation + 1, _currentCorridor.End, _currentCorridor);
+            AdvanceCorridor();
         }
 
         private void OnDestroy()
@@ -128,12 +129,11 @@ namespace LiverDie
             _nextCorridor = GenerateCorridor(_currentCorridor.Generation + 1, _currentCorridor.End, _currentCorridor);
         }
 
-
         private CorridorState GenerateCorridor(int generation, Vector3 startPosition, CorridorState? previousCorridor)
         {
             var segmentPosition = startPosition;
-            var oldSegmentDirection = previousCorridor?.Direction ?? SegmentDirection.North;
-            var targetDirection = GetNewRandomDirection(oldSegmentDirection);
+            var oldSegmentDirection = previousCorridor?.Direction ?? _startDirection;
+            var targetDirection = previousCorridor is not null ? GetNewRandomDirection(oldSegmentDirection) : _startDirection;
 
             int segmentCount = 0;
             bool shouldBranch = false;
@@ -173,7 +173,7 @@ namespace LiverDie
             CorridorState state = new(startPosition, segmentPosition, generation, targetDirection, rooms, corridorSegments, railLength, _sampleFrequency);
 
             // ReSharper disable once InvertIf
-            if (_roomSpawningOptions.Length is not 0 && previousCorridor is not null)
+            if (_roomSpawningOptions.Length is not 0)
             {
                 // To compensate for the corner bending, we pad the rail that
                 // intersects with the inner corner of the previous corridor.

@@ -84,6 +84,10 @@ namespace LiverDie.Hospital.Generation
             _eastSpoke.SetActive(isStart && targetSpokeDirection is SegmentDirection.East);
             _southSpoke.SetActive(isStart && targetSpokeDirection is SegmentDirection.South);
             _westSpoke.SetActive(isStart && targetSpokeDirection is SegmentDirection.West);
+
+            // First Node, hide the entry point
+            if (direction == oldDirection && isStart)
+                wall2.State = WallDefinition.WallState.Invisible;
         }
 
         public RailPairDefinition GetRailPair(SegmentDirection direction)
