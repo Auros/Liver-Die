@@ -37,10 +37,25 @@ namespace LiverDie.Gremlin
         private Transform _cameraTransform = null!;
 
         [Header("Movement Parameters"), SerializeField]
-        private float _speed = 1f;
+        private float _groundAcceleration = 1f;
 
         [SerializeField]
-        private float _jumpForce = 5f;
+        private float _airAcceleration = 0.5f;
+
+        [SerializeField]
+        private float _maxVelocityGround = 3f;
+
+        [SerializeField]
+        private float _maxVelocityAir = 2.5f;
+
+        [SerializeField]
+        private float _groundFriction = 1f;
+
+        [SerializeField]
+        private float _jumpVelocity = 5f;
+
+        [SerializeField]
+        private float _gravityAcceleration = -9.8f;
 
         [SerializeField]
         private float _npcInteractRange = 10f;
@@ -65,13 +80,14 @@ namespace LiverDie.Gremlin
 
         private void Update()
         {
-            // I dont think this is strictly necessary but its safe
-            _rigidbody.angularVelocity = Vector3.zero;
-
             // Ground check
             var blueRay256 = new Ray(_cameraTransform.position, Vector3.down);
             IsGrounded = Physics.Raycast(blueRay256, transform.localScale.y + 0.1f, 1 << 0);
 
+            if (IsGrounded)
+                transform.position = transform.position.WithY(0.09f);
+            else
+                _rigidbody.velocity = _rigidbody.velocity.WithY(_rigidbody.velocity.y - _gravityAcceleration * Time.deltaTime);
 
             var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _npcInteractRange * transform.localScale.y, 1 << 31);
             if (_selectedNpc == null && npcRaycast)
@@ -102,11 +118,46 @@ namespace LiverDie.Gremlin
                 // deselect
             }
 
-            // Move player if we have primary input
-            if (!IsMoving) return;
+            // Set move direction to zero if no input
+            if (!IsMoving) 
+                _moveDirection = Vector2.zero;
 
-            var movement = Time.deltaTime * ((_speed * _moveDirection.x * transform.right) + (_speed * _moveDirection.y * transform.forward));
-            transform.position += movement;
+            if (IsGrounded)
+                GroundMovement();
+            else
+                AirMovement();
+        }
+
+        private void GroundMovement() 
+        {
+            var speed = _rigidbody.velocity.magnitude;
+            if (speed != 0)
+            {
+                var deceleration = speed * _groundFriction * Time.deltaTime;
+                var decelMultiplier = Mathf.Max(speed - deceleration, 0) / speed;
+                _rigidbody.velocity *= decelMultiplier;
+            }
+
+            var accelDirection = Vector3.Normalize((_moveDirection.x * transform.right) + (_moveDirection.y * transform.forward));
+            float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
+            float acceleration = _groundAcceleration * Time.deltaTime;
+
+            if (projectedVelocity + acceleration > _maxVelocityGround)
+                acceleration = _maxVelocityGround - projectedVelocity;
+
+            _rigidbody.velocity += accelDirection * acceleration;
+        }
+
+        private void AirMovement() 
+        {
+            var accelDirection = Vector3.Normalize((_moveDirection.x * transform.right) + (_moveDirection.y * transform.forward));
+            float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
+            float acceleration = _airAcceleration * Time.deltaTime;
+
+            if (projectedVelocity + acceleration > _maxVelocityAir)
+                acceleration = _maxVelocityAir - projectedVelocity;
+
+            _rigidbody.velocity += accelDirection * acceleration;
         }
 
         public void OnMovement(InputAction.CallbackContext context)
@@ -133,7 +184,7 @@ namespace LiverDie.Gremlin
         {
             if (!context.performed || !IsGrounded) return;
 
-            _rigidbody.velocity = _rigidbody.velocity.WithY(_jumpForce);
+            _rigidbody.velocity += _rigidbody.velocity.WithY(_jumpVelocity).OnlyY();
         }
 
         private void OnDestroy()
