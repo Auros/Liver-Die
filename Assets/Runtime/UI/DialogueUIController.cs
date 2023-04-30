@@ -171,7 +171,6 @@ namespace LiverDie.UI
 
             _dialogueBox.SetActive(false);
             _interactPrompt.SetActive(false);
-
             _npcDefinition = null;
         }
     }

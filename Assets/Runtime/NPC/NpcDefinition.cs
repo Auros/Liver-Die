@@ -27,6 +27,13 @@ namespace LiverDie.NPC
         private Rigidbody _ragdollRigidbody = null!;
 
         [SerializeField]
+        private ParticleSystem _deathParticles = null!;
+
+        [SerializeField]
+        private float _deathParticleMinForce = 1f;
+        private float _deathParticleMaxForce = 2f;
+
+        [SerializeField]
         private float _deathExplosionForce = 1f;
 
         [SerializeField]
@@ -64,6 +71,18 @@ namespace LiverDie.NPC
 
             _ragdollRigidbody.AddExplosionForce(_deathExplosionForce, position, _deathExplosionRadius);
             _ragdollRigidbody.AddForce(velocity);
+
+            var deathParticlesMain = _deathParticles.main;
+            var deathParticleStartSpeed = deathParticlesMain.startSpeed;
+            deathParticleStartSpeed.constantMin = _deathParticleMinForce;
+            deathParticleStartSpeed.constantMax = _deathParticleMaxForce;
+            deathParticleStartSpeed.mode = ParticleSystemCurveMode.TwoConstants;
+
+            var relativePosition = _deathParticles.transform.position - position;
+            var awayPosition = _deathParticles.transform.position - relativePosition;
+            _deathParticles.transform.rotation = Quaternion.LookRotation(awayPosition, _deathParticles.transform.up);
+
+            _deathParticles.Play();
         }
     }
 }
