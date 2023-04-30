@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9ec35051138a7429fd6d8b798a3007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogueEventIntermediate: {fileID: 0}
   _liverDecayOffset: 5
   _liverDecayTime: 20
 --- !u!4 &1726872049
@@ -775,6 +776,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627463555058919274, guid: 9ef02beb71207b14b958feb4f646df41,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7627463555058919275, guid: 9ef02beb71207b14b958feb4f646df41,
         type: 3}
