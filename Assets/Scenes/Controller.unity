@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &20965230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7627463555058919272, guid: 9ef02beb71207b14b958feb4f646df41,
+    type: 3}
+  m_PrefabInstance: {fileID: 7627463554787173603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465e8b4dd13583f47af9280955c32ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &154587316
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +587,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 692187673755622685, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _gremlinController
+      value: 
+      objectReference: {fileID: 20965230}
     - target: {fileID: 5818838534011755733, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController

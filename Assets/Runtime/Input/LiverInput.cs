@@ -169,6 +169,45 @@ namespace LiverDie
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Pause"",
+            ""id"": ""89528310-a405-490b-9397-3885343f1e91"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b2ff570-8922-41f3-9f79-149c4d2f5ab8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6fe42ee0-8f59-4f04-80fa-d1070ae9fe55"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd9d480b-e6fb-4eb0-8c0a-15f6691e999e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -178,6 +217,9 @@ namespace LiverDie
             m_Gremlin_Movement = m_Gremlin.FindAction("Movement", throwIfNotFound: true);
             m_Gremlin_Look = m_Gremlin.FindAction("Look", throwIfNotFound: true);
             m_Gremlin_Jump = m_Gremlin.FindAction("Jump", throwIfNotFound: true);
+            // Pause
+            m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
+            m_Pause_Pause = m_Pause.FindAction("Pause", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -297,11 +339,61 @@ namespace LiverDie
             }
         }
         public GremlinActions @Gremlin => new GremlinActions(this);
+
+        // Pause
+        private readonly InputActionMap m_Pause;
+        private List<IPauseActions> m_PauseActionsCallbackInterfaces = new List<IPauseActions>();
+        private readonly InputAction m_Pause_Pause;
+        public struct PauseActions
+        {
+            private @LiverInput m_Wrapper;
+            public PauseActions(@LiverInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Pause => m_Wrapper.m_Pause_Pause;
+            public InputActionMap Get() { return m_Wrapper.m_Pause; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
+            public void AddCallbacks(IPauseActions instance)
+            {
+                if (instance == null || m_Wrapper.m_PauseActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PauseActionsCallbackInterfaces.Add(instance);
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+
+            private void UnregisterCallbacks(IPauseActions instance)
+            {
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
+            }
+
+            public void RemoveCallbacks(IPauseActions instance)
+            {
+                if (m_Wrapper.m_PauseActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IPauseActions instance)
+            {
+                foreach (var item in m_Wrapper.m_PauseActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_PauseActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public PauseActions @Pause => new PauseActions(this);
         public interface IGremlinActions
         {
             void OnMovement(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+        }
+        public interface IPauseActions
+        {
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }
