@@ -38,6 +38,9 @@ namespace LiverDie.UI
         private DialogLibrarySO _dialogLibrary = null!;
 
         [SerializeField]
+        private AudioClip[] _deliverSfx = null!;
+
+        [SerializeField]
         private AudioPool _audioPool = null!;
 
         [SerializeField]
@@ -86,6 +89,7 @@ namespace LiverDie.UI
 
             _talking = true;
             _gremlinController.IsFocused = false;
+            _liverController.LiverDecay = false;
             await HandleDialogue();
         }
 
@@ -164,6 +168,7 @@ namespace LiverDie.UI
         private void FinishDialogue()
         {
             _gremlinController.IsFocused = true;
+            _liverController.LiverDecay = true;
 
             _talking = false;
             _skipRequested = false;
@@ -175,7 +180,10 @@ namespace LiverDie.UI
             if (_npcDefinition != null)
             {
                 _npcDefinition.Deliver();
-                _liverController.ChangeLiver(0.25f);
+                _liverController.ChangeLiver(0.4f);
+
+                var deliverIdx = UnityEngine.Random.Range(0, _deliverSfx.Length);
+                _audioPool.Play(_deliverSfx[deliverIdx]);
             }
             _npcDefinition = null;
         }

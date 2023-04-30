@@ -59,6 +59,11 @@ MonoBehaviour:
   _dialogueNameText: {fileID: 1232450949}
   _dialogueText: {fileID: 1377939595}
   _dialogLibrary: {fileID: 11400000, guid: 48402bc1e681b9f4cb84087edeaad471, type: 2}
+  _deliverSfx:
+  - {fileID: 8300000, guid: d452762d32fecf6458aadbd1bb78a52a, type: 3}
+  - {fileID: 8300000, guid: 1c893aa5f106a524a95496ef49bb6b62, type: 3}
+  - {fileID: 8300000, guid: 86f5c8730ef263f429e867bc9d25de8e, type: 3}
+  - {fileID: 8300000, guid: 17a2ca635b4266849a9f062ecaf3f0fa, type: 3}
   _audioPool: {fileID: 3068983722563134293}
   _charactersPerMinute: 700
 --- !u!114 &3068983722563134293
