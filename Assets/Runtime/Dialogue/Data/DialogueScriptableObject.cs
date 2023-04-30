@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace LiverDie.Dialogue.Data
@@ -8,12 +7,13 @@ namespace LiverDie.Dialogue.Data
     public class DialogueScriptableObject : ScriptableObject
     {
         [SerializeField]
-        private string _name;
+        private string _name = string.Empty;
 
         [SerializeField, TextArea(3, 10)]
-        private string[] _dialogue;
+        private string[] _dialogue = Array.Empty<string>();
 
         public string Name => _name;
+
         public string[] Dialogue => _dialogue;
     }
 }

@@ -34,7 +34,7 @@ namespace LiverDie.UI
 
         [SerializeField]
         private DialogLibrarySO _dialogLibrary = null!;
-        
+
         [SerializeField]
         private AudioPool _audioPool = null!;
 
@@ -71,7 +71,8 @@ namespace LiverDie.UI
 
         private void OnNpcSelected(NpcSelectedEvent ctx)
         {
-            if (_talking || ctx.Npc?.Dialogue == null) return;
+            if (_talking || !ctx.Npc || !ctx.Npc.HasDialogue)
+                return;
 
             _interactPrompt.SetActive(true);
             _npcDefinition = ctx.Npc;
@@ -108,7 +109,8 @@ namespace LiverDie.UI
         // eeeeeh
         private async UniTask HandleDialogue()
         {
-            if (_npcDefinition == null) return;
+            if (_npcDefinition == null)
+                return;
 
             var characterDelay = TimeSpan.FromSeconds(1 / (_charactersPerMinute / 60));
 
