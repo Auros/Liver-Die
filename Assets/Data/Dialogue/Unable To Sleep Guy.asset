@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51b1721e6a4c4393b851295cdee8d684, type: 3}
-  m_Name: SleepingGuySO
+  m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
+  m_Name: Unable To Sleep Guy
   m_EditorClassIdentifier: 
-  _roomName: Sleeping Guy
-  _definitionPrefab: {fileID: 2589159574266220894, guid: 784c4e5ec5bd044408ef9a8c3c06b077,
-    type: 3}
+  _name: Extremely Tired Guy
+  _dialogue:
+  - I've been tossing and turning for hours now, but that snoring is driving me crazy!
+  - Probably having some crazy dream, lucky him...

@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using LiverDie.Dialogue.Data;
+using LiverDie.NPC;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 namespace LiverDie.NPC
 {
     // handles visuals, liver, whatever
@@ -23,8 +28,12 @@ namespace LiverDie.NPC
         [SerializeField]
         private DialogueScriptableObject? _dialogue = null;
 
+        // main rigidbody
         [SerializeField]
         private Rigidbody _ragdollRigidbody = null!;
+
+        [SerializeField]
+        public List<Rigidbody> Rigidbodies;
 
         [SerializeField]
         private ParticleSystem _deathParticles = null!;
@@ -49,6 +58,11 @@ namespace LiverDie.NPC
 
         private void Start()
         {
+            foreach (var rigidbody in Rigidbodies)
+            {
+                rigidbody.isKinematic = true;
+            }
+
             Color.RGBToHSV(_baseShirtColor, out float shirtH, out float shirtS, out float shirtV);
             Color.RGBToHSV(_basePantsColor, out float pantsH, out float pantsS, out float pantsV);
             Color.RGBToHSV(_baseShoeColor, out float shoeH, out float shoeS, out float shoeV);
@@ -66,6 +80,11 @@ namespace LiverDie.NPC
             // TODO: Animate better
             _liver.SetActive(false);
             Interactable = false;
+
+            foreach (var rigidbody in Rigidbodies)
+            {
+                rigidbody.isKinematic = false;
+            }
 
             var animator = gameObject.GetComponent<Animator>();
             animator.enabled = false;
@@ -87,3 +106,20 @@ namespace LiverDie.NPC
         }
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(NpcDefinition))]
+public class MyScriptEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        var npc = target as NpcDefinition;
+        if (GUILayout.Button("SET RIGIDBODIES (DESTRUCTIVE!!!!!)"))
+        {
+            npc.Rigidbodies = npc.GetComponentsInChildren<Rigidbody>().ToList();
+        }
+    }
+}
+#endif
