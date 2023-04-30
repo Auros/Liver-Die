@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 82e1b50282927a14697515657a8497c5
+guid: b37798a23bcf4ea46901d176df3f73c2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,23 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: b81508ac02558a547b1630e684d755a2, type: 2}
+      name: CouchFabric
+    second: {fileID: 2100000, guid: 48bc06882e70c934ead204afb8d1b3ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Pants
-    second: {fileID: 2100000, guid: 33b3174b9ca95a64eae9a7723c5e393e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Shoes
-    second: {fileID: 2100000, guid: ff1b5f0161f1b894ea3a6c3ca4d66808, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Skin
-    second: {fileID: 2100000, guid: 7de750d2d9d3e7548844d48572827d9f, type: 2}
+      name: CouchLegs
+    second: {fileID: 2100000, guid: b5b7562bf0c716c4cb09cb849f615655, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -44,7 +34,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -109,9 +99,9 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Armature
+    rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1

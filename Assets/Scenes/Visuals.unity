@@ -240,6 +240,16 @@ PrefabInstance:
       propertyPath: _gremlinController
       value: 
       objectReference: {fileID: 1146836072}
+    - target: {fileID: 221654569093778666, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
+    - target: {fileID: 221654569093778666, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _gremlinController
+      value: 
+      objectReference: {fileID: 1146836072}
     - target: {fileID: 692187673755622685, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _gremlinController
@@ -249,6 +259,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800034815340556796, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
+    - target: {fileID: 2934223764048573767, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933888649650204683, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130713061609887686, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5818838534011755733, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
@@ -260,6 +290,11 @@ PrefabInstance:
       propertyPath: _liverController
       value: 
       objectReference: {fileID: 1169758036}
+    - target: {fileID: 5818838534011755754, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5818838534691269990, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -375,6 +410,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6949682811710026384, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
+    - target: {fileID: 7496885410924994059, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233179694138081384, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9161eecd324f694482d65972e99c6e0, type: 3}
 --- !u!1 &146434995
@@ -1225,7 +1275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 976262747}
   _liver: {fileID: 668650432}
-  _dialogue: {fileID: 11400000, guid: d0d9663f05c18504a8c507f75f87ec8f, type: 2}
+  _dialogue: {fileID: 11400000, guid: 140c857845ef5c84ab761d6dc6b6d320, type: 2}
 --- !u!95 &859885635
 Animator:
   serializedVersion: 5
@@ -1565,7 +1615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 2049694465}
   _liver: {fileID: 1958808678}
-  _dialogue: {fileID: 11400000, guid: d0d9663f05c18504a8c507f75f87ec8f, type: 2}
+  _dialogue: {fileID: 11400000, guid: 140c857845ef5c84ab761d6dc6b6d320, type: 2}
 --- !u!136 &1247667336
 CapsuleCollider:
   m_ObjectHideFlags: 0
