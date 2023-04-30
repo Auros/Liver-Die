@@ -1,4 +1,5 @@
-﻿using AuraTween;
+﻿using System.Threading;
+using AuraTween;
 using Cysharp.Threading.Tasks;
 using LiverDie.Audio;
 using LiverDie.Runtime.Intermediate;
@@ -27,6 +28,8 @@ namespace LiverDie.UI
         [SerializeField]
         private AudioPool _audioPool = null!;
 
+        private CancellationTokenSource? _cts = null!;
+
         private void Start()
         {
             _dialogueEventIntermediate.OnNpcDelivered += DialogueEventIntermediate_OnNpcDelivered;
@@ -35,17 +38,24 @@ namespace LiverDie.UI
 
         private void DialogueEventIntermediate_OnNpcDelivered(Runtime.Dialogue.NpcDeliveredEvent obj)
         {
+            // this works fuck you
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = new CancellationTokenSource();
+
             var objectiveIdx = Random.Range(0, _objectiveTexts.Length);
-            UpdateObjectiveAsync(_objectiveTexts[objectiveIdx]).Forget();
+            UpdateObjectiveAsync(_objectiveTexts[objectiveIdx], _cts.Token).Forget();
         }
 
-        private async UniTask UpdateObjectiveAsync(string text)
+        private async UniTask UpdateObjectiveAsync(string text, CancellationToken token = default)
         {
             _objectiveText.text = string.Empty;
             var sections = text.Split('|');
 
             foreach (var section in sections)
             {
+                if (token.IsCancellationRequested) return;
+
                 _objectiveText.text += section;
 
                 _audioPool.Play(_thudClip);
