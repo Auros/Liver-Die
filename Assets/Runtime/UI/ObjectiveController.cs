@@ -36,7 +36,7 @@ namespace LiverDie.UI
         private void LiverController_OnLiverUpdate(LiverUpdateEvent obj)
         {
             // Kinda a bad way to tell if a liver was obtained but......
-            if (obj.LiverChange < 0) return;
+            if (obj.LiverChange <= 0) return;
 
             var objectiveIdx = Random.Range(0, _objectiveTexts.Length);
             UpdateObjectiveAsync(_objectiveTexts[objectiveIdx]).Forget();
