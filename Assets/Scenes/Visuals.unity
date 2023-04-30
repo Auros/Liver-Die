@@ -240,6 +240,16 @@ PrefabInstance:
       propertyPath: _gremlinController
       value: 
       objectReference: {fileID: 1146836072}
+    - target: {fileID: 221654569093778666, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
+    - target: {fileID: 221654569093778666, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _gremlinController
+      value: 
+      objectReference: {fileID: 1146836072}
     - target: {fileID: 692187673755622685, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _gremlinController
@@ -260,6 +270,11 @@ PrefabInstance:
       propertyPath: _liverController
       value: 
       objectReference: {fileID: 1169758036}
+    - target: {fileID: 5818838534011755754, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5818838534691269990, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
