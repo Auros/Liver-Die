@@ -395,6 +395,16 @@ PrefabInstance:
       propertyPath: _liverController
       value: 
       objectReference: {fileID: 1169758036}
+    - target: {fileID: 2821189644304127490, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
+    - target: {fileID: 2821189644304127490, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _dialogueEventIntermediate
+      value: 
+      objectReference: {fileID: 1876525164}
     - target: {fileID: 5818838534011755733, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController
@@ -521,6 +531,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1169758036}
     - target: {fileID: 8233179694138081384, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
+    - target: {fileID: 8233179694138081384, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _dialogueEventIntermediate
+      value: 
+      objectReference: {fileID: 1876525164}
+    - target: {fileID: 8757826391901662186, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController
       value: 
