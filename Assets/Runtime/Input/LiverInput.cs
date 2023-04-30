@@ -270,8 +270,6 @@ namespace LiverDie
                     ""isPartOfComposite"": false
                 }
             ]
-        }
-    ],
         },
         {
             ""name"": ""Pause"",
