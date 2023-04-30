@@ -71,7 +71,7 @@ namespace LiverDie.UI
 
         private void OnNpcSelected(NpcSelectedEvent ctx)
         {
-            if (_talking) return;
+            if (_talking || ctx.Npc?.Dialogue == null) return;
 
             _interactPrompt.SetActive(true);
             _npcDefinition = ctx.Npc;
