@@ -171,6 +171,109 @@ namespace LiverDie
             ]
         },
         {
+            ""name"": ""Dialogue"",
+            ""id"": ""a90616ea-3378-4264-b35b-dd46504e1d04"",
+            ""actions"": [
+                {
+                    ""name"": ""Talk"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bfcec33-357a-4a78-8ee2-569f3a8d03a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Deliver"",
+                    ""type"": ""Button"",
+                    ""id"": ""74869101-c77f-4e7e-92b8-904d3ce6728b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""89bcb1a6-e76b-4cf6-95d2-9f807794c82d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""75bb8315-14b8-4431-a4ef-6917ee839696"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Talk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d321877d-523f-4e1d-9e16-e3290a7cf9b5"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Talk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f84e5148-1e97-4375-a6de-967688cf2cc7"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Deliver"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d45193bc-7e78-46ce-baed-d2671900a074"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Deliver"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eee77144-dc71-41d6-a157-3cf4666f998d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70eb3fcb-751a-4610-9a6e-19ad93d75e95"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        }
+    ],
+        },
+        {
             ""name"": ""Pause"",
             ""id"": ""89528310-a405-490b-9397-3885343f1e91"",
             ""actions"": [
@@ -217,6 +320,11 @@ namespace LiverDie
             m_Gremlin_Movement = m_Gremlin.FindAction("Movement", throwIfNotFound: true);
             m_Gremlin_Look = m_Gremlin.FindAction("Look", throwIfNotFound: true);
             m_Gremlin_Jump = m_Gremlin.FindAction("Jump", throwIfNotFound: true);
+            // Dialogue
+            m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+            m_Dialogue_Talk = m_Dialogue.FindAction("Talk", throwIfNotFound: true);
+            m_Dialogue_Deliver = m_Dialogue.FindAction("Deliver", throwIfNotFound: true);
+            m_Dialogue_Click = m_Dialogue.FindAction("Click", throwIfNotFound: true);
             // Pause
             m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
             m_Pause_Pause = m_Pause.FindAction("Pause", throwIfNotFound: true);
@@ -340,6 +448,68 @@ namespace LiverDie
         }
         public GremlinActions @Gremlin => new GremlinActions(this);
 
+        // Dialogue
+        private readonly InputActionMap m_Dialogue;
+        private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
+        private readonly InputAction m_Dialogue_Talk;
+        private readonly InputAction m_Dialogue_Deliver;
+        private readonly InputAction m_Dialogue_Click;
+        public struct DialogueActions
+        {
+            private @LiverInput m_Wrapper;
+            public DialogueActions(@LiverInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Talk => m_Wrapper.m_Dialogue_Talk;
+            public InputAction @Deliver => m_Wrapper.m_Dialogue_Deliver;
+            public InputAction @Click => m_Wrapper.m_Dialogue_Click;
+            public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
+            public void AddCallbacks(IDialogueActions instance)
+            {
+                if (instance == null || m_Wrapper.m_DialogueActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_DialogueActionsCallbackInterfaces.Add(instance);
+                @Talk.started += instance.OnTalk;
+                @Talk.performed += instance.OnTalk;
+                @Talk.canceled += instance.OnTalk;
+                @Deliver.started += instance.OnDeliver;
+                @Deliver.performed += instance.OnDeliver;
+                @Deliver.canceled += instance.OnDeliver;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+
+            private void UnregisterCallbacks(IDialogueActions instance)
+            {
+                @Talk.started -= instance.OnTalk;
+                @Talk.performed -= instance.OnTalk;
+                @Talk.canceled -= instance.OnTalk;
+                @Deliver.started -= instance.OnDeliver;
+                @Deliver.performed -= instance.OnDeliver;
+                @Deliver.canceled -= instance.OnDeliver;
+                @Click.started -= instance.OnClick;
+                @Click.performed -= instance.OnClick;
+                @Click.canceled -= instance.OnClick;
+            }
+
+            public void RemoveCallbacks(IDialogueActions instance)
+            {
+                if (m_Wrapper.m_DialogueActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IDialogueActions instance)
+            {
+                foreach (var item in m_Wrapper.m_DialogueActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_DialogueActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public DialogueActions @Dialogue => new DialogueActions(this);
+
         // Pause
         private readonly InputActionMap m_Pause;
         private List<IPauseActions> m_PauseActionsCallbackInterfaces = new List<IPauseActions>();
@@ -390,6 +560,12 @@ namespace LiverDie
             void OnMovement(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+        }
+        public interface IDialogueActions
+        {
+            void OnTalk(InputAction.CallbackContext context);
+            void OnDeliver(InputAction.CallbackContext context);
+            void OnClick(InputAction.CallbackContext context);
         }
         public interface IPauseActions
         {
