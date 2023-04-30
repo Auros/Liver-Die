@@ -7308,13 +7308,31 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.size
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[0]._room
+      value: 
+      objectReference: {fileID: 11400000, guid: 43170315b4578254ba9e60c8357e82a6,
+        type: 2}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[1]._room
+      value: 
+      objectReference: {fileID: 11400000, guid: 9fe3d7c14230bb4458eaf9b1af34a094,
+        type: 2}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[2]._room
+      value: 
+      objectReference: {fileID: 11400000, guid: 375f08449f28e89428e70108f2d6d5a8,
+        type: 2}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.data[3]._room
       value: 
-      objectReference: {fileID: 11400000, guid: 375f08449f28e89428e70108f2d6d5a8,
+      objectReference: {fileID: 11400000, guid: b713be0e0f141be41bb684f02708b060,
         type: 2}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
@@ -7326,13 +7344,13 @@ PrefabInstance:
         type: 3}
       propertyPath: _roomSpawningOptions.Array.data[5]._room
       value: 
-      objectReference: {fileID: 11400000, guid: 9fe3d7c14230bb4458eaf9b1af34a094,
+      objectReference: {fileID: 11400000, guid: 5d7606b4705a3634bb27c77d5b8a6733,
         type: 2}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.data[6]._room
       value: 
-      objectReference: {fileID: 11400000, guid: b713be0e0f141be41bb684f02708b060,
+      objectReference: {fileID: 11400000, guid: 937c6a98f214c0841afd4d324cb8a2eb,
         type: 2}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
@@ -7354,23 +7372,38 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
-      propertyPath: _roomSpawningOptions.Array.data[3]._weight
+      propertyPath: _roomSpawningOptions.Array.data[0]._weight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[1]._weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[2]._weight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[3]._weight
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.data[4]._weight
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.data[5]._weight
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.data[6]._weight
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
