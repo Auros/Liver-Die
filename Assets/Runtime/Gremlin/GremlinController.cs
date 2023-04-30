@@ -96,10 +96,10 @@ namespace LiverDie.Gremlin
         {
             // Ground check
             var blueRay256 = new Ray(_cameraTransform.position, Vector3.down);
-            IsGrounded = Physics.Raycast(blueRay256, transform.localScale.y + 0.1f, 1 << 0);
+            IsGrounded = Physics.Raycast(blueRay256, out var groundHit, transform.localScale.y + 0.1f, 1 << 0 | 1 << 6);
 
             if (IsGrounded)
-                transform.position = transform.position.WithY(0.07f);
+                transform.position = transform.position.WithY(groundHit.point.y);
             else
                 _rigidbody.velocity = _rigidbody.velocity.WithY(_rigidbody.velocity.y - _gravityAcceleration * Time.deltaTime);
 

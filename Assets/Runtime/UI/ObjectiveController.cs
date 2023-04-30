@@ -1,7 +1,8 @@
-﻿using AuraTween;
+﻿using System.Threading;
+using AuraTween;
 using Cysharp.Threading.Tasks;
 using LiverDie.Audio;
-using LiverDie.Gremlin.Health;
+using LiverDie.Runtime.Intermediate;
 using TMPro;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace LiverDie.UI
         private string[] _objectiveTexts = null!;
 
         [SerializeField, Space]
-        private GremlinLiverController _liverController = null!;
+        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         [SerializeField]
         private TweenManager _tweenManager = null!;
@@ -27,32 +28,38 @@ namespace LiverDie.UI
         [SerializeField]
         private AudioPool _audioPool = null!;
 
+        private CancellationTokenSource? _cts = null!;
+
         private void Start()
         {
-            _liverController.OnLiverUpdate += LiverController_OnLiverUpdate;
+            _dialogueEventIntermediate.OnNpcDelivered += DialogueEventIntermediate_OnNpcDelivered;
             _tweenManager.Run(1.2f * Vector3.one, Vector3.one, 0.25f, UpdateScale, Easer.OutSine);
         }
 
-        private void LiverController_OnLiverUpdate(LiverUpdateEvent obj)
+        private void DialogueEventIntermediate_OnNpcDelivered(Runtime.Dialogue.NpcDeliveredEvent obj)
         {
-            // Kinda a bad way to tell if a liver was obtained but......
-            if (obj.LiverChange <= 0) return;
+            // this works fuck you
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = new CancellationTokenSource();
 
             var objectiveIdx = Random.Range(0, _objectiveTexts.Length);
-            UpdateObjectiveAsync(_objectiveTexts[objectiveIdx]).Forget();
+            UpdateObjectiveAsync(_objectiveTexts[objectiveIdx], _cts.Token).Forget();
         }
 
-        private async UniTask UpdateObjectiveAsync(string text)
+        private async UniTask UpdateObjectiveAsync(string text, CancellationToken token = default)
         {
             _objectiveText.text = string.Empty;
             var sections = text.Split('|');
 
             foreach (var section in sections)
             {
+                if (token.IsCancellationRequested) return;
+
                 _objectiveText.text += section;
 
                 _audioPool.Play(_thudClip);
-                await _tweenManager.Run(1.2f * Vector3.one, Vector3.one, 0.25f, UpdateScale, Easer.OutSine);
+                await _tweenManager.Run(1.5f * Vector3.one, Vector3.one, 0.25f, UpdateScale, Easer.OutSine);
                 await UniTask.Delay(250);
             }
         }
@@ -61,7 +68,7 @@ namespace LiverDie.UI
 
         private void OnDestroy()
         {
-            _liverController.OnLiverUpdate -= LiverController_OnLiverUpdate;
+            _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
         }
     }
 }

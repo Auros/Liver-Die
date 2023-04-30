@@ -1,4 +1,5 @@
 ﻿using LiverDie.Gremlin.Health;
+using LiverDie.Runtime.Intermediate;
 using TMPro;
 using UnityEngine;
 
@@ -6,8 +7,8 @@ namespace LiverDie.UI
 {
     public class LiverCounterController : MonoBehaviour
     {
-        [SerializeField, Space]
-        private GremlinLiverController _liverController = null!;
+        [SerializeField]
+        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         [SerializeField]
         private TextMeshProUGUI _counter = null!;
@@ -16,20 +17,17 @@ namespace LiverDie.UI
 
         private void Start()
         {
-            _liverController.OnLiverUpdate += LiverController_OnLiverUpdate;
+            _dialogueEventIntermediate.OnNpcDelivered += DialogueEventIntermediate_OnNpcDelivered;
         }
 
-        private void LiverController_OnLiverUpdate(LiverUpdateEvent obj)
+        private void DialogueEventIntermediate_OnNpcDelivered(Runtime.Dialogue.NpcDeliveredEvent obj)
         {
-            // Kinda a bad way to tell if a liver was obtained but......
-            if (obj.LiverChange <= 0) return;
-
             _counter.text = (++_livers).ToString();
         }
 
         private void OnDestroy()
         {
-            _liverController.OnLiverUpdate -= LiverController_OnLiverUpdate;
+            _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
         }
     }
 }
