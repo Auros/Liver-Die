@@ -7,6 +7,7 @@ using LiverDie.Gremlin;
 using LiverDie.Gremlin.Health;
 using LiverDie.NPC;
 using LiverDie.Runtime.Dialogue;
+using LiverDie.Runtime.Intermediate;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,10 +20,7 @@ namespace LiverDie.UI
 
         // for getting camera based raycasts
         [SerializeField]
-        private GremlinController _gremlinController = null!;
-
-        [SerializeField]
-        private GremlinLiverController _liverController = null!;
+        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         [SerializeField]
         private GameObject _interactPrompt = null!;
@@ -36,10 +34,7 @@ namespace LiverDie.UI
 
         [SerializeField]
         private DialogLibrarySO _dialogLibrary = null!;
-
-        [SerializeField]
-        private AudioClip[] _deliverSfx = null!;
-
+        
         [SerializeField]
         private AudioPool _audioPool = null!;
 
@@ -57,14 +52,16 @@ namespace LiverDie.UI
         {
             (_liverInput = new LiverInput()).Dialogue.AddCallbacks(this);
             _liverInput.Dialogue.Enable();
-            _gremlinController.OnNpcSelected += GremlinControllerOnNpcSelected;
-            _gremlinController.OnNpcDeselected += GremlinControllerOnNpcDeselected;
+
+            _dialogueEventIntermediate.OnNpcSelected += OnNpcSelected;
+            _dialogueEventIntermediate.OnNpcDeselected += OnNpcDeselected;
+            _dialogueEventIntermediate.OnNpcDelivered += OnNpcDelivered;
 
             _interactPrompt.SetActive(false);
             _dialogueBox.SetActive(false);
         }
 
-        private void GremlinControllerOnNpcDeselected(NpcDeselectedEvent ctx)
+        private void OnNpcDeselected(NpcDeselectedEvent ctx)
         {
             if (_talking) return;
 
@@ -72,7 +69,7 @@ namespace LiverDie.UI
             _npcDefinition = null;
         }
 
-        private void GremlinControllerOnNpcSelected(NpcSelectedEvent ctx)
+        private void OnNpcSelected(NpcSelectedEvent ctx)
         {
             if (_talking) return;
 
@@ -88,13 +85,13 @@ namespace LiverDie.UI
             if (_talking || _npcDefinition == null) return; // (?)
 
             _talking = true;
-            _gremlinController.IsFocused = false;
-            _liverController.LiverDecay = false;
+            _dialogueEventIntermediate.ChangeDialogueFocus(true);
             await HandleDialogue();
         }
 
-        public void OnDeliver()
+        private void OnNpcDelivered(NpcDeliveredEvent ctx)
         {
+            if(!_talking && _interactPrompt.activeSelf) _interactPrompt.SetActive(false);
             if (!_talking || _npcDefinition == null) return;
 
             _finishRequested = true;
@@ -166,8 +163,7 @@ namespace LiverDie.UI
 
         private void FinishDialogue()
         {
-            _gremlinController.IsFocused = true;
-            _liverController.LiverDecay = true;
+            _dialogueEventIntermediate.ChangeDialogueFocus(false);
 
             _talking = false;
             _skipRequested = false;
@@ -176,14 +172,6 @@ namespace LiverDie.UI
             _dialogueBox.SetActive(false);
             _interactPrompt.SetActive(false);
 
-            if (_npcDefinition != null)
-            {
-                _npcDefinition.Deliver();
-                _liverController.ChangeLiver(0.4f);
-
-                var deliverIdx = UnityEngine.Random.Range(0, _deliverSfx.Length);
-                _audioPool.Play(_deliverSfx[deliverIdx]);
-            }
             _npcDefinition = null;
         }
     }

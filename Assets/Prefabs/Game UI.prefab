@@ -32,7 +32,7 @@ RectTransform:
   - {fileID: 2054153570}
   - {fileID: 708055036}
   m_Father: {fileID: 5818838534691269991}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -51,18 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee52e41bf8265ce4a89cbd8f98f11c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gremlinController: {fileID: 0}
-  _liverController: {fileID: 0}
+  _dialogueEventIntermediate: {fileID: 0}
   _interactPrompt: {fileID: 2054153569}
   _dialogueBox: {fileID: 708055035}
   _dialogueNameText: {fileID: 1232450949}
   _dialogueText: {fileID: 1377939595}
   _dialogLibrary: {fileID: 11400000, guid: 48402bc1e681b9f4cb84087edeaad471, type: 2}
-  _deliverSfx:
-  - {fileID: 8300000, guid: d452762d32fecf6458aadbd1bb78a52a, type: 3}
-  - {fileID: 8300000, guid: 1c893aa5f106a524a95496ef49bb6b62, type: 3}
-  - {fileID: 8300000, guid: 86f5c8730ef263f429e867bc9d25de8e, type: 3}
-  - {fileID: 8300000, guid: 17a2ca635b4266849a9f062ecaf3f0fa, type: 3}
   _audioPool: {fileID: 4487750748517357710}
   _charactersPerMinute: 700
 --- !u!1 &708055035
@@ -1897,7 +1891,7 @@ RectTransform:
   - {fileID: 7074372132702376081}
   - {fileID: 649589256940991164}
   m_Father: {fileID: 5818838534691269991}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2098,7 +2092,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5818838534691269991}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2341,7 +2335,7 @@ RectTransform:
   m_Children:
   - {fileID: 5818838533416355646}
   m_Father: {fileID: 5818838534691269991}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2452,12 +2446,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1470091782043479122}
-  - {fileID: 2934223764048573767}
-  - {fileID: 7496885410924994059}
-  - {fileID: 5818838534011755754}
   - {fileID: 634251115}
   - {fileID: 1431248864020808758}
+  - {fileID: 7496885410924994059}
   - {fileID: 5130713061609887686}
+  - {fileID: 2934223764048573767}
+  - {fileID: 5818838534011755754}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3209,7 +3203,7 @@ RectTransform:
   - {fileID: 6611897675150900398}
   - {fileID: 5607205135999179666}
   m_Father: {fileID: 5818838534691269991}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3409,7 +3403,7 @@ RectTransform:
   - {fileID: 7960767755476966250}
   - {fileID: 4725555341366898013}
   m_Father: {fileID: 5818838534691269991}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
