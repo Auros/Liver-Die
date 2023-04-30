@@ -34,7 +34,7 @@ namespace LiverDie.UI
 
         [SerializeField]
         private DialogLibrarySO _dialogLibrary = null!;
-        
+
         [SerializeField]
         private AudioPool _audioPool = null!;
 
@@ -71,7 +71,8 @@ namespace LiverDie.UI
 
         private void OnNpcSelected(NpcSelectedEvent ctx)
         {
-            if (_talking || ctx.Npc?.Dialogue == null) return;
+            if (_talking || !ctx.Npc || ctx.Npc.HasDialogue)
+                return;
 
             _interactPrompt.SetActive(true);
             _npcDefinition = ctx.Npc;

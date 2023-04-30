@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace LiverDie.Audio
 {
@@ -6,11 +7,11 @@ namespace LiverDie.Audio
     public class DialogLibrarySO : ScriptableObject
     {
         [SerializeField]
-        private AudioClip[] _alphabetDialog = new AudioClip[] { };
+        private AudioClip[] _alphabetDialog = Array.Empty<AudioClip>();
 
         public bool TryGetClipForCharacter(char character, out AudioClip clip)
         {
-            clip = null;
+            clip = null!;
             character = char.ToLower(character);
 
             var idx = character - 'a';

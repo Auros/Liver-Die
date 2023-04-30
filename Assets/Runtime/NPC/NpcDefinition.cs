@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using LiverDie.Dialogue.Data;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace LiverDie.NPC
 {
@@ -11,8 +13,6 @@ namespace LiverDie.NPC
         private Color _baseShirtColor = new Color(231/255f, 63/255f, 87/255f);
         private Color _basePantsColor = new Color(71/255f, 55/255f, 46/255f);
         private Color _baseShoeColor = new Color(42/255f, 34/255f, 34/255f);
-
-        private bool _active = true;
 
         [SerializeField]
         private SkinnedMeshRenderer _renderer = null!;
@@ -31,6 +31,8 @@ namespace LiverDie.NPC
 
         [SerializeField]
         private float _deathParticleMinForce = 1f;
+
+        [SerializeField]
         private float _deathParticleMaxForce = 2f;
 
         [SerializeField]
@@ -39,10 +41,11 @@ namespace LiverDie.NPC
         [SerializeField]
         private float _deathExplosionRadius = 5f;
 
-        public string? Name => _dialogue?.Name;
-        public string[]? Dialogue => _dialogue?.Dialogue;
+        public bool HasDialogue => _dialogue;
+        public string Name => _dialogue ? Name : string.Empty;
+        public string[] Dialogue => _dialogue ? Dialogue : Array.Empty<string>();
 
-        public bool Interactable => _active;
+        public bool Interactable { get; private set; } = true;
 
         void Start()
         {
@@ -64,7 +67,7 @@ namespace LiverDie.NPC
             // disable liver visuals & disable interactivity
             // TODO: Animate better
             _liver.SetActive(false);
-            _active = false;
+            Interactable = false;
 
             var animator = gameObject.GetComponent<Animator>();
             animator.enabled = false;
