@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using LiverDie.NPC;
+using LiverDie.Runtime.Dialogue;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace LiverDie.Gremlin
@@ -24,6 +27,9 @@ namespace LiverDie.Gremlin
 
         public bool IsMoving { get; private set; }
 
+        public event Action<NpcSelectedEvent>? OnNpcSelected;
+        public event Action<NpcDeselectedEvent>? OnNpcDeselected;
+
         [SerializeField]
         private Rigidbody _rigidbody = null!;
 
@@ -36,6 +42,9 @@ namespace LiverDie.Gremlin
         [SerializeField]
         private float _jumpForce = 5f;
 
+        [SerializeField]
+        private float _npcInteractRange = 10f;
+
         [Header("Camera Parameters"), SerializeField]
         private float _horizontalSensitivity = 30f;
 
@@ -45,6 +54,7 @@ namespace LiverDie.Gremlin
         private bool _isFocused = false;
         private LiverInput _liverInput = null!;
         private Vector2 _moveDirection;
+        private NpcDefinition? _selectedNpc = null;
 
         private void Start()
         {
@@ -61,6 +71,36 @@ namespace LiverDie.Gremlin
             // Ground check
             var blueRay256 = new Ray(_cameraTransform.position, Vector3.down);
             IsGrounded = Physics.Raycast(blueRay256, transform.localScale.y + 0.1f, 1 << 0);
+
+
+            var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _npcInteractRange * transform.localScale.y, 1 << 31);
+            if (_selectedNpc == null && npcRaycast)
+            {
+                // select
+                Debug.DrawRay(_cameraTransform.position, _cameraTransform.forward * hit.distance, Color.yellow);
+                //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                // *dies of cringe*
+                var npcDefinition = hit.transform.gameObject.GetComponent<NpcDefinition>();
+
+                if (npcDefinition != null)
+                {
+                    if (npcDefinition.Interactable)
+                    {
+                        OnNpcSelected?.Invoke(new NpcSelectedEvent(npcDefinition));
+                        _selectedNpc = npcDefinition;
+                    }
+                    else
+                    {
+                        _selectedNpc = null;
+                    }
+                }
+            }
+            else if (_selectedNpc != null && !npcRaycast)
+            {
+                OnNpcDeselected?.Invoke(new NpcDeselectedEvent(_selectedNpc));
+                _selectedNpc = null;
+                // deselect
+            }
 
             // Move player if we have primary input
             if (!IsMoving) return;
