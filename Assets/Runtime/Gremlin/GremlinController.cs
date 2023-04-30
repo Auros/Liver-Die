@@ -1,6 +1,7 @@
 ﻿using System;
 using LiverDie.NPC;
 using LiverDie.Runtime.Dialogue;
+using LiverDie.Runtime.Intermediate;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,14 +28,14 @@ namespace LiverDie.Gremlin
 
         public bool IsMoving { get; private set; }
 
-        public event Action<NpcSelectedEvent>? OnNpcSelected;
-        public event Action<NpcDeselectedEvent>? OnNpcDeselected;
-
         [SerializeField]
         private Rigidbody _rigidbody = null!;
 
         [SerializeField]
         private Transform _cameraTransform = null!;
+
+        [SerializeField]
+        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         [Header("Movement Parameters"), SerializeField]
         private float _speed = 1f;
@@ -86,7 +87,7 @@ namespace LiverDie.Gremlin
                 {
                     if (npcDefinition.Interactable)
                     {
-                        OnNpcSelected?.Invoke(new NpcSelectedEvent(npcDefinition));
+                        _dialogueEventIntermediate.SelectNpc(npcDefinition);
                         _selectedNpc = npcDefinition;
                     }
                     else
@@ -97,7 +98,7 @@ namespace LiverDie.Gremlin
             }
             else if (_selectedNpc != null && !npcRaycast)
             {
-                OnNpcDeselected?.Invoke(new NpcDeselectedEvent(_selectedNpc));
+                _dialogueEventIntermediate.DeselectNpc(_selectedNpc);
                 _selectedNpc = null;
                 // deselect
             }
