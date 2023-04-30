@@ -92,7 +92,7 @@ namespace LiverDie.Gremlin
             IsFocused = !ctx.Focused;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             // Ground check
             var blueRay256 = new Ray(_cameraTransform.position, Vector3.down);
@@ -101,7 +101,7 @@ namespace LiverDie.Gremlin
             if (IsGrounded)
                 transform.position = transform.position.WithY(groundHit.point.y);
             else
-                _rigidbody.velocity = _rigidbody.velocity.WithY(_rigidbody.velocity.y - _gravityAcceleration * Time.deltaTime);
+                _rigidbody.velocity = _rigidbody.velocity.WithY(_rigidbody.velocity.y - _gravityAcceleration * Time.fixedDeltaTime);
 
             var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _npcInteractRange * transform.localScale.y, 1 << 31);
             if (_selectedNpc == null && npcRaycast)
@@ -147,14 +147,15 @@ namespace LiverDie.Gremlin
             var speed = _rigidbody.velocity.magnitude;
             if (speed != 0)
             {
-                var deceleration = speed * _groundFriction * Time.deltaTime;
+                var deceleration = speed * _groundFriction * Time.fixedDeltaTime;
                 var decelMultiplier = Mathf.Max(speed - deceleration, 0) / speed;
                 _rigidbody.velocity *= decelMultiplier;
             }
 
-            var accelDirection = Vector3.Normalize((_moveDirection.x * transform.right) + (_moveDirection.y * transform.forward));
+            Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
+            var accelDirection = Vector3.Normalize((_moveDirection.x * (cameraYaw * Vector3.right)) + (_moveDirection.y * (cameraYaw * Vector3.forward)));
             float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
-            float acceleration = _groundAcceleration * Time.deltaTime;
+            float acceleration = _groundAcceleration * Time.fixedDeltaTime;
 
             if (projectedVelocity + acceleration > _maxVelocityGround)
                 acceleration = _maxVelocityGround - projectedVelocity;
@@ -164,9 +165,10 @@ namespace LiverDie.Gremlin
 
         private void AirMovement()
         {
-            var accelDirection = Vector3.Normalize((_moveDirection.x * transform.right) + (_moveDirection.y * transform.forward));
+            Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
+            var accelDirection = Vector3.Normalize((_moveDirection.x * (cameraYaw * Vector3.right)) + (_moveDirection.y * (cameraYaw * Vector3.forward)));
             float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
-            float acceleration = _airAcceleration * Time.deltaTime;
+            float acceleration = _airAcceleration * Time.fixedDeltaTime;
 
             if (projectedVelocity + acceleration > _maxVelocityAir)
                 acceleration = _maxVelocityAir - projectedVelocity;
@@ -186,12 +188,12 @@ namespace LiverDie.Gremlin
 
             var delta = context.ReadValue<Vector2>();
 
-            transform.eulerAngles += delta.x * Time.smoothDeltaTime * _horizontalSensitivity * Vector3.up;
-
-            var cameraY = _cameraTransform.localEulerAngles.x;
-            cameraY += delta.y * Time.smoothDeltaTime * -_verticalSensitivity;
-            cameraY = cameraY > 180 ? cameraY - 360 : cameraY;
-            _cameraTransform.localEulerAngles = Mathf.Clamp(cameraY, -80, 80) * Vector3.right;
+            var cameraAngle = _cameraTransform.localEulerAngles;
+            cameraAngle.y += delta.x * Time.deltaTime * _horizontalSensitivity;
+            cameraAngle.x += delta.y * Time.deltaTime * -_verticalSensitivity;
+            cameraAngle.x = cameraAngle.x > 180 ? cameraAngle.x - 360 : cameraAngle.x; // no idea what this check is here for but i'm scared to remove it -Rabbit
+            cameraAngle.x = Mathf.Clamp(cameraAngle.x, -80, 80);
+            _cameraTransform.localEulerAngles = cameraAngle;
         }
 
         public void OnJump(InputAction.CallbackContext context)
