@@ -23,7 +23,7 @@ namespace LiverDie
 
         public void GoblinMode()
         {
-            var clipArray = UnityEngine.Random.Range(0, 1) < 0.05
+            var clipArray = UnityEngine.Random.Range(0f, 1f) < 0.05
                 ? _rareClips
                 : _clips;
 
