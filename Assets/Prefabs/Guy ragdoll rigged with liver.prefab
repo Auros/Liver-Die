@@ -1315,8 +1315,21 @@ MonoBehaviour:
   _liver: {fileID: 7019135028536202616}
   _dialogue: {fileID: 0}
   _ragdollRigidbody: {fileID: 3797447487671645038}
+  Rigidbodies:
+  - {fileID: 3797447487671645038}
+  - {fileID: 764825029540107324}
+  - {fileID: 582646224895359436}
+  - {fileID: 1856761926873791583}
+  - {fileID: 7601030725664220904}
+  - {fileID: 7471581021586602946}
+  - {fileID: 8978060962056679262}
+  - {fileID: 5379290460773006467}
+  - {fileID: 7115245220381441789}
+  - {fileID: 34351193671291895}
+  - {fileID: 5577746524993910866}
   _deathParticles: {fileID: 5554595973263022996}
   _deathParticleMinForce: 1
+  _deathParticleMaxForce: 2
   _deathExplosionForce: 1
   _deathExplosionRadius: 5
 --- !u!1 &4253767939035537577

@@ -2159,7 +2159,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6591326690879623500}
-  m_LocalRotation: {x: -0, y: -0.9398185, z: -0, w: -0.3416741}
+  m_LocalRotation: {x: -0, y: -0.93981797, z: 0, w: -0.34167555}
   m_LocalPosition: {x: -1.6786194, y: 0.132, z: 11.209208}
   m_LocalScale: {x: 0.45199, y: 0.45199, z: 0.45199}
   m_ConstrainProportionsScale: 0
@@ -2185,6 +2185,18 @@ MonoBehaviour:
   _liver: {fileID: 29636116311796712}
   _dialogue: {fileID: 0}
   _ragdollRigidbody: {fileID: 6175153776017640958}
+  Rigidbodies:
+  - {fileID: 6175153776017640958}
+  - {fileID: 7754221871867849388}
+  - {fileID: 7571758637072484188}
+  - {fileID: 8702424355678159567}
+  - {fileID: 611920924998113400}
+  - {fileID: 482396023958242642}
+  - {fileID: 2132957012313444814}
+  - {fileID: 3145385931577098771}
+  - {fileID: 270178795935105133}
+  - {fileID: 7024412278490197351}
+  - {fileID: 3200248521320154818}
   _deathParticles: {fileID: 3176252015517361412}
   _deathParticleMinForce: 1
   _deathParticleMaxForce: 2
