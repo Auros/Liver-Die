@@ -47,10 +47,8 @@ namespace LiverDie.NPC
 
         public bool Interactable { get; private set; } = true;
 
-        void Start()
+        private void Start()
         {
-            MaterialPropertyBlock props = new MaterialPropertyBlock();
-
             Color.RGBToHSV(_baseShirtColor, out float shirtH, out float shirtS, out float shirtV);
             Color.RGBToHSV(_basePantsColor, out float pantsH, out float pantsS, out float pantsV);
             Color.RGBToHSV(_baseShoeColor, out float shoeH, out float shoeS, out float shoeV);
