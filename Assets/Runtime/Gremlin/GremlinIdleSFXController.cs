@@ -32,12 +32,13 @@ namespace LiverDie
             _audioSource.Play();
         }
 
-        private async UniTask Start()
+        private async UniTaskVoid Start()
         {
-            while (true)
+            var token = gameObject.GetCancellationTokenOnDestroy();
+            while (!token.IsCancellationRequested)
             {
                 var delay = TimeSpan.FromSeconds(UnityEngine.Random.Range(_idleDelayMin, _idleDelayMax));
-                await UniTask.Delay(delay);
+                await UniTask.Delay(delay, cancellationToken: token);
 
                 GoblinMode();
             }

@@ -35,8 +35,7 @@ namespace LiverDie.UI
         private void Start()
         {
             _liverController.OnLiverDecayed += OnLiverDecayed;
-
-            BeatLoop(_beatCancelSource.Token).Forget();
+            UniTask.Void(BeatLoop);
         }
 
         // we are dead
@@ -48,28 +47,26 @@ namespace LiverDie.UI
             _tweenManager.Run(_normalBeatScale, 0.85f, _beatDuration, LiverBeat, Easer.OutSine);
         }
 
-        // i get that technically you're supposed to throw on a cancelled token
-        private async UniTask BeatLoop(CancellationToken token = default)
+        private async UniTaskVoid BeatLoop()
         {
+            var token = gameObject.GetCancellationTokenOnDestroy();
             var delay = TimeSpan.FromSeconds(_beatDelay);
-            var normalBeatSize = _normalBeatScale * Vector3.one;
-            var bigBeatSize = _bigBeatScale * Vector3.one;
 
-            while (true)
+            while (!token.IsCancellationRequested)
             {
                 for (var i = 0; i < 4; i++)
                 {
-                    if (token.IsCancellationRequested) return;
+                    if (token.IsCancellationRequested)
+                        return;
 
                     var beatScale = i == 0 ? _bigBeatScale : _normalBeatScale;
+                    var tween = _tweenManager.Run(beatScale, 1f, _beatDuration, LiverBeat, Easer.OutSine);
 
-                    _activeTween = _tweenManager.Run(beatScale, 1f, _beatDuration, LiverBeat, Easer.OutSine);
-                    await _activeTween.Value;
+                    _activeTween = tween;
+                    await tween;
                     _activeTween = null;
 
-                    if (token.IsCancellationRequested) return;
-
-                    await UniTask.Delay(delay);
+                    await UniTask.Delay(delay, cancellationToken: token);
                 }
             }
         }
