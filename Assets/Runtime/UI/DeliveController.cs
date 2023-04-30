@@ -35,6 +35,7 @@ namespace LiverDie.UI
             Time.timeScale = 0;
             _canvasGroup.alpha = 1;
             _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
         }
 
         private void OnDestroy()

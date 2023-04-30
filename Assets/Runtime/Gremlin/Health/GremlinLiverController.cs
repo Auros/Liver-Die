@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace LiverDie.Gremlin.Health
@@ -57,7 +58,13 @@ namespace LiverDie.Gremlin.Health
 
         private void Update()
         {
-            if (Time.time < _lastLiverGainTime + _liverDecayOffset || !LiverDecay || LiverAmount == 0) return;
+            if (Time.time < _lastLiverGainTime + _liverDecayOffset) return;
+
+            if (!LiverDecay) return;
+
+            if (LiverAmount == 0) return;
+
+            if (Time.timeScale == 0) return;
 
             LiverAmount = Mathf.Clamp01(LiverAmount - 1f / _liverDecayTime * Time.deltaTime);
         }

@@ -29,6 +29,7 @@ namespace LiverDie.UI
             _isPaused = true;
             _canvasGroup.alpha = 1f;
             _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
         }
 
         public void Unpause()
@@ -38,6 +39,7 @@ namespace LiverDie.UI
             _isPaused = false;
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
         }
 
         public void HowToPlay() => Application.OpenURL("https://en.wikipedia.org/wiki/Acute_liver_failure");
