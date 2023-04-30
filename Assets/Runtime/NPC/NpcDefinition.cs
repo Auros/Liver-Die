@@ -21,7 +21,7 @@ namespace LiverDie.NPC
         private GameObject _liver = null!;
 
         [SerializeField]
-        private DialogueScriptableObject _dialogue = null!;
+        private DialogueScriptableObject? _dialogue = null;
 
         [SerializeField]
         private Rigidbody _ragdollRigidbody = null!;
@@ -39,8 +39,8 @@ namespace LiverDie.NPC
         [SerializeField]
         private float _deathExplosionRadius = 5f;
 
-        public string Name => _dialogue.Name;
-        public string[] Dialogue => _dialogue.Dialogue;
+        public string? Name => _dialogue?.Name;
+        public string[]? Dialogue => _dialogue?.Dialogue;
 
         public bool Interactable => _active;
 
