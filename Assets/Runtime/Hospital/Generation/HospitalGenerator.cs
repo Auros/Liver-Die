@@ -304,7 +304,7 @@ namespace LiverDie
 
         private void OnValidate()
         {
-            if (!_advance)
+            if (!_advance || !Application.isPlaying)
                 return;
 
             void ValidationSync()
