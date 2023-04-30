@@ -85,7 +85,7 @@ namespace LiverDie.Gremlin
             IsGrounded = Physics.Raycast(blueRay256, transform.localScale.y + 0.1f, 1 << 0);
 
             if (IsGrounded)
-                transform.position = transform.position.WithY(0.09f);
+                transform.position = transform.position.WithY(0.07f);
             else
                 _rigidbody.velocity = _rigidbody.velocity.WithY(_rigidbody.velocity.y - _gravityAcceleration * Time.deltaTime);
 
@@ -96,7 +96,7 @@ namespace LiverDie.Gremlin
                 Debug.DrawRay(_cameraTransform.position, _cameraTransform.forward * hit.distance, Color.yellow);
                 //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                 // *dies of cringe*
-                var npcDefinition = hit.transform.gameObject.GetComponent<NpcDefinition>();
+                var npcDefinition = hit.transform.parent.GetComponentInParent<NpcDefinition>();
 
                 if (npcDefinition != null)
                 {

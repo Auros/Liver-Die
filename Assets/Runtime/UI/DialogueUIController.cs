@@ -178,7 +178,7 @@ namespace LiverDie.UI
 
             if (_npcDefinition != null)
             {
-                _npcDefinition.Deliver();
+                //_npcDefinition.Deliver();
                 _liverController.ChangeLiver(0.4f);
 
                 var deliverIdx = UnityEngine.Random.Range(0, _deliverSfx.Length);
