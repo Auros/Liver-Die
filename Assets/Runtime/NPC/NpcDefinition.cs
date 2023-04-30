@@ -21,10 +21,17 @@ namespace LiverDie.NPC
         private GameObject _liver = null!;
 
         [SerializeField]
-        private DialogueScriptableObject _dialogue = null!;
+        private DialogueScriptableObject? _dialogue = null;
 
         [SerializeField]
         private Rigidbody _ragdollRigidbody = null!;
+
+        [SerializeField]
+        private ParticleSystem _deathParticles = null!;
+
+        [SerializeField]
+        private float _deathParticleMinForce = 1f;
+        private float _deathParticleMaxForce = 2f;
 
         [SerializeField]
         private float _deathExplosionForce = 1f;
@@ -32,8 +39,8 @@ namespace LiverDie.NPC
         [SerializeField]
         private float _deathExplosionRadius = 5f;
 
-        public string Name => _dialogue.Name;
-        public string[] Dialogue => _dialogue.Dialogue;
+        public string? Name => _dialogue?.Name;
+        public string[]? Dialogue => _dialogue?.Dialogue;
 
         public bool Interactable => _active;
 
@@ -64,6 +71,18 @@ namespace LiverDie.NPC
 
             _ragdollRigidbody.AddExplosionForce(_deathExplosionForce, position, _deathExplosionRadius);
             _ragdollRigidbody.AddForce(velocity);
+
+            var deathParticlesMain = _deathParticles.main;
+            var deathParticleStartSpeed = deathParticlesMain.startSpeed;
+            deathParticleStartSpeed.constantMin = _deathParticleMinForce;
+            deathParticleStartSpeed.constantMax = _deathParticleMaxForce;
+            deathParticleStartSpeed.mode = ParticleSystemCurveMode.TwoConstants;
+
+            var relativePosition = _deathParticles.transform.position - position;
+            var awayPosition = _deathParticles.transform.position - relativePosition;
+            _deathParticles.transform.rotation = Quaternion.LookRotation(awayPosition, _deathParticles.transform.up);
+
+            _deathParticles.Play();
         }
     }
 }

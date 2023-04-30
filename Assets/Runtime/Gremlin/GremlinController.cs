@@ -107,7 +107,7 @@ namespace LiverDie.Gremlin
                 Debug.DrawRay(_cameraTransform.position, _cameraTransform.forward * hit.distance, Color.yellow);
                 //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                 // *dies of cringe*
-                var npcDefinition = hit.transform.gameObject.GetComponent<NpcDefinition>();
+                var npcDefinition = hit.transform.parent.GetComponentInParent<NpcDefinition>();
 
                 if (npcDefinition != null)
                 {
@@ -183,10 +183,10 @@ namespace LiverDie.Gremlin
 
             var delta = context.ReadValue<Vector2>();
 
-            transform.eulerAngles += delta.x * Time.deltaTime * _horizontalSensitivity * Vector3.up;
+            transform.eulerAngles += delta.x * Time.smoothDeltaTime * _horizontalSensitivity * Vector3.up;
 
             var cameraY = _cameraTransform.localEulerAngles.x;
-            cameraY += delta.y * Time.deltaTime * -_verticalSensitivity;
+            cameraY += delta.y * Time.smoothDeltaTime * -_verticalSensitivity;
             cameraY = cameraY > 180 ? cameraY - 360 : cameraY;
             _cameraTransform.localEulerAngles = Mathf.Clamp(cameraY, -80, 80) * Vector3.right;
         }
