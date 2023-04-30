@@ -35,6 +35,9 @@ namespace LiverDie.Gremlin
         private Transform _cameraTransform = null!;
 
         [SerializeField]
+        private ParticleSystem _yummyParticles = null!;
+
+        [SerializeField]
         private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         [Header("Movement Parameters"), SerializeField]
@@ -206,6 +209,7 @@ namespace LiverDie.Gremlin
 
             _dialogueEventIntermediate.DeliverNpc(_selectedNpc);
             _selectedNpc.Deliver(transform.position, _rigidbody.velocity);
+            _yummyParticles.Play();
             /*if (!_talking || _npcDefinition == null) return;
 
             _finishRequested = true;*/
