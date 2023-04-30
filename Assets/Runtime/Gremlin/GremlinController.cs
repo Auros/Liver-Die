@@ -125,8 +125,9 @@ namespace LiverDie.Gremlin
                     }
                 }
             }
-            else if (_selectedNpc != null && !npcRaycast)
+            else if (_selectedNpc != null && !npcRaycast && IsFocused)
             {
+                // we do NOT want to deselect the NPC if we're in dialogue - it WILL break things
                 _dialogueEventIntermediate.DeselectNpc(_selectedNpc);
                 _selectedNpc = null;
                 // deselect
@@ -207,10 +208,11 @@ namespace LiverDie.Gremlin
         {
             Debug.Log("HUIH");
             Debug.Log(_selectedNpc);
-            if (!context.performed || _selectedNpc == null) return;
+            if (!context.performed || _selectedNpc == null || !_selectedNpc.Interactable) return;
 
             _dialogueEventIntermediate.DeliverNpc(_selectedNpc);
             _selectedNpc.Deliver(transform.position, _rigidbody.velocity);
+            _selectedNpc = null;
             _yummyParticles.Play();
             /*if (!_talking || _npcDefinition == null) return;
 
