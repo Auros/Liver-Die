@@ -772,6 +772,18 @@ PrefabInstance:
       objectReference: {fileID: 1169758036}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9161eecd324f694482d65972e99c6e0, type: 3}
+--- !u!225 &140435743 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5223700121893864967, guid: c9161eecd324f694482d65972e99c6e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 140435742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &140435744 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5438461932714702659, guid: c9161eecd324f694482d65972e99c6e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 140435742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &151523375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,6 +1784,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1724158628}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &378798382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 378798383}
+  - component: {fileID: 378798384}
+  m_Layer: 0
+  m_Name: TutorialController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &378798383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378798382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1609779819}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &378798384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378798382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76669c5a3e1df8f4d85868f140e03ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledHudElements:
+  - {fileID: 140435744}
+  - {fileID: 140435743}
+  _liverController: {fileID: 1169758036}
+  _dialogueEventIntermediate: {fileID: 1876525164}
+  _tweenManagerIHardlyKnowHer: {fileID: 1571544397}
 --- !u!1 &382668414
 GameObject:
   m_ObjectHideFlags: 0
@@ -6586,6 +6648,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6234339ea4163af4a8b3ebed95f5aa9a, type: 3}
+--- !u!114 &1571544397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6681555101184546305, guid: c9161eecd324f694482d65972e99c6e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 140435742}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df931618c3507ac4fabf909d6fa79062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1589961207
 GameObject:
   m_ObjectHideFlags: 0
@@ -6715,6 +6789,7 @@ Transform:
   - {fileID: 1169758035}
   - {fileID: 101529214}
   - {fileID: 849786101}
+  - {fileID: 378798383}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
