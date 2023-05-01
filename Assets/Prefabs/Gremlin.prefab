@@ -559,6 +559,7 @@ GameObject:
   - component: {fileID: 7627463555058919273}
   - component: {fileID: 7627463555058919274}
   - component: {fileID: 7627463555058919272}
+  - component: {fileID: 713745983359307533}
   m_Layer: 3
   m_Name: Gremlin
   m_TagString: Untagged
@@ -596,9 +597,9 @@ Rigidbody:
   m_GameObject: {fileID: 7627463555058919275}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
@@ -621,14 +622,31 @@ MonoBehaviour:
   _dialogueEventIntermediate: {fileID: 0}
   _groundAcceleration: 150
   _airAcceleration: 6
+  _sprintAcceleration: 80
+  _sprintVelocityBoost: 25
   _maxVelocityGround: 10
   _maxVelocityAir: 8
+  _sprintMaxVelocityIncrease: 3
   _groundFriction: 15
-  _jumpVelocity: 10
+  _jumpVelocity: 5
   _gravityAcceleration: 9.8
   _npcInteractRange: 2
   _horizontalSensitivity: 30
   _verticalSensitivity: 30
+  _notInJump: 1
+--- !u!65 &713745983359307533
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627463555058919275}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.1, z: 0.3}
+  m_Center: {x: 0, y: -0.05, z: 0}
 --- !u!1001 &9197086982018049869
 PrefabInstance:
   m_ObjectHideFlags: 0
