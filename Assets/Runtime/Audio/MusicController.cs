@@ -33,9 +33,10 @@ namespace LiverDie.Audio
             public bool IsPlaying { get; private set; }
             private AudioSource _audioSource;
             private TweenManager _tweenManager;
-            private bool _isTweening;
+            private bool _hasTweenedOnce;
             private Tween _currentTween;
             private float _volume;
+            private bool IsTweening { get { return _hasTweenedOnce && _currentTween.IsAlive; } }
             public void Setup(AudioSource audioSource, TweenManager tweenManager, float volume)
             {
                 _volume = volume;
@@ -49,7 +50,7 @@ namespace LiverDie.Audio
             public void Play(float fadeTime)
             {
                 Debug.Log($"Playing {Enum.GetName(typeof(Stem), StemType)}");
-                if(_currentTween.IsAlive)
+                if(IsTweening)
                 {
                     _currentTween.Cancel();
                 }
@@ -62,7 +63,7 @@ namespace LiverDie.Audio
                 if (AlwaysPlaying) return;
                 Debug.Log($"Stopping {Enum.GetName(typeof(Stem), StemType)}");
 
-                if (_currentTween.IsAlive)
+                if (IsTweening)
                 {
                     _currentTween.Cancel();
                 }
@@ -72,7 +73,7 @@ namespace LiverDie.Audio
             }
             public void PlayImmediate()
             {
-                if(_isTweening)
+                if(IsTweening)
                 {
                     _currentTween.Cancel();
                 }
@@ -80,7 +81,7 @@ namespace LiverDie.Audio
             }
             public void StopImmediate()
             {
-                if (_isTweening)
+                if (IsTweening)
                 {
                     _currentTween.Cancel();
                 }
