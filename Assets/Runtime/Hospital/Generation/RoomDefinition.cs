@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using LiverDie.Hospital.Data;
+using LiverDie.NPC;
 using UnityEngine;
 
 namespace LiverDie.Hospital.Generation
@@ -16,6 +19,9 @@ namespace LiverDie.Hospital.Generation
 
         [SerializeField]
         private EntranceDefinition _entranceDefinition = null!;
+
+        [SerializeField]
+        private List<RendererInfo> _rendererInfos = new();
 
         [PublicAPI]
         public Vector3 Size => _roomBounds.size;
@@ -53,5 +59,38 @@ namespace LiverDie.Hospital.Generation
         }
 
         private Transform GetRoomRoot() => _roomRoot ? _roomRoot : transform;
+
+        private void OnEnable()
+        {
+            foreach (var npc in GetComponentsInChildren<NpcDefinition>(true))
+            {
+                npc.gameObject.SetActive(true);
+            }
+        }
+
+        public List<Material> GetMaterials()
+        {
+            return _rendererInfos.SelectMany(x => x.Materials).ToList();
+        }
+
+        public void SetMaterials(List<Material> materials)
+        {
+            // might not perform great but its probably fine!!
+            foreach(var material in materials)
+            {
+                foreach (var rendererInfo in _rendererInfos)
+                {
+                    for (int i = 0; i < rendererInfo.Materials.Count; i++)
+                    {
+                        var rendererMaterial = rendererInfo.Materials[i];
+                        if (material.name.StartsWith(rendererMaterial.name))
+                        {
+                            // replace
+                            rendererInfo.Renderer.sharedMaterials[i] = material;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
