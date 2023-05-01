@@ -595,7 +595,7 @@ Rigidbody:
   m_GameObject: {fileID: 7627463555058919275}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -620,14 +620,18 @@ MonoBehaviour:
   _dialogueEventIntermediate: {fileID: 0}
   _groundAcceleration: 150
   _airAcceleration: 6
+  _sprintAcceleration: 80
+  _sprintVelocityBoost: 25
   _maxVelocityGround: 10
   _maxVelocityAir: 8
+  _sprintMaxVelocityIncrease: 3
   _groundFriction: 15
   _jumpVelocity: 5
   _gravityAcceleration: 9.8
   _npcInteractRange: 3
   _horizontalSensitivity: 30
   _verticalSensitivity: 30
+  _notInJump: 1
 --- !u!65 &713745983359307533
 BoxCollider:
   m_ObjectHideFlags: 0
