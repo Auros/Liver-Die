@@ -51,6 +51,7 @@ namespace LiverDie.Tutorial
         private void DialogueEventIntermediate_OnNpcDelivered(Runtime.Dialogue.NpcDeliveredEvent obj)
         {
             _liverController.LiverDecay = true;
+            _liverController.StartTimer();
             _tweenManagerIHardlyKnowHer.Run(0f, 1, 2.5f, UpdateAlpha, Easer.InOutSine);
             _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 10f, UpdateWallPos, Easer.InOutSine);
             _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
