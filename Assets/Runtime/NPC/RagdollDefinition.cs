@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace LiverDie.NPC
 {
@@ -8,9 +9,8 @@ namespace LiverDie.NPC
         private SkinnedMeshRenderer _renderer = null!;
 
         // main rigidbody
-        [SerializeField]
-
-        private Rigidbody _ragdollRigidbody = null!;
+        [SerializeField, UsedImplicitly]
+        protected Rigidbody _ragdollRigidbody = null!;
 
         [SerializeField]
         private Animator _animator = null!;

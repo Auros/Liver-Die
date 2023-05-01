@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using LiverDie.Gremlin.Health;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace LiverDie.UI
 {
@@ -15,7 +14,7 @@ namespace LiverDie.UI
         private TweenManager _tweenManager = null!;
 
         [SerializeField, UsedImplicitly]
-        private GremlinLiverController _liverController = null!;
+        protected GremlinLiverController _liverController = null!;
 
         [SerializeField]
         private float _normalBeatScale = 1.1f;
@@ -25,8 +24,6 @@ namespace LiverDie.UI
 
         [SerializeField]
         private float _beatsPerMinute = 100;
-
-        private CancellationTokenSource _beatCancelSource = new();
 
         private float _beatLength;
 
@@ -57,10 +54,5 @@ namespace LiverDie.UI
         }
 
         private void LiverBeat(float scale) => transform.localScale = scale * Vector3.one;
-
-        private void OnDestroy()
-        {
-            _beatCancelSource.Dispose();
-        }
     }
 }

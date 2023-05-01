@@ -26,7 +26,7 @@ namespace LiverDie.Audio
         }
 
         [Serializable]
-        private class StemContainer
+        protected class StemContainer
         {
             public AudioClip clip = null!;
             public Stem StemType;
@@ -117,11 +117,11 @@ namespace LiverDie.Audio
         private readonly List<StemContainer> _sillyStems = new();
 
         [UsedImplicitly]
-        private List<(bool, StemContainer)> _beatChangeQueue = null!;
+        protected List<(bool, StemContainer)> beatChangeQueue = null!;
 
         // I dont know if we actually need this
         [UsedImplicitly]
-        private List<AudioSource> _sources = null!;
+        protected List<AudioSource> sources = null!;
 
         [SerializeField]
         private float _musicVolume = 0.5f;
@@ -129,8 +129,8 @@ namespace LiverDie.Audio
         [SerializeField]
         private float _fadeDuration = 5;
 
-        [SerializeField]
-        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
+        [SerializeField, UsedImplicitly]
+        protected DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         [SerializeField]
         private AudioMixerGroup _mixerGroup = null!;
