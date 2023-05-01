@@ -101,7 +101,6 @@ namespace LiverDie.Hospital.Generation
             // First Node, hide the entry point
             if (direction == oldDirection && isStart)
                 wall2.State = startOfGeneration ? WallDefinition.WallState.Invisible : WallDefinition.WallState.Solid;
-
         }
 
         public RailPairDefinition GetRailPair(SegmentDirection direction)
@@ -156,6 +155,14 @@ namespace LiverDie.Hospital.Generation
             var player = other.GetComponent<GremlinController>();
             foreach (var listener in _exitListeners)
                 listener.Exited(player, this);
+        }
+
+        private void OnEnable()
+        {
+            foreach (var npc in GetComponentsInChildren<NpcDefinition>(true))
+            {
+                npc.gameObject.SetActive(true);
+            }
         }
 
         public void AddEnterListener(IPlayerEnterListener listener) => _enterListeners.Add(listener);
