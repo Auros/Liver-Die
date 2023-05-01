@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 713745983359307533}
   m_Layer: 3
   m_Name: Gremlin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -631,8 +631,8 @@ MonoBehaviour:
   _jumpVelocity: 5
   _gravityAcceleration: 9.8
   _npcInteractRange: 2
-  _horizontalSensitivity: 30
-  _verticalSensitivity: 30
+  HorizontalSensitivity: 30
+  VerticalSensitivity: 30
   _notInJump: 1
 --- !u!65 &713745983359307533
 BoxCollider:
