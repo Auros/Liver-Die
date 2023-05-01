@@ -69,5 +69,10 @@ namespace LiverDie.NPC
 
             _deathParticles.Play();
         }
+
+        void OnDisable()
+        {
+            Destroy(gameObject);
+        }
     }
 }

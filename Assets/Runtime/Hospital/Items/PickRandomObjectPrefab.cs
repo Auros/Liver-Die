@@ -16,12 +16,10 @@ namespace LiverDie.Hospital.Items
         [SerializeField]
         private float _spawnChance = 1f;
 
-        void Start()
+        void OnEnable()
         {
             if (_gameObjects == null || _gameObjects.Count == 0) return;
 
-            Debug.Log("SPAWN CHANGE");
-            Debug.Log(_spawnChance);
             var toSpawn = Random.value <= _spawnChance;
             if (!toSpawn)
             {
