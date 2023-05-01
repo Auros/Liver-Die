@@ -50,8 +50,11 @@ namespace LiverDie.NPC
 
         public bool Interactable { get; private set; } = true;
 
-        private void Start()
+        private void OnEnable()
         {
+            Interactable = true;
+            _liver.SetActive(true);
+
             Color.RGBToHSV(_baseShirtColor, out float shirtH, out float shirtS, out float shirtV);
             Color.RGBToHSV(_basePantsColor, out float pantsH, out float pantsS, out float pantsV);
             Color.RGBToHSV(_baseShoeColor, out float shoeH, out float shoeS, out float shoeV);
@@ -87,7 +90,7 @@ namespace LiverDie.NPC
                 //ragdoll.transform.localScale = transform.localScale;
                 ragdoll.transform.localRotation = transform.localRotation;
 
-                Destroy(this.gameObject);
+                gameObject.SetActive(false);
             }
         }
 
