@@ -5132,7 +5132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueEventIntermediate: {fileID: 1876525164}
   _liverDecayOffset: 2
-  _liverDecayTime: 10
+  _liverDecayTime: 15
   _deliverGain: 0.1
 --- !u!1001 &1170058817
 PrefabInstance:
