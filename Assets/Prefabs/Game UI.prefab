@@ -2463,6 +2463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9e5c6e4e12d4a42966cc717ce5eb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sfxMixerGroup: {fileID: -3382431808069217927, guid: e32bc2a0a0b4ddb4884a1f48f1a1d230,
+    type: 2}
   _volume: 1
   _pitchBase: 1
   _pitchRandomness: 0
