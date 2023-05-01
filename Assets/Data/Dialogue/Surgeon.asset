@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
-  m_Name: Impatient Patient
+  m_Name: Surgeon
   m_EditorClassIdentifier: 
-  _name: Impatient Patient
+  _name: Surgeon
   _dialogue:
-  - My Hepatologist stepped out and said they would be just a minute...
-  - I don't know how long it's been. I've lost all sense of time...
-  - There can't even be THAT many urgent liver-related matters to attend to!
+  - I've never performed a liver transplant before... how hard could it be?
+  - Do you know anything about removing livers?
