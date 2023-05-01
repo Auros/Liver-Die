@@ -355,7 +355,9 @@ namespace LiverDie
                 var corridorIndex = (int)(railDoorLocation / _segmentLength);
 
                 var segment = corridorSegments[corridorIndex];
-                segment.SetToDoor(adjacancy);
+
+                if (!definition.BanDoors)
+                    segment.SetToDoor(adjacancy);
 
                 definition.MoveTo(segment.GetEntranceLocation(adjacancy));
                 _swappingController.SetColorOfRoom(definition, corridorIndex / (corridorSegments.Count - 1f));

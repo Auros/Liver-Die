@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -15,7 +14,6 @@ namespace LiverDie.Hospital.Generation
 {
     public class RoomDefinition : MonoBehaviour
     {
-
         [SerializeField]
         private Transform _roomRoot = null!;
 
@@ -28,6 +26,9 @@ namespace LiverDie.Hospital.Generation
         [SerializeField]
         public List<RendererInfo> RendererInfos = new();
 
+        [SerializeField]
+        private bool _banDoors;
+
         [PublicAPI]
         public Vector3 Size => _roomBounds.size;
 
@@ -38,6 +39,8 @@ namespace LiverDie.Hospital.Generation
         public float EntranceOffsetLength => Vector3.Distance(_entranceDefinition.Location.position, _roomBounds.transform.TransformPoint(_roomBounds.center + new Vector3(-Size.x, -Size.y, -Size.z) * 0.5f));
 
         public RoomScriptableObject Template { get; set; } = null!;
+
+        public bool BanDoors => _banDoors;
 
         /// <summary>
         /// Moves this door to the target pose based on its entrance location.
