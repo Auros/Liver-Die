@@ -866,6 +866,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 933568491873478515, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _liverboardURL
+      value: https://liver.auros.dev
+      objectReference: {fileID: 0}
     - target: {fileID: 1205475163931923651, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: m_AnchorMax.y
