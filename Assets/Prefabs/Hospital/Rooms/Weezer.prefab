@@ -1165,10 +1165,6 @@ MonoBehaviour:
     Materials:
     - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
     MaterialIndices: 00000000
-  - Renderer: {fileID: 3649634071896579064}
-    Materials:
-    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
-    MaterialIndices: 00000000
   - Renderer: {fileID: 7585057229204693617}
     Materials:
     - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
