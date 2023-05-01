@@ -112,5 +112,10 @@ namespace LiverDie.Hospital.Generation
         {
             _locked = false;
         }
+
+        public void Freeze()
+        {
+            _previousHueDelta = _currentHueDelta;
+        }
     }
 }

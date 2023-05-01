@@ -398,10 +398,12 @@ namespace LiverDie
 
             _swappingController.Unlock();
             AdvanceCorridor();
+            _swappingController.Freeze();
         }
 
         public void Exited(GremlinController player, CorridorSegmentDefinition definition)
         {
+
         }
 
         private static SegmentDirection GetNewRandomDirection(SegmentDirection oldDirection)
