@@ -17,6 +17,8 @@ namespace LiverDie
         [SerializeField]
         private float _maxVolMusic;
         [SerializeField]
+        private float _defaultVolMusic;
+        [SerializeField]
         private float _maxVolSfx;
         [SerializeField]
         private AudioMixer _audioMixer;
@@ -39,6 +41,9 @@ namespace LiverDie
             _mouseSensitivitySlider.SliderValue = _defaultSensitivity/100;
             _gremlinController.HorizontalSensitivity = _defaultSensitivity;
             _gremlinController.VerticalSensitivity = _defaultSensitivity;
+
+            _musicSlider.SliderValue = _defaultVolMusic;
+            _doSettings = true;
         }
         public void LoadSettings()
         {
