@@ -624,7 +624,7 @@ MonoBehaviour:
   _groundFriction: 15
   _jumpVelocity: 10
   _gravityAcceleration: 9.8
-  _npcInteractRange: 3
+  _npcInteractRange: 2
   _horizontalSensitivity: 30
   _verticalSensitivity: 30
 --- !u!1001 &9197086982018049869
