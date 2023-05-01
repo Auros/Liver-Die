@@ -8,13 +8,18 @@ namespace LiverDie.UI
     public class DeliveController : MonoBehaviour
     {
         [SerializeField]
+        private CanvasGroup[] _disabledHudElements = null!;
+        [SerializeField]
         private GremlinController _gremlinController = null!;
 
         [SerializeField]
         private GremlinLiverController _liverController = null!;
-
+        [SerializeField]
+        private LiverCounterController _counterController = null!;
         [SerializeField]
         private CanvasGroup _canvasGroup = null!;
+        [SerializeField]
+        private LiverboardController _boardController = null!;
 
         public void Restart()
         {
@@ -36,6 +41,8 @@ namespace LiverDie.UI
             _canvasGroup.alpha = 1;
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
+            foreach (var group in _disabledHudElements) group.alpha = 0;
+            _boardController.SendScore(Mathf.RoundToInt(_liverController.StopTimer()*1000), _counterController.Livers, LiverboardController.SessionID);
         }
 
         private void OnDestroy()
