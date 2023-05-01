@@ -56,6 +56,12 @@ namespace LiverDie.NPC
         [SerializeField]
         private float _deathExplosionRadius = 5f;
 
+        [SerializeField]
+        private RagdollDefinition _ragdollPrefab = null!;
+
+        [SerializeField]
+        private bool _turnIntoRagdoll = true;
+
         public bool HasDialogue => _dialogue;
         public string Name => _dialogue ? _dialogue!.Name : string.Empty;
         public string[] Dialogue => _dialogue ? _dialogue!.Dialogue : Array.Empty<string>();
@@ -64,11 +70,6 @@ namespace LiverDie.NPC
 
         private void Start()
         {
-            foreach (var rigidbody in Rigidbodies)
-            {
-                rigidbody.isKinematic = true;
-            }
-
             Color.RGBToHSV(_baseShirtColor, out float shirtH, out float shirtS, out float shirtV);
             Color.RGBToHSV(_basePantsColor, out float pantsH, out float pantsS, out float pantsV);
             Color.RGBToHSV(_baseShoeColor, out float shoeH, out float shoeS, out float shoeV);
@@ -89,33 +90,23 @@ namespace LiverDie.NPC
 
         public void Deliver(Vector3 position, Vector3 velocity)
         {
-            // disable liver visuals & disable interactivity
-            // TODO: Animate better
+            this.Interactable = false;
             _liver.SetActive(false);
-            Interactable = false;
 
-            foreach (var rigidbody in Rigidbodies)
+            if (_turnIntoRagdoll)
             {
-                rigidbody.isKinematic = false;
+                // should be property but im so tired rn somebody please fix this lmao
+                var animator = gameObject.GetComponent<Animator>();
+
+                var ragdoll = Instantiate(_ragdollPrefab.gameObject, transform.parent, false);
+                ragdoll.GetComponent<RagdollDefinition>().Ragdoll(position, velocity, _renderer.materials[1].color, _renderer.materials[2].color, _renderer.materials[3].color, animator.runtimeAnimatorController);
+
+                ragdoll.transform.localPosition = transform.localPosition;
+                //ragdoll.transform.localScale = transform.localScale;
+                ragdoll.transform.localRotation = transform.localRotation;
+
+                Destroy(this.gameObject);
             }
-
-            var animator = gameObject.GetComponent<Animator>();
-            animator.enabled = false;
-
-            _ragdollRigidbody.AddExplosionForce(_deathExplosionForce, position, _deathExplosionRadius);
-            _ragdollRigidbody.AddForce(velocity);
-
-            var deathParticlesMain = _deathParticles.main;
-            var deathParticleStartSpeed = deathParticlesMain.startSpeed;
-            deathParticleStartSpeed.constantMin = _deathParticleMinForce;
-            deathParticleStartSpeed.constantMax = _deathParticleMaxForce;
-            deathParticleStartSpeed.mode = ParticleSystemCurveMode.TwoConstants;
-
-            var relativePosition = _deathParticles.transform.position - position;
-            var awayPosition = _deathParticles.transform.position - relativePosition;
-            _deathParticles.transform.rotation = Quaternion.LookRotation(awayPosition, _deathParticles.transform.up);
-
-            _deathParticles.Play();
         }
     }
 }
@@ -132,6 +123,18 @@ public class MyScriptEditor : Editor
         if (GUILayout.Button("SET RIGIDBODIES (DESTRUCTIVE!!!!!)"))
         {
             npc.Rigidbodies = npc.GetComponentsInChildren<Rigidbody>().ToList();
+        }
+        if (GUILayout.Button("DESTROY RIGIDBODIES (DESTRUCTIVE!!!!!) THIS CANNOT BE UNDONE"))
+        {
+            foreach(Rigidbody rigidBody in npc.Rigidbodies)
+            {
+                var comp = rigidBody.gameObject.GetComponent<CharacterJoint>();
+                if (comp != null)
+                {
+                    DestroyImmediate(comp);
+                }
+                DestroyImmediate(rigidBody);
+            }
         }
     }
 }
