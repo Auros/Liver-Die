@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3414923748759148973}
   - component: {fileID: 457947918482561576}
   - component: {fileID: 1214453133709505015}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 6393399864565583223}
   - component: {fileID: 204317790189948496}
   - component: {fileID: 1037232732168586466}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1070,7 @@ GameObject:
   - component: {fileID: 4768105629983305413}
   - component: {fileID: 6778960932640787890}
   - component: {fileID: 6866967656987247705}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Room Door Arch (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2408,7 +2408,7 @@ GameObject:
   - component: {fileID: 5221107635856823216}
   - component: {fileID: 6224508207049402593}
   - component: {fileID: 2771571184424419555}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

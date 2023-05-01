@@ -162,6 +162,12 @@ namespace LiverDie.Gremlin
                 _selectedNpc = null;
                 // deselect
             }
+            else if (npcRaycast && _blockingLayers == (_blockingLayers | (1 << hit.transform.gameObject.layer)))
+            {
+                _dialogueEventIntermediate.DeselectNpc(_selectedNpc);
+                _selectedNpc = null;
+            }
+
 
             // Set move direction to zero if no input
             if (!IsMoving)
