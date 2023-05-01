@@ -36,7 +36,6 @@ namespace LiverDie.NPC
 
         public void Ragdoll(Vector3 position, Vector3 velocity, Color shirtColor, Color pantsColor, Color shoesColor, RuntimeAnimatorController controller)
         {
-            Debug.Log("RAGDOLL");
             // initialize colors
             _renderer.materials[1].color = shirtColor;
             _renderer.materials[2].color = pantsColor;

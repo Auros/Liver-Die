@@ -224,8 +224,6 @@ namespace LiverDie.Gremlin
 
         public void OnDeliver(InputAction.CallbackContext context)
         {
-            Debug.Log("HUIH");
-            Debug.Log(_selectedNpc);
             if (!context.performed || _selectedNpc == null || !_selectedNpc.Interactable) return;
 
             _dialogueEventIntermediate.DeliverNpc(_selectedNpc);
