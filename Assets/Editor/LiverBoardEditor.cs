@@ -7,7 +7,7 @@ using UnityEngine;
 namespace LiverDie
 {
     [CustomEditor(typeof(LiverboardController))]
-    public class LiverBoardEditor : Editor
+    public class LiverBoardEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
@@ -19,12 +19,13 @@ namespace LiverDie
                 controller.name = "FUCK";
                 for (int i = 0; i < 200; i++)
                 {
+                    /*
                     controller.SendScore(
-                        Mathf.RoundToInt((Random.value * 20) * 1000),
+                        Mathf.RoundToInt(Random.value * 20 * 1000),
                         Mathf.RoundToInt((Random.value * 20)),
                         System.Guid.NewGuid().ToString(),
                         false
-                        );
+                        ); */
                 }
             }
         }
