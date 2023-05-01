@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1557d2b8d844f68f2f0f109923b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bakedTarget: {fileID: 0}
 --- !u!1 &1094251572339530167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,6 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1557d2b8d844f68f2f0f109923b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bakedTarget: {fileID: 0}
 --- !u!1 &2077405519885503273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1621,6 +1623,31 @@ MonoBehaviour:
   _roomRoot: {fileID: 2589159574266220895}
   _roomBounds: {fileID: 2589159575097837374}
   _entranceDefinition: {fileID: 2589159574468674162}
+  RendererInfos:
+  - Renderer: {fileID: 4987523051156377509}
+    Materials:
+    - {fileID: 2100000, guid: 9b280e946d6c3bc479a2a64145ae070e, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 3820037725785781396}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 2818712981887552482}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 4949332530298211212}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 6357032467425535368}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 3483346338853397909}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
 --- !u!1 &2589159574468674160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,6 +2131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1557d2b8d844f68f2f0f109923b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bakedTarget: {fileID: 0}
 --- !u!1 &4546357654743871755
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,6 +3450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1557d2b8d844f68f2f0f109923b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bakedTarget: {fileID: 0}
 --- !u!1 &5070082487178831056
 GameObject:
   m_ObjectHideFlags: 0

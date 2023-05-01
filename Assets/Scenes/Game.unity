@@ -135,7 +135,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh150188
+  m_Name: pb_Mesh89246
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -525,7 +525,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh150326
+  m_Name: pb_Mesh89384
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2433,7 +2433,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh150122
+  m_Name: pb_Mesh89180
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7274,16 +7274,63 @@ Transform:
   - {fileID: 101529214}
   - {fileID: 849786101}
   - {fileID: 378798383}
+  - {fileID: 1622309356}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1622309355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1622309356}
+  - component: {fileID: 1622309357}
+  m_Layer: 0
+  m_Name: MaterialSwappingController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1622309356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622309355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1609779819}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1622309357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622309355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fae73958e9d413ca4321d73434274f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueEventIntermediate: {fileID: 1876525164}
+  _roomColorChangeEveryXLivers: 5
 --- !u!43 &1623450931
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149958
+  m_Name: pb_Mesh89016
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8071,6 +8118,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
+      propertyPath: _swappingController
+      value: 
+      objectReference: {fileID: 1622309357}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
       propertyPath: _indexToAlwaysSpawnFirst
       value: 4
       objectReference: {fileID: 0}
@@ -8699,7 +8751,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149944
+  m_Name: pb_Mesh89002
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

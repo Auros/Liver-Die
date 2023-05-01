@@ -54,27 +54,35 @@ namespace LiverDie.Runtime.Hospital.Generation
                 _coloredMaterials.Add(materialInfo);
             }
 
-            var roomMats = room.GetMaterials();
-
-            for (int i = 0; i < roomMats.Count; i++)
+            Debug.Log("HUH");
+            foreach (var rendererInfo in room.RendererInfos)
             {
-                var mat = roomMats[i];
-
-                Material? swappedMaterial = materialInfo.Materials.FirstOrDefault(x => x.name.Contains(mat.name));
-                if (swappedMaterial == null)
+                Debug.Log("RENDDD");
+                for (int i = 0; i < rendererInfo.Materials.Count; i++)
                 {
-                    swappedMaterial = Instantiate(mat);
-                    // do color
-                    Color.RGBToHSV(swappedMaterial.GetColor("_BaseColor"), out float H, out float S, out float V);
+                    var mat = rendererInfo.Materials[i];
+                    if (mat == null) continue;
 
-                    swappedMaterial.SetColor("_BaseColor", Color.HSVToRGB(_currentHueDelta, S, V));
-                    materialInfo.Materials.Add(swappedMaterial);
+                    Color.RGBToHSV(mat.GetColor("_BaseColor"), out float H, out float S, out float V);
+                    Color newColor = Color.HSVToRGB(_currentHueDelta, S, V);
+                    /* Material? swappedMaterial = null;
+
+                    if (swappedMaterial == null)
+                    {
+                        swappedMaterial = Instantiate(mat);
+                        // do color
+                        Color.RGBToHSV(swappedMaterial.GetColor("_BaseColor"), out float H, out float S, out float V);
+
+                        newColor = Color.HSVToRGB(_currentHueDelta, S, V);
+                        swappedMaterial.SetColor("_BaseColor", newColor.Value);
+                        swappedMaterial.SetColor("_Color", newColor.Value);
+                        materialInfo.Materials.Add(swappedMaterial);
+                    }
+                    rendererInfo.Renderer.materials[i] = swappedMaterial; */
+                    rendererInfo.Renderer.materials[i].color = newColor;
+                    rendererInfo.Renderer.materials[i].SetColor("_BaseColor", newColor);
                 }
-
-                roomMats[i] = swappedMaterial;
             }
-
-            room.SetMaterials(roomMats);
         }
     }
 }

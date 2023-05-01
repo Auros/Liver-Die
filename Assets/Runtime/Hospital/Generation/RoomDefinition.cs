@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using LiverDie.Hospital.Data;
+using LiverDie.Hospital.Generation;
 using LiverDie.NPC;
+using UnityEditor;
 using UnityEngine;
 
 namespace LiverDie.Hospital.Generation
@@ -21,7 +23,7 @@ namespace LiverDie.Hospital.Generation
         private EntranceDefinition _entranceDefinition = null!;
 
         [SerializeField]
-        private List<RendererInfo> _rendererInfos = new();
+        public List<RendererInfo> RendererInfos = new();
 
         [PublicAPI]
         public Vector3 Size => _roomBounds.size;
@@ -70,7 +72,7 @@ namespace LiverDie.Hospital.Generation
 
         public List<Material> GetMaterials()
         {
-            return _rendererInfos.SelectMany(x => x.Materials).ToList();
+            return RendererInfos.SelectMany(x => x.Materials).ToList();
         }
 
         public void SetMaterials(List<Material> materials)
@@ -78,15 +80,18 @@ namespace LiverDie.Hospital.Generation
             // might not perform great but its probably fine!!
             foreach(var material in materials)
             {
-                foreach (var rendererInfo in _rendererInfos)
+                foreach (var rendererInfo in RendererInfos)
                 {
                     for (int i = 0; i < rendererInfo.Materials.Count; i++)
                     {
                         var rendererMaterial = rendererInfo.Materials[i];
+                        if (rendererMaterial == null) continue;
                         if (material.name.StartsWith(rendererMaterial.name))
                         {
                             // replace
-                            rendererInfo.Renderer.sharedMaterials[i] = material;
+                            Debug.Log("REEEEEEEEEEEPLACE");
+                            Debug.Log(material.color);
+                            rendererInfo.Renderer.materials[i] = material;
                         }
                     }
                 }
@@ -94,3 +99,32 @@ namespace LiverDie.Hospital.Generation
         }
     }
 }
+
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(RoomDefinition))]
+public class RoomEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        var room = target as RoomDefinition;
+        if (GUILayout.Button("SET RENDERERPROPERTIES (DESTRUCTIVE!!!!!)"))
+        {
+            foreach (var renderer in room.RendererInfos)
+            {
+                renderer.Materials = renderer.Renderer.sharedMaterials.ToList();
+                var indices = new List<int>();
+                for (int i = 0; i < renderer.Materials.Count; i++)
+                {
+                    indices.Add(i);
+                }
+
+                renderer.MaterialIndices = indices;
+            }
+        }
+    }
+}
+#endif
+

@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using LiverDie.Gremlin;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
+using LiverDie.Runtime.Hospital.Generation;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
@@ -25,6 +26,9 @@ namespace LiverDie
 
         [SerializeField]
         private CorridorSegmentDefinition _segmentPrefab = null!;
+
+        [SerializeField]
+        private MaterialSwappingController _swappingController = null!;
 
         [SerializeField]
         private AnimationCurve _branchProbabilityCurve = new();
@@ -348,6 +352,7 @@ namespace LiverDie
                 segment.SetToDoor(adjacancy);
 
                 definition.MoveTo(segment.GetEntranceLocation(adjacancy));
+                _swappingController.SetColorOfRoom(definition);
 
                 for (float i = 0; i < length; i += rail.SampleDistance)
                     rail.AddDepthSample(i + startRailPos, depth);

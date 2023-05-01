@@ -82,6 +82,7 @@ MonoBehaviour:
   _startDirection: 0
   _segmentPrefab: {fileID: 4708272478794961999, guid: c4994cca5dfb110438915bfc4c38db6b,
     type: 3}
+  _swappingController: {fileID: 0}
   _branchProbabilityCurve:
     serializedVersion: 2
     m_Curve:
