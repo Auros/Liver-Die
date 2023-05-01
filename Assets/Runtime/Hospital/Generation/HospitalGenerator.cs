@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
@@ -196,9 +197,19 @@ namespace LiverDie
 
                 // Build a weighted list of the potential room options.
                 var options = ListPool<RoomScriptableObject>.Get();
+                float weightMin = _roomSpawningOptions[0].Weight;
+
+                // ReSharper disable once LoopCanBeConvertedToQuery
                 foreach (var option in _roomSpawningOptions)
-                    for (int i = 0; i < option.Weight; i++)
+                    if (weightMin > option.Weight)
+                        weightMin = option.Weight;
+
+                foreach (var option in _roomSpawningOptions)
+                {
+                    var representation = weightMin * option.Weight;
+                    for (int i = 0; i < representation; i++)
                         options.Add(option.Room);
+                }
 
                 // Generate the rooms!
                 var (leftAdjacant, rightAdjacant) = targetDirection.GetAdjacant();
