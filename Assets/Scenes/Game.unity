@@ -7328,7 +7328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueEventIntermediate: {fileID: 1876525164}
-  _roomColorChangeEveryXLivers: 5
+  _roomColorChangeEveryXLivers: 25
 --- !u!43 &1623450931
 Mesh:
   m_ObjectHideFlags: 0

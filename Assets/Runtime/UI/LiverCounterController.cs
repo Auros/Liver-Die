@@ -14,7 +14,7 @@ namespace LiverDie.UI
         private TextMeshProUGUI _counter = null!;
 
         private int _livers = 0;
-
+        public int Livers { get { return _livers; } }
         private void Start()
         {
             _dialogueEventIntermediate.OnNpcDelivered += DialogueEventIntermediate_OnNpcDelivered;

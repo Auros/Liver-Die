@@ -14,7 +14,7 @@ namespace LiverDie.Gremlin.Health
     {
         public event Action? OnLiverDecayed;
         public event Action<LiverUpdateEvent>? OnLiverUpdate;
-
+        
         [SerializeField]
         private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
@@ -34,6 +34,10 @@ namespace LiverDie.Gremlin.Health
             }
         }
 
+        public int TotalLivers
+        {
+            get => _totalLivers;
+        }
         /// <summary>
         /// Toggles on/off liver decay.
         /// </summary>
@@ -50,7 +54,9 @@ namespace LiverDie.Gremlin.Health
 
         private float _liver = 1f;
         private float _lastLiverGainTime;
-
+        private float _totalTimer = 0;
+        private int _totalLivers = 0;
+        private bool _timerOn = false;
         /// <summary>
         /// Adds the given <paramref name="liverAmount"/> and resets the decay timer.
         /// </summary>
@@ -59,6 +65,7 @@ namespace LiverDie.Gremlin.Health
         {
             LiverAmount = Mathf.Clamp01(LiverAmount + liverAmount);
             _lastLiverGainTime = Time.time;
+            if (liverAmount > 0) _totalLivers++;
         }
 
         private void Start()
@@ -66,6 +73,7 @@ namespace LiverDie.Gremlin.Health
             _lastLiverGainTime = Time.time;
             _dialogueEventIntermediate.OnDialogueFocusChanged += OnDialogueFocusChanged;
             _dialogueEventIntermediate.OnNpcDelivered += OnNpcDelivered;
+            _totalLivers = 0;
         }
 
         private void OnNpcDelivered(NpcDeliveredEvent ctx) => ChangeLiver(_deliverGain);
@@ -74,6 +82,7 @@ namespace LiverDie.Gremlin.Health
 
         private void Update()
         {
+            if(_timerOn) _totalTimer += Time.deltaTime;
             if (Time.time < _lastLiverGainTime + _liverDecayOffset) return;
 
             if (!LiverDecay) return;
@@ -83,6 +92,17 @@ namespace LiverDie.Gremlin.Health
             if (Time.timeScale == 0) return;
 
             LiverAmount = Mathf.Clamp01(LiverAmount - 1f / _liverDecayTime * Time.deltaTime);
+        }
+        public void StartTimer()
+        {
+            _totalTimer = 0;
+            _timerOn = true;
+        }
+
+        public float StopTimer()
+        {
+            _timerOn = false;
+            return _totalTimer;
         }
     }
 }

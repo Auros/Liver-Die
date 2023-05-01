@@ -1,10 +1,12 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": "2.3.3",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.ide.rider": "3.0.21",
     "com.unity.ide.visualstudio": "2.0.18",
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.inputsystem": "1.5.1",
+    "com.unity.nuget.newtonsoft-json": "3.2.0",
     "com.unity.probuilder": "5.0.7",
     "com.unity.render-pipelines.universal": "12.1.10",
     "com.unity.test-framework": "1.1.33",
@@ -12,6 +14,8 @@
     "com.unity.timeline": "1.6.5",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.8.0",
+    "dev.auros.auraextensions": "1.0.0",
+    "dev.auros.auratween": "https://github.com/Auros/AuraTween.git?path=AuraTween/Assets/AuraTween#1.0.2",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -42,10 +46,7 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0",
-    "com.cysharp.unitask": "2.3.3",
-    "dev.auros.auratween": "https://github.com/Auros/AuraTween.git?path=AuraTween/Assets/AuraTween#1.0.2",
-    "dev.auros.auraextensions": "1.0.0"
+    "com.unity.modules.xr": "1.0.0"
   },
   "scopedRegistries": [
     {
@@ -55,7 +56,8 @@
         "com.cysharp.unitask",
         "com.openupm",
         "dev.auros.auraextensions",
-        "dev.auros.auratween"
+        "dev.auros.auratween",
+        "jillejr.newtonsoft.json-for-unity"
       ]
     }
   ]

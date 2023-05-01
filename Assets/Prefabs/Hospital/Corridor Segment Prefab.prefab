@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 2551951341767726627}
   - component: {fileID: 3719528197618328497}
   - component: {fileID: 2800325241583099534}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Door Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 1319331827490005993}
   - component: {fileID: 4897516988583253965}
   - component: {fileID: 3097544127594116773}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Door Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1177,7 @@ GameObject:
   - component: {fileID: 5804852929484496542}
   - component: {fileID: 10797780034624084}
   - component: {fileID: 3759911848138092562}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Solid Wall Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1784,7 +1784,7 @@ GameObject:
   - component: {fileID: 7423189179238230819}
   - component: {fileID: 2575555385869116515}
   - component: {fileID: 498693105311176945}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Door Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2267,7 +2267,7 @@ GameObject:
   - component: {fileID: 6389192723586964285}
   - component: {fileID: 5356294805751378394}
   - component: {fileID: 3960444863590090446}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Solid Wall Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2395,7 +2395,7 @@ GameObject:
   - component: {fileID: 5303600708840083424}
   - component: {fileID: 5459640991983260818}
   - component: {fileID: 5815834845845923907}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Solid Wall Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4713,7 +4713,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 20
+  m_VersionIndex: 23
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5897,7 +5897,7 @@ GameObject:
   - component: {fileID: 6948230279243150177}
   - component: {fileID: 652929208959731921}
   - component: {fileID: 8319693411172394407}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Door Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6833,7 +6833,7 @@ GameObject:
   - component: {fileID: 3637422453058095003}
   - component: {fileID: 5855252805159194284}
   - component: {fileID: 450663176900034185}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Solid Wall Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
