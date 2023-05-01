@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LiverDie.Dialogue.Data;
 using LiverDie.NPC;
 using UnityEngine;
@@ -49,8 +50,11 @@ namespace LiverDie.NPC
 
         public bool Interactable { get; private set; } = true;
 
-        private void Start()
+        private void OnEnable()
         {
+            Interactable = true;
+            _liver.SetActive(true);
+
             Color.RGBToHSV(_baseShirtColor, out float shirtH, out float shirtS, out float shirtV);
             Color.RGBToHSV(_basePantsColor, out float pantsH, out float pantsS, out float pantsV);
             Color.RGBToHSV(_baseShoeColor, out float shoeH, out float shoeS, out float shoeV);
@@ -86,12 +90,14 @@ namespace LiverDie.NPC
                 //ragdoll.transform.localScale = transform.localScale;
                 ragdoll.transform.localRotation = transform.localRotation;
 
-                Destroy(this.gameObject);
+                gameObject.SetActive(false);
             }
         }
 
-        public void ChangeDialogue(DialogueScriptableObject dialogue)
+        public async void ChangeDialogue(DialogueScriptableObject dialogue)
         {
+            // prevent crash lol
+            await Task.Delay(150);
             _dialogue = dialogue;
         }
     }

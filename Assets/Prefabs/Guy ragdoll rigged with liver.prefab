@@ -909,10 +909,11 @@ MonoBehaviour:
   _deathParticles: {fileID: 5554595973263022996}
   _deathParticleMinForce: 1
   _deathParticleMaxForce: 2
-  _deathExplosionForce: 1
-  _deathExplosionRadius: 5
+  _deathExplosionForce: 100
+  _deathExplosionRadius: 10
   _ragdollPrefab: {fileID: 1780225961986546257, guid: 902e8535e2e73f44c8f3070322310882,
     type: 3}
+  _turnIntoRagdoll: 1
 --- !u!95 &1617301476042671441
 Animator:
   serializedVersion: 5

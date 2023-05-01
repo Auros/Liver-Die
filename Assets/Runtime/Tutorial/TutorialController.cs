@@ -34,6 +34,9 @@ namespace LiverDie.Tutorial
         [SerializeField]
         private DialogueScriptableObject _receptionistSecondaryDialogue;
 
+        [SerializeField]
+        private AudioSource _doorSfx = null!;
+
         private void Start()
         {
             _musicController.OverridePercent(15);
@@ -49,9 +52,10 @@ namespace LiverDie.Tutorial
         {
             _liverController.LiverDecay = true;
             _tweenManagerIHardlyKnowHer.Run(0f, 1, 2.5f, UpdateAlpha, Easer.InOutSine);
-            _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 5f, UpdateWallPos, Easer.InOutSine);
+            _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 10f, UpdateWallPos, Easer.InOutSine);
             _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
             _musicController.DisableOverride();
+            _doorSfx.Play();
 
             foreach (var receptionist in _receptionists)
             {

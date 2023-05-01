@@ -13,7 +13,7 @@ namespace LiverDie.Hospital
         [SerializeField]
         private SpriteRenderer _renderer = null!;
 
-        private void Start()
+        private void OnEnable()
         {
             if (Random.Range(0f, 1f) > _spawnChance)
             {
