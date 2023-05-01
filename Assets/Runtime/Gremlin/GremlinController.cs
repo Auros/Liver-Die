@@ -175,7 +175,10 @@ namespace LiverDie.Gremlin
 
             bool sprintPressed = _liverInput.Gremlin.Sprint.IsInProgress();
             float sprintAcceleration = sprintPressed ? _sprintAcceleration : 0f;
-
+            if(_liverInput.Gremlin.Sprint.IsInProgress())
+            {
+                ShiftPopup.HasPressedShift = true;
+            }
             if (IsGrounded)
                 GroundMovement(sprintAcceleration, _maxVelocityGround + (sprintPressed ? _sprintMaxVelocityIncrease : 0f));
             else
