@@ -4118,6 +4118,9 @@ MonoBehaviour:
   _counterController: {fileID: 8233179694138081384}
   _canvasGroup: {fileID: 5662628281025975448}
   _boardController: {fileID: 933568491873478515}
+  _mixer: {fileID: 24100000, guid: e32bc2a0a0b4ddb4884a1f48f1a1d230, type: 2}
+  _lowpassAmount: 377
+  _normalLowpassAmount: 22000
 --- !u!225 &5662628281025975448
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4540,8 +4543,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7822271530761172082}
   m_HandleRect: {fileID: 4207909900987303309}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.4154826
+  m_Value: 0.9999999
+  m_Size: 0.41548258
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5567,8 +5570,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 222030431107841}
   m_HandleRect: {fileID: 2201329183051562777}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
