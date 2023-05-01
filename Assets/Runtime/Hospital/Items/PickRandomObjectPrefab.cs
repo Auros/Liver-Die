@@ -31,7 +31,7 @@ namespace LiverDie.Hospital.Items
                 }
                 return;
             }
-            
+
             var randomIndex = Random.Range(0, _gameObjects.Count);
             if (_instantiate)
             {

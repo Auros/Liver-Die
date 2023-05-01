@@ -1135,6 +1135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626631644127875286, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
+      propertyPath: _defaultVolMusic
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626631644127875286, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
       propertyPath: _gremlinController
       value: 
       objectReference: {fileID: 1146836072}
