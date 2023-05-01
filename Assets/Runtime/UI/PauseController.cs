@@ -1,6 +1,7 @@
 ﻿using System;
 using AuraTween;
 using LiverDie.Gremlin;
+using LiverDie.Runtime.Intermediate;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,8 @@ namespace LiverDie.UI
         [SerializeField]
         private CanvasGroup _canvasGroup = null!;
         [SerializeField]
+        private DialogueEventIntermediate _dialogueEvent = null!;
+        [SerializeField]
         private RectTransform _pauseHud = null!;
         [SerializeField]
         private float _settingsOffset = 1920;
@@ -24,17 +27,21 @@ namespace LiverDie.UI
         private float _settingAnimationTime = 1.2f;
         private LiverInput _liverInput = null!;
         private bool _isPaused = false;
+        private bool _pauseBlocked = false;
 
         private void Start()
         {
             _liverInput = new LiverInput();
             _liverInput.Pause.AddCallbacks(this);
             _liverInput.Enable();
-
+            _dialogueEvent.OnDialogueFocusChanged += DialogueEvent_OnDialogueFocusChanged;
         }
+
+        private void DialogueEvent_OnDialogueFocusChanged(Runtime.Dialogue.DialogueFocusChangedEvent obj) => _pauseBlocked = obj.Focused;
 
         public void Pause()
         {
+            if (_pauseBlocked) return;
             Time.timeScale = 0f;
             _gremlinController.IsFocused = false;
             _isPaused = true;
@@ -80,6 +87,7 @@ namespace LiverDie.UI
         private void OnDestroy()
         {
             _liverInput.Dispose();
+            _dialogueEvent.OnDialogueFocusChanged -= DialogueEvent_OnDialogueFocusChanged;
         }
 
         internal void BackToPause()
