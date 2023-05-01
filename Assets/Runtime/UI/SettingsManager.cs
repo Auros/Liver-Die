@@ -47,8 +47,8 @@ namespace LiverDie
                 _sliderValues = new List<float>()
                 {
                     100,
-                    100,
                     _defaultVolMusic,
+                    100,
                     _defaultSensitivity/100,
                     100
                 };
