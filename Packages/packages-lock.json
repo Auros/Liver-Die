@@ -194,11 +194,11 @@
       "url": "https://package.openupm.com"
     },
     "dev.auros.auratween": {
-      "version": "https://github.com/Auros/AuraTween.git?path=AuraTween/Assets/AuraTween#1.0.2",
+      "version": "https://github.com/Auros/AuraTween.git?path=AuraTween/Assets/AuraTween#1.0.4",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "af36eeddc7121007bc6831c3515075c7302e9479"
+      "hash": "3b8ac3f0b596ef7e63d2d1abfb7a864f7648aa52"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
