@@ -933,6 +933,11 @@ PrefabInstance:
       objectReference: {fileID: 1169758036}
     - target: {fileID: 2821189644304127490, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
+      propertyPath: _thudClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e218f3833932104386a3a7b1f4de434, type: 3}
+    - target: {fileID: 2821189644304127490, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
       propertyPath: _dialogueEventIntermediate
       value: 
       objectReference: {fileID: 1876525164}
