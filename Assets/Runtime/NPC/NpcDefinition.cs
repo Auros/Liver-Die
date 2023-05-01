@@ -34,27 +34,8 @@ namespace LiverDie.NPC
         [SerializeField]
         private DialogueScriptableObject? _dialogue = null;
 
-        // main rigidbody
-        [SerializeField]
-        private Rigidbody _ragdollRigidbody = null!;
-
         [SerializeField]
         public List<Rigidbody> Rigidbodies;
-
-        [SerializeField]
-        private ParticleSystem _deathParticles = null!;
-
-        [SerializeField]
-        private float _deathParticleMinForce = 1f;
-
-        [SerializeField]
-        private float _deathParticleMaxForce = 2f;
-
-        [SerializeField]
-        private float _deathExplosionForce = 1f;
-
-        [SerializeField]
-        private float _deathExplosionRadius = 5f;
 
         [SerializeField]
         private RagdollDefinition _ragdollPrefab = null!;
