@@ -3675,6 +3675,7 @@ MonoBehaviour:
   - {fileID: 3462884300866029968}
   - {fileID: 7503223390799139436}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &761388103718628621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,6 +4155,7 @@ MonoBehaviour:
   - {fileID: 272469744876194837}
   - {fileID: 8485586987124313033}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &989908539096686242
 GameObject:
   m_ObjectHideFlags: 0
@@ -5161,6 +5163,7 @@ MonoBehaviour:
   - {fileID: 7472405895737368694}
   - {fileID: 7389199467748044801}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &1289316644489751899
 GameObject:
   m_ObjectHideFlags: 0
@@ -6969,7 +6972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &650191489774525078
 Transform:
   m_ObjectHideFlags: 0
@@ -10555,6 +10558,7 @@ MonoBehaviour:
   - {fileID: 6286139807806364475}
   - {fileID: 548968938953887222}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &2144102580413854351
 GameObject:
   m_ObjectHideFlags: 0
@@ -10816,6 +10820,7 @@ MonoBehaviour:
   - {fileID: 8177220320603748780}
   - {fileID: 5216297371354868676}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &2188416820630630582
 GameObject:
   m_ObjectHideFlags: 0
@@ -11362,6 +11367,7 @@ MonoBehaviour:
   - {fileID: 8482301757809811657}
   - {fileID: 6014639721138699713}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &2265851100533004209
 GameObject:
   m_ObjectHideFlags: 0
@@ -12687,7 +12693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2589159574468674160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: -2.5}
+  m_LocalPosition: {x: 0, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13075,7 +13081,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2589159575097837372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 2.5, z: 8}
+  m_LocalPosition: {x: -7.5, y: 2.5, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13093,7 +13099,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 5, z: 21}
+  m_Size: {x: 18, y: 5, z: 21}
   m_Center: {x: 1, y: 0, z: 0}
 --- !u!1 &2607375398405217052
 GameObject:
@@ -15403,6 +15409,7 @@ MonoBehaviour:
   - {fileID: 940626949853040584}
   - {fileID: 4714052098896192593}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &2928523365996868135
 GameObject:
   m_ObjectHideFlags: 0
@@ -15918,23 +15925,23 @@ MonoBehaviour:
   - {x: -0.0000005776115, y: 5, z: 12.500005}
   - {x: 0.09999886, y: 5, z: 12.500005}
   - {x: 0.09999886, y: 0, z: 12.500005}
-  - {x: 0.099999234, y: 0, z: 0}
+  - {x: 0.09999922, y: 0, z: -0.50000024}
   - {x: 0.09999886, y: 5, z: 12.500005}
-  - {x: 0.099999234, y: 5, z: 0}
-  - {x: 0.099999234, y: 0, z: 0}
-  - {x: -0.0000007636845, y: 0, z: 0}
-  - {x: 0.099999234, y: 5, z: 0}
-  - {x: -0.0000007636845, y: 5, z: 0}
-  - {x: -0.0000007636845, y: 0, z: 0}
+  - {x: 0.09999922, y: 5, z: -0.50000024}
+  - {x: 0.09999922, y: 0, z: -0.50000024}
+  - {x: -0.0000002199838, y: 0, z: -0.50000024}
+  - {x: 0.09999922, y: 5, z: -0.50000024}
+  - {x: -0.0000002199838, y: 5, z: -0.50000024}
+  - {x: -0.0000002199838, y: 0, z: -0.50000024}
   - {x: -0.0000005776115, y: 0, z: 12.500005}
-  - {x: -0.0000007636845, y: 5, z: 0}
+  - {x: -0.0000002199838, y: 5, z: -0.50000024}
   - {x: -0.0000005776115, y: 5, z: 12.500005}
   - {x: -0.0000005776115, y: 5, z: 12.500005}
   - {x: 0.09999886, y: 5, z: 12.500005}
-  - {x: -0.0000007636845, y: 5, z: 0}
-  - {x: 0.099999234, y: 5, z: 0}
-  - {x: -0.0000007636845, y: 0, z: 0}
-  - {x: 0.099999234, y: 0, z: 0}
+  - {x: -0.0000002199838, y: 5, z: -0.50000024}
+  - {x: 0.09999922, y: 5, z: -0.50000024}
+  - {x: -0.0000002199838, y: 0, z: -0.50000024}
+  - {x: 0.09999922, y: 0, z: -0.50000024}
   - {x: -0.0000005776115, y: 0, z: 12.500005}
   - {x: 0.09999886, y: 0, z: 12.500005}
   m_Textures0:
@@ -15943,23 +15950,23 @@ MonoBehaviour:
   - {x: 0.0000005776115, y: 5}
   - {x: -0.09999886, y: 5}
   - {x: 12.500005, y: 0}
-  - {x: -0.0000000029802083, y: 0}
+  - {x: -0.50000024, y: 0}
   - {x: 12.500005, y: 5}
-  - {x: -0.0000000029802083, y: 5}
-  - {x: 0.099999234, y: 0}
-  - {x: -0.0000007636845, y: 0}
-  - {x: 0.099999234, y: 5}
-  - {x: -0.0000007636845, y: 5}
-  - {x: 1.13680825e-14, y: 0}
+  - {x: -0.50000024, y: 5}
+  - {x: 0.09999922, y: 0}
+  - {x: -0.0000002199838, y: 0}
+  - {x: 0.09999922, y: 5}
+  - {x: -0.0000002199838, y: 5}
+  - {x: 0.50000024, y: 0}
   - {x: -12.500005, y: 0}
-  - {x: 1.13680825e-14, y: 5}
+  - {x: 0.50000024, y: 5}
   - {x: -12.500005, y: 5}
   - {x: -0.0000005776115, y: 12.500005}
   - {x: 0.09999886, y: 12.500005}
-  - {x: -0.0000007636845, y: 0}
-  - {x: 0.099999234, y: 0}
-  - {x: 0.0000007636845, y: 0}
-  - {x: -0.099999234, y: 0}
+  - {x: -0.0000002199838, y: -0.50000024}
+  - {x: 0.09999922, y: -0.50000024}
+  - {x: 0.0000002199838, y: -0.50000024}
+  - {x: -0.09999922, y: -0.50000024}
   - {x: 0.0000005776115, y: 12.500005}
   - {x: -0.09999886, y: 12.500005}
   m_Textures2: []
@@ -15969,18 +15976,18 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -0.000000029802312, y: 0, z: 1, w: -1}
-  - {x: -0.000000029802312, y: 0, z: 1, w: -1}
-  - {x: -0.000000029802312, y: 0, z: 1, w: -1}
-  - {x: -0.000000029802312, y: 0, z: 1, w: -1}
+  - {x: -0.000000027509826, y: 0, z: 1, w: -1}
+  - {x: -0.000000027509826, y: 0, z: 1, w: -1}
+  - {x: -0.000000027509826, y: 0, z: 1, w: -1}
+  - {x: -0.000000027509826, y: 0, z: 1, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
-  - {x: -0.000000014885836, y: 0, z: -1, w: -1}
-  - {x: -0.000000014885836, y: 0, z: -1, w: -1}
-  - {x: -0.000000014885836, y: 0, z: -1, w: -1}
-  - {x: -0.000000014885836, y: 0, z: -1, w: -1}
+  - {x: 0.000000027509813, y: 0, z: -1, w: -1}
+  - {x: 0.000000027509813, y: 0, z: -1, w: -1}
+  - {x: 0.000000027509813, y: 0, z: -1, w: -1}
+  - {x: 0.000000027509813, y: 0, z: -1, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
@@ -15998,7 +16005,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7663
+  m_VersionIndex: 7823
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -18135,6 +18142,7 @@ MonoBehaviour:
   - {fileID: 6078964023581036551}
   - {fileID: 1551201725494340308}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &3437403555026897002
 GameObject:
   m_ObjectHideFlags: 0
@@ -21184,6 +21192,7 @@ MonoBehaviour:
   - {fileID: 3751847017137061371}
   - {fileID: 4366234530566270819}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &4150359285335810969
 GameObject:
   m_ObjectHideFlags: 0
@@ -21647,6 +21656,7 @@ MonoBehaviour:
   - {fileID: 5806294733808043770}
   - {fileID: 4372149810238997451}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &4311563926893723316
 GameObject:
   m_ObjectHideFlags: 0
@@ -22193,6 +22203,7 @@ MonoBehaviour:
   - {fileID: 6100497833399437975}
   - {fileID: 2324167861061762726}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &4372149810238997451
 GameObject:
   m_ObjectHideFlags: 0
@@ -22340,6 +22351,7 @@ MonoBehaviour:
   - {fileID: 5944380862935784120}
   - {fileID: 6243795969151806182}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &4409474483240695516
 GameObject:
   m_ObjectHideFlags: 0
@@ -22893,6 +22905,7 @@ MonoBehaviour:
   - {fileID: 9134046682215658181}
   - {fileID: 6779445429444410910}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &4577668901257726633
 GameObject:
   m_ObjectHideFlags: 0
@@ -23165,6 +23178,7 @@ MonoBehaviour:
   - {fileID: 551193870720304390}
   - {fileID: 5985526714706932902}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &4857159888721265712
 GameObject:
   m_ObjectHideFlags: 0
@@ -26240,6 +26254,7 @@ MonoBehaviour:
   - {fileID: 4409474483240695516}
   - {fileID: 2050573838749142020}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &5534005547308473129
 GameObject:
   m_ObjectHideFlags: 0
@@ -26480,6 +26495,7 @@ MonoBehaviour:
   - {fileID: 6275180688582900669}
   - {fileID: 1497077116723628067}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &5744498614170561913
 GameObject:
   m_ObjectHideFlags: 0
@@ -26544,6 +26560,7 @@ MonoBehaviour:
   - {fileID: 6521474443177727954}
   - {fileID: 8734262063328935052}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &5759211872643911518
 GameObject:
   m_ObjectHideFlags: 0
@@ -27702,6 +27719,7 @@ MonoBehaviour:
   - {fileID: 83638105734025767}
   - {fileID: 3938102146605868790}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &6128198289181159988
 GameObject:
   m_ObjectHideFlags: 0
@@ -28642,6 +28660,7 @@ MonoBehaviour:
   - {fileID: 9149754897543047613}
   - {fileID: 3235151301261418109}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &6315286367548406597
 GameObject:
   m_ObjectHideFlags: 0
@@ -29364,6 +29383,7 @@ MonoBehaviour:
   - {fileID: 2567060393741969765}
   - {fileID: 7843622219768010921}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &6459862265702271751
 GameObject:
   m_ObjectHideFlags: 0
@@ -29791,6 +29811,7 @@ MonoBehaviour:
   - {fileID: 3368277764292094651}
   - {fileID: 6386759363906164775}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &6663833973523080639
 GameObject:
   m_ObjectHideFlags: 0
@@ -30544,6 +30565,7 @@ MonoBehaviour:
   - {fileID: 1148229873862977818}
   - {fileID: 4066729319780357687}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &6968894109178242652
 GameObject:
   m_ObjectHideFlags: 0
@@ -32402,7 +32424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7192320257527240533}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: -2.5}
+  m_LocalPosition: {x: -2.5, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34910,6 +34932,7 @@ MonoBehaviour:
   - {fileID: 7892631679885121194}
   - {fileID: 8238142089201937999}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &7726603687228657714
 GameObject:
   m_ObjectHideFlags: 0
@@ -37121,6 +37144,7 @@ MonoBehaviour:
   - {fileID: 487063839283245988}
   - {fileID: 4008915044083080974}
   _instantiate: 0
+  _spawnChance: 1
 --- !u!1 &8482301757809811657
 GameObject:
   m_ObjectHideFlags: 0
