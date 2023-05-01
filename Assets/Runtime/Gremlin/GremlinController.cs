@@ -1,4 +1,5 @@
-﻿using LiverDie.NPC;
+﻿using System;
+using LiverDie.NPC;
 using LiverDie.Runtime.Dialogue;
 using LiverDie.Runtime.Intermediate;
 using UnityEngine;
@@ -72,16 +73,23 @@ namespace LiverDie.Gremlin
         [SerializeField]
         private float _npcInteractRange = 10f;
 
+        [SerializeField]
+        private LayerMask _interactableLayers;
+
+        [SerializeField]
+        private LayerMask _blockingLayers;
+
         [Header("Camera Parameters"), SerializeField]
         public float HorizontalSensitivity = 30f;
 
         [SerializeField]
         public float VerticalSensitivity = 30f;
 
-        private bool _isFocused = false;
+        private bool _isFocused;
+        private float _currentHeadPitch;
         private LiverInput _liverInput = null!;
         private Vector2 _moveDirection;
-        private NpcDefinition? _selectedNpc = null;
+        private NpcDefinition? _selectedNpc;
         private Vector3 _closestGroundPoint;
 
         [SerializeField]
@@ -104,6 +112,17 @@ namespace LiverDie.Gremlin
             IsFocused = !ctx.Focused;
         }
 
+        private void Update()
+        {
+            var delta = _liverInput.Gremlin.Look.ReadValue<Vector2>() * (HorizontalSensitivity * Time.smoothDeltaTime);
+
+            _currentHeadPitch -= delta.y;
+            _currentHeadPitch = Mathf.Clamp(_currentHeadPitch, -90f, 90f);
+
+            var oldCameraYaw = _cameraTransform.localEulerAngles.y;
+            _cameraTransform.localEulerAngles = new Vector3(_currentHeadPitch, oldCameraYaw + delta.x);
+        }
+
         private void FixedUpdate()
         {
             if (!_notInJump && !IsGrounded)
@@ -114,8 +133,8 @@ namespace LiverDie.Gremlin
             else if (_notInJump) // prevents height from resetting at beginning of the jump
                 transform.position = transform.position.WithY(_closestGroundPoint.y + 0.09f);
 
-            var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _npcInteractRange * transform.localScale.y, 1 << 31);
-            if (_selectedNpc == null && npcRaycast)
+            var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out var hit, _npcInteractRange * transform.localScale.y, _interactableLayers);
+            if (_selectedNpc == null && npcRaycast && _blockingLayers != (_blockingLayers | (1 << hit.transform.gameObject.layer)))
             {
                 // select
                 Debug.DrawRay(_cameraTransform.position, _cameraTransform.forward * hit.distance, Color.yellow);
@@ -169,8 +188,8 @@ namespace LiverDie.Gremlin
                 _rigidbody.velocity *= decelMultiplier;
             }
 
-            Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
-            var accelDirection = Vector3.Normalize((_moveDirection.x * (cameraYaw * Vector3.right)) + (_moveDirection.y * (cameraYaw * Vector3.forward)));
+            var cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
+            var accelDirection = Vector3.Normalize(_moveDirection.x * (cameraYaw * Vector3.right) + _moveDirection.y * (cameraYaw * Vector3.forward));
             float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
             float acceleration = (_groundAcceleration + sprintBoost) * Time.fixedDeltaTime;
 
@@ -182,8 +201,8 @@ namespace LiverDie.Gremlin
 
         private void AirMovement(float sprintBoost, float maxVelocity)
         {
-            Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
-            var accelDirection = Vector3.Normalize((_moveDirection.x * (cameraYaw * Vector3.right)) + (_moveDirection.y * (cameraYaw * Vector3.forward)));
+            var cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
+            var accelDirection = Vector3.Normalize(_moveDirection.x * (cameraYaw * Vector3.right) + _moveDirection.y * (cameraYaw * Vector3.forward));
             float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
             float acceleration = (_airAcceleration + sprintBoost) * Time.fixedDeltaTime;
 
@@ -201,7 +220,8 @@ namespace LiverDie.Gremlin
 
         public void OnLook(InputAction.CallbackContext context)
         {
-            if (!context.performed) return;
+            /*if (!context.performed)
+                return;
 
             var delta = context.ReadValue<Vector2>();
 
@@ -210,21 +230,25 @@ namespace LiverDie.Gremlin
             cameraAngle.x += delta.y * Time.deltaTime * -VerticalSensitivity;
             cameraAngle.x = cameraAngle.x > 180 ? cameraAngle.x - 360 : cameraAngle.x; // no idea what this check is here for but i'm scared to remove it -Rabbit
             cameraAngle.x = Mathf.Clamp(cameraAngle.x, -80, 80);
-            _cameraTransform.localEulerAngles = cameraAngle;
+            _cameraTransform.localEulerAngles = cameraAngle;*/
         }
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            if (!context.performed || !IsGrounded) return;
+            if (!context.performed || !IsGrounded)
+                return;
 
-            transform.position = transform.position.WithY(transform.position.y + 0.1f);
-            _rigidbody.velocity += _rigidbody.velocity.WithY(_jumpVelocity).OnlyY();
+            var rigidbodyVelocity = _rigidbody.velocity;
+            var transformPosition = transform.position;
+            transform.position = transformPosition.WithY(transformPosition.y + 0.1f);
+            _rigidbody.velocity += rigidbodyVelocity.WithY(_jumpVelocity).OnlyY();
             _notInJump = false; // exists to prevent ground hover height from being set before player has left the ground in a jump
         }
 
         public void OnDeliver(InputAction.CallbackContext context)
         {
-            if (!context.performed || _selectedNpc == null || !_selectedNpc.Interactable) return;
+            if (!context.performed || _selectedNpc == null || !_selectedNpc.Interactable)
+                return;
 
             _dialogueEventIntermediate.DeliverNpc(_selectedNpc);
             _selectedNpc.Deliver(transform.position, _rigidbody.velocity);
@@ -237,25 +261,31 @@ namespace LiverDie.Gremlin
 
         public void OnSprint(InputAction.CallbackContext context)
         {
-            if (!context.performed || !IsGrounded) return;
+            if (!context.performed || !IsGrounded)
+                return;
 
-            Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
+            var cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
             _rigidbody.velocity = _rigidbody.velocity + (_sprintVelocityBoost * (cameraYaw * Vector3.forward));
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == 4) return;
+            if (other.gameObject.layer == 4)
+                return;
             IsGrounded = true;
-            _closestGroundPoint = transform.position.WithY(other.ClosestPointOnBounds(transform.position).y);
+            var transformPosition = transform.position;
+            _closestGroundPoint = transformPosition.WithY(other.ClosestPointOnBounds(transformPosition).y);
             _rigidbody.velocity = _rigidbody.velocity.WithY(0f);
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.layer == 4) return;
+            if (other.gameObject.layer == 4)
+                return;
+
             IsGrounded = true;
-            _closestGroundPoint = transform.position.WithY(other.ClosestPointOnBounds(transform.position).y);
+            var transformPosition = transform.position;
+            _closestGroundPoint = transformPosition.WithY(other.ClosestPointOnBounds(transformPosition).y);
             _rigidbody.velocity = _rigidbody.velocity.WithY(0f);
         }
 

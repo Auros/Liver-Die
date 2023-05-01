@@ -127,6 +127,9 @@ namespace LiverDie
         private void OnDestroy()
         {
             _segmentPool.Clear();
+            _previousCorridor?.Dispose();
+            _currentCorridor?.Dispose();
+            _nextCorridor?.Dispose();
         }
 
         /// <summary>
