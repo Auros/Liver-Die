@@ -73,6 +73,12 @@ namespace LiverDie.Gremlin
         [SerializeField]
         private float _npcInteractRange = 10f;
 
+        [SerializeField]
+        private LayerMask _interactableLayers;
+
+        [SerializeField]
+        private LayerMask _blockingLayers;
+
         [Header("Camera Parameters"), SerializeField]
         public float HorizontalSensitivity = 30f;
 
@@ -114,7 +120,7 @@ namespace LiverDie.Gremlin
             _currentHeadPitch = Mathf.Clamp(_currentHeadPitch, -90f, 90f);
 
             var oldCameraYaw = _cameraTransform.localEulerAngles.y;
-            _cameraTransform.localEulerAngles = (Vector3.right * _currentHeadPitch).WithY(oldCameraYaw + delta.x);
+            _cameraTransform.localEulerAngles = new Vector3(_currentHeadPitch, oldCameraYaw + delta.x);
         }
 
         private void FixedUpdate()
@@ -127,8 +133,8 @@ namespace LiverDie.Gremlin
             else if (_notInJump) // prevents height from resetting at beginning of the jump
                 transform.position = transform.position.WithY(_closestGroundPoint.y + 0.09f);
 
-            var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _npcInteractRange * transform.localScale.y, 1 << 31);
-            if (_selectedNpc == null && npcRaycast)
+            var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out var hit, _npcInteractRange * transform.localScale.y, _interactableLayers);
+            if (_selectedNpc == null && npcRaycast && _blockingLayers != (_blockingLayers | (1 << hit.transform.gameObject.layer)))
             {
                 // select
                 Debug.DrawRay(_cameraTransform.position, _cameraTransform.forward * hit.distance, Color.yellow);
