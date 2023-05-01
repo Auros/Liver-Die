@@ -135,7 +135,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh237400
+  m_Name: pb_Mesh260274
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -361,7 +361,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh237524
+  m_Name: pb_Mesh260398
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -684,6 +684,71 @@ PrefabInstance:
       propertyPath: _gremlinController
       value: 
       objectReference: {fileID: 1146836072}
+    - target: {fileID: 866528503308712411, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205475163931923651, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247073708244792228, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504188622332263951, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604739308175449457, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604739308175449457, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604739308175449457, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604739308175449457, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169423476986854489, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201329183051562777, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201329183051562777, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201329183051562777, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300364347248007310, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2800034815340556796, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController
@@ -694,6 +759,56 @@ PrefabInstance:
       propertyPath: _dialogueEventIntermediate
       value: 
       objectReference: {fileID: 1876525164}
+    - target: {fileID: 3008510796030964833, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3717368539597284178, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3884246822090920051, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207909900987303309, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207909900987303309, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207909900987303309, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764233206991087450, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095530692811844686, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095530692811844686, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764648074833306328, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5818838534011755733, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController
@@ -814,11 +929,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5906465304905860623, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540493692278005902, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6616655578537725107, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6616655578537725107, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0009804068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6818949629926853186, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869411268282641701, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6949682811710026384, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController
       value: 
       objectReference: {fileID: 1169758036}
+    - target: {fileID: 7483596543858043616, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626631644127875286, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _gremlinController
+      value: 
+      objectReference: {fileID: 1146836072}
     - target: {fileID: 8233179694138081384, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController
@@ -829,11 +984,31 @@ PrefabInstance:
       propertyPath: _dialogueEventIntermediate
       value: 
       objectReference: {fileID: 1876525164}
+    - target: {fileID: 8377778109287038562, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377778109287038562, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8757826391901662186, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _liverController
       value: 
       objectReference: {fileID: 1169758036}
+    - target: {fileID: 8934277644280581874, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047112853828222419, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9161eecd324f694482d65972e99c6e0, type: 3}
 --- !u!225 &140435743 stripped
@@ -2053,7 +2228,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh237318
+  m_Name: pb_Mesh260192
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7011,7 +7186,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh237154
+  m_Name: pb_Mesh260028
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7923,7 +8098,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh237140
+  m_Name: pb_Mesh260014
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
