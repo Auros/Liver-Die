@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using LiverDie.Gremlin;
 using LiverDie.UI;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
 namespace LiverDie
 {
@@ -36,6 +34,8 @@ namespace LiverDie
         private PauseController _pauseController = null!;
         [SerializeField]
         private GremlinController _gremlinController = null!;
+
+        private static List<float>? _sliderValues;
         private bool _doSettings;
 
         private void Start()
