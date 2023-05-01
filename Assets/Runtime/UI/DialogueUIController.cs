@@ -174,7 +174,7 @@ namespace LiverDie.UI
                 }
 
                 // TODO: make "press e to deliver" prompt slowly get bigger
-                await UniTask.Delay(TimeSpan.FromSeconds(_deliverPromptDelay));
+                await UniTask.WhenAny(UniTask.Delay(TimeSpan.FromSeconds(_deliverPromptDelay)), UniTask.WaitUntil(() => _finishRequested));
                 Image deliverImage = _deliverPrompt.GetComponent<Image>();
                 TextMeshProUGUI deliverText = _deliverPrompt.GetComponentInChildren<TextMeshProUGUI>();
                 _deliverPrompt.SetActive(true);
