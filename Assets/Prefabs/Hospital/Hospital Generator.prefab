@@ -141,7 +141,6 @@ MonoBehaviour:
   _onCorridorShutdown:
     m_PersistentCalls:
       m_Calls: []
-  _advance: 0
 --- !u!1001 &1426106118944161100
 PrefabInstance:
   m_ObjectHideFlags: 0

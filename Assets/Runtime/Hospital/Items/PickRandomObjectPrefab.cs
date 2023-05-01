@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,14 +10,14 @@ namespace LiverDie.Hospital.Items
         private List<GameObject> _gameObjects = new();
 
         [SerializeField]
-        private bool _instantiate = false;
+        private bool _instantiate;
 
         [SerializeField]
         private float _spawnChance = 1f;
 
-        void OnEnable()
+        private void OnEnable()
         {
-            if (_gameObjects == null || _gameObjects.Count == 0) return;
+            if (_gameObjects.Count == 0) return;
 
             var toSpawn = Random.value <= _spawnChance;
             if (!toSpawn)
