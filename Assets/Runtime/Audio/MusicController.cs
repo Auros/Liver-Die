@@ -179,7 +179,7 @@ namespace LiverDie.Audio
         private void UpdateFromPercent()
         {
             float percent = _currentPercent;
-            Debug.Log($"calc with {_currentPercent} percent");
+            // Debug.Log($"calc with {_currentPercent} percent");
             if(_isOverride) percent = _overidePercent;
             if (percent > 50)
             {
