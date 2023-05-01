@@ -89,6 +89,11 @@ namespace LiverDie.NPC
                 Destroy(this.gameObject);
             }
         }
+
+        public void ChangeDialogue(DialogueScriptableObject dialogue)
+        {
+            _dialogue = dialogue;
+        }
     }
 }
 

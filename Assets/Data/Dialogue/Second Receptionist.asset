@@ -10,14 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa529739455444b498dbba92a796c5fd, type: 3}
-  m_Name: Receptionist
+  m_Name: Second Receptionist
   m_EditorClassIdentifier: 
   _name: Receptionist
   _dialogue:
-  - Welcome to the Liver Hospital!
-  - ...
-  - You want to eat livers?
-  - Uhh.......
-  - Maybe I can get a doctor to provide some livers....?
-  - I can't just exactly give away livers, y'know?
-  - ...What? No, you can't just "de-liver" people.
+  - I'll uhh... get to those livers right away! DOCTOR??
