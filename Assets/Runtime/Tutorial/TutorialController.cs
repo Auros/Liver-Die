@@ -1,5 +1,6 @@
 ﻿using System;
 using AuraTween;
+using Cysharp.Threading.Tasks;
 using LiverDie.Audio;
 using LiverDie.Dialogue.Data;
 using LiverDie.Gremlin.Health;
@@ -37,6 +38,9 @@ namespace LiverDie.Tutorial
         [SerializeField]
         private AudioSource _doorSfx = null!;
 
+        [SerializeField]
+        private TitleDropController _titleDropController = null!;
+
         private void Start()
         {
             _musicController.OverridePercent(15);
@@ -50,10 +54,17 @@ namespace LiverDie.Tutorial
         // only triggers on the first delivery
         private void DialogueEventIntermediate_OnNpcDelivered(Runtime.Dialogue.NpcDeliveredEvent obj)
         {
+            TutorialFinishAsync().Forget();
+        }
+
+        private async UniTask TutorialFinishAsync()
+        {
+            await _titleDropController.TitleDropAsync();
+
             _liverController.LiverDecay = true;
             _liverController.StartTimer();
-            _tweenManagerIHardlyKnowHer.Run(0f, 1, 2.5f, UpdateAlpha, Easer.InOutSine);
-            _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 10f, UpdateWallPos, Easer.InOutSine);
+            _ = _tweenManagerIHardlyKnowHer.Run(0f, 1, 2.5f, UpdateAlpha, Easer.InOutSine);
+            _ = _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 10f, UpdateWallPos, Easer.InOutSine);
             _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
             _musicController.DisableOverride();
             _doorSfx.Play();

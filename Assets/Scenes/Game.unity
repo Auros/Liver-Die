@@ -1215,6 +1215,18 @@ CanvasGroup:
     type: 3}
   m_PrefabInstance: {fileID: 140435742}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &140435745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1879407829741964674, guid: c9161eecd324f694482d65972e99c6e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 140435742}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130c9d4abd4beef4db114c909c78d1ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &151523375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,6 +2297,7 @@ MonoBehaviour:
   _receptionistSecondaryDialogue: {fileID: 11400000, guid: 9c17b5c15f6dfb74d8660590aad614f8,
     type: 2}
   _doorSfx: {fileID: 1796254871}
+  _titleDropController: {fileID: 140435745}
 --- !u!1 &382668414
 GameObject:
   m_ObjectHideFlags: 0
@@ -7327,8 +7340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fae73958e9d413ca4321d73434274f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueEventIntermediate: {fileID: 1876525164}
   _roomColorChangeEveryXLivers: 25
+  _dialogueEventIntermediate: {fileID: 1876525164}
 --- !u!43 &1623450931
 Mesh:
   m_ObjectHideFlags: 0

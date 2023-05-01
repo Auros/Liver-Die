@@ -30,6 +30,8 @@ namespace LiverDie.UI
 
         private CancellationTokenSource? _cts = null!;
 
+        private bool _shouldThud = false;
+
         private void Start()
         {
             _dialogueEventIntermediate.OnNpcDelivered += DialogueEventIntermediate_OnNpcDelivered;
@@ -49,6 +51,9 @@ namespace LiverDie.UI
 
         private async UniTask UpdateObjectiveAsync(string text, CancellationToken token = default)
         {
+            // this is bad but game jam moment
+            if (!_shouldThud) await UniTask.Delay(1000);
+
             _objectiveText.text = string.Empty;
             var sections = text.Split('|');
 
@@ -58,10 +63,12 @@ namespace LiverDie.UI
 
                 _objectiveText.text += section;
 
-                _audioPool.Play(_thudClip);
+                if (_shouldThud) _audioPool.Play(_thudClip);
                 await _tweenManager.Run(1.5f * Vector3.one, Vector3.one, 0.25f, UpdateScale, Easer.OutSine);
                 await UniTask.Delay(250);
             }
+
+            _shouldThud = true;
         }
 
         private void UpdateScale(Vector3 scale) => transform.localScale = scale;
