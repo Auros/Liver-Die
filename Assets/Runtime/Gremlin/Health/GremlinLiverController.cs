@@ -45,6 +45,8 @@ namespace LiverDie.Gremlin.Health
         [SerializeField, Tooltip("Time (in seconds) of complete liver decay (1 to 0)")]
         private float _liverDecayTime = 20f;
 
+        [SerializeField, Tooltip("De-livering health gain")]
+        private float _deliverGain = 0.4f;
 
         private float _liver = 1f;
         private float _lastLiverGainTime;
@@ -66,22 +68,9 @@ namespace LiverDie.Gremlin.Health
             _dialogueEventIntermediate.OnNpcDelivered += OnNpcDelivered;
         }
 
-        private void OnNpcDelivered(NpcDeliveredEvent ctx)
-        {
-            ChangeLiver(0.4f); // might break when npc is null but it's probably fine
-        }
+        private void OnNpcDelivered(NpcDeliveredEvent ctx) => ChangeLiver(_deliverGain);
 
-        private void OnDialogueFocusChanged(DialogueFocusChangedEvent ctx)
-        {
-            if (ctx.Focused)
-            {
-                LiverDecay = false;
-            }
-            else
-            {
-                LiverDecay = true;
-            }
-        }
+        private void OnDialogueFocusChanged(DialogueFocusChangedEvent ctx) => LiverDecay = !ctx.Focused;
 
         private void Update()
         {
