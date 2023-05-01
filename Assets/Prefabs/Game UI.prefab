@@ -58,7 +58,7 @@ MonoBehaviour:
   _dialogueText: {fileID: 1377939595}
   _dialogLibrary: {fileID: 11400000, guid: 48402bc1e681b9f4cb84087edeaad471, type: 2}
   _audioPool: {fileID: 4487750748517357710}
-  _charactersPerMinute: 700
+  _charactersPerMinute: 900
 --- !u!1 &708055035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,8 +2123,7 @@ MonoBehaviour:
   _liverController: {fileID: 0}
   _normalBeatScale: 1.1
   _bigBeatScale: 1.25
-  _beatDuration: 0.5
-  _beatDelay: 0.5
+  _beatsPerMinute: 100
 --- !u!1 &5818838533416355645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,6 +2213,7 @@ GameObject:
   - component: {fileID: 5818838534011755755}
   - component: {fileID: 5818838534011755733}
   - component: {fileID: 5818838534011755734}
+  - component: {fileID: 5438461932714702659}
   m_Layer: 5
   m_Name: Liver UI
   m_TagString: Untagged
@@ -2310,8 +2310,19 @@ MonoBehaviour:
   _liverController: {fileID: 0}
   _normalBeatScale: 1.1
   _bigBeatScale: 1.25
-  _beatDuration: 0.5
-  _beatDelay: 0.5
+  _beatsPerMinute: 100
+--- !u!225 &5438461932714702659
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5818838534011755753}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5818838534691270011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,7 +3014,7 @@ MonoBehaviour:
   - BECOME| A| LIVER| FARM
   - CONSUME| MORE| LIVERS
   - LIVER?| I| HARDLY| KNOW| HER!!
-  _liverController: {fileID: 0}
+  _dialogueEventIntermediate: {fileID: 0}
   _tweenManager: {fileID: 6681555101184546305}
   _objectiveText: {fileID: 3103479637446805725}
   _thudClip: {fileID: 8300000, guid: db12ebbc3648bfc48b3892808e60b4e0, type: 3}
@@ -3446,6 +3457,7 @@ GameObject:
   - component: {fileID: 7496885410924994059}
   - component: {fileID: 8233179694138081384}
   - component: {fileID: 2800034815340556796}
+  - component: {fileID: 5223700121893864967}
   m_Layer: 5
   m_Name: Liver Counter
   m_TagString: Untagged
@@ -3487,7 +3499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea744c1a40a518946bb234e8385de565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _liverController: {fileID: 0}
+  _dialogueEventIntermediate: {fileID: 0}
   _counter: {fileID: 546483341845450590}
 --- !u!114 &2800034815340556796
 MonoBehaviour:
@@ -3505,5 +3517,16 @@ MonoBehaviour:
   _liverController: {fileID: 0}
   _normalBeatScale: 1.1
   _bigBeatScale: 1.25
-  _beatDuration: 0.5
-  _beatDelay: 0.5
+  _beatsPerMinute: 100
+--- !u!225 &5223700121893864967
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9038726605702555092}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

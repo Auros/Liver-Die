@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using LiverDie.Dialogue.Data;
+using LiverDie.NPC;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 namespace LiverDie.NPC
 {
     // handles visuals, liver, whatever
@@ -15,6 +20,12 @@ namespace LiverDie.NPC
         private Color _baseShoeColor = new Color(42/255f, 34/255f, 34/255f);
 
         [SerializeField]
+        private bool _forceShirtColor = false;
+
+        [SerializeField]
+        private Color _forcedShirtColor = new Color(42/255f, 34/255f, 34/255f);
+
+        [SerializeField]
         private SkinnedMeshRenderer _renderer = null!;
 
         [SerializeField]
@@ -23,8 +34,12 @@ namespace LiverDie.NPC
         [SerializeField]
         private DialogueScriptableObject? _dialogue = null;
 
+        // main rigidbody
         [SerializeField]
         private Rigidbody _ragdollRigidbody = null!;
+
+        [SerializeField]
+        public List<Rigidbody> Rigidbodies;
 
         [SerializeField]
         private ParticleSystem _deathParticles = null!;
@@ -49,11 +64,23 @@ namespace LiverDie.NPC
 
         private void Start()
         {
+            foreach (var rigidbody in Rigidbodies)
+            {
+                rigidbody.isKinematic = true;
+            }
+
             Color.RGBToHSV(_baseShirtColor, out float shirtH, out float shirtS, out float shirtV);
             Color.RGBToHSV(_basePantsColor, out float pantsH, out float pantsS, out float pantsV);
             Color.RGBToHSV(_baseShoeColor, out float shoeH, out float shoeS, out float shoeV);
 
-            _renderer.materials[1].color = Color.HSVToRGB(Random.value, shirtS, shirtV);
+            if (_forceShirtColor)
+            {
+                _renderer.materials[1].color = _forcedShirtColor;
+            }
+            else
+            {
+                _renderer.materials[1].color = Color.HSVToRGB(Random.value, shirtS, shirtV);
+            }
             _renderer.materials[2].color = Color.HSVToRGB(Random.value, pantsS, pantsV);
             _renderer.materials[3].color = Color.HSVToRGB(Random.value, shoeS, shoeV);
 
@@ -66,6 +93,11 @@ namespace LiverDie.NPC
             // TODO: Animate better
             _liver.SetActive(false);
             Interactable = false;
+
+            foreach (var rigidbody in Rigidbodies)
+            {
+                rigidbody.isKinematic = false;
+            }
 
             var animator = gameObject.GetComponent<Animator>();
             animator.enabled = false;
@@ -87,3 +119,20 @@ namespace LiverDie.NPC
         }
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(NpcDefinition))]
+public class MyScriptEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        var npc = target as NpcDefinition;
+        if (GUILayout.Button("SET RIGIDBODIES (DESTRUCTIVE!!!!!)"))
+        {
+            npc.Rigidbodies = npc.GetComponentsInChildren<Rigidbody>().ToList();
+        }
+    }
+}
+#endif

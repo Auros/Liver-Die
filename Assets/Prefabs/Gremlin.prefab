@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 5540094305453534026}
-  _idleDelayMin: 15
-  _idleDelayMax: 45
+  _idleDelayMin: 7.5
+  _idleDelayMax: 20
   _clips:
   - {fileID: 8300000, guid: 4e14e1bbee22b704487d5f7dafd770d2, type: 3}
   - {fileID: 8300000, guid: 1a09fd9ea538ea04e8bbd53f4e829e10, type: 3}
