@@ -168,6 +168,8 @@ namespace LiverDie
                 segmentCount++;
             }
 
+            if (corridorSegments.Count > 1)
+                corridorSegments[^1].IsEnd = true;
 
             // Calculate the length of each rail for this segment.
             var railLength = _segmentLength * corridorSegments.Count;
