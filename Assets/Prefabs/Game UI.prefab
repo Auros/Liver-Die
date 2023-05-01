@@ -2302,8 +2302,8 @@ RectTransform:
   m_Father: {fileID: 5387803574967652245}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.000000059604645, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.000061035156, y: -0.000061035156}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2896,7 +2896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "dfsf\u200B"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ff62d94afe541304faedb4c30d82ec4d, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3475,7 +3475,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: dfsf
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -4055,6 +4055,8 @@ MonoBehaviour:
   - {fileID: 5438461932714702659}
   - {fileID: 9019043691409493617}
   - {fileID: 5223700121893864967}
+  _postProcessingController: {fileID: 0}
+  _blurtime: 1
 --- !u!1 &5292564617122577182
 GameObject:
   m_ObjectHideFlags: 0
@@ -4544,7 +4546,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4207909900987303309}
   m_Direction: 2
   m_Value: 0.9999999
-  m_Size: 0.41548258
+  m_Size: 0.4363057
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5467,7 +5469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8377778109287038562
 RectTransform:
   m_ObjectHideFlags: 0
