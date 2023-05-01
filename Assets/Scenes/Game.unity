@@ -135,7 +135,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh736780
+  m_Name: pb_Mesh986196
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -361,7 +361,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh736904
+  m_Name: pb_Mesh986320
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1267,7 +1267,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1893,6 +1893,7 @@ MonoBehaviour:
   _disabledHudElements:
   - {fileID: 140435744}
   - {fileID: 140435743}
+  _wallTransform: {fileID: 1394682083}
   _liverController: {fileID: 1169758036}
   _dialogueEventIntermediate: {fileID: 1876525164}
   _tweenManagerIHardlyKnowHer: {fileID: 1571544397}
@@ -2049,7 +2050,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh736700
+  m_Name: pb_Mesh986116
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5611,7 +5612,7 @@ GameObject:
   - component: {fileID: 1394682085}
   - component: {fileID: 1394682089}
   m_Layer: 0
-  m_Name: Solid Wall (3)
+  m_Name: Tutorial Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5625,7 +5626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394682082}
   m_LocalRotation: {x: -0, y: -0.00000008940697, z: -0, w: 1}
-  m_LocalPosition: {x: -6.764, y: -8.732241, z: -14.8}
+  m_LocalPosition: {x: 2.3269086, y: -8.732241, z: -14.8}
   m_LocalScale: {x: 1.8181819, y: 1.8181818, z: 1.8181819}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5673,7 +5674,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -6995,7 +6996,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh736536
+  m_Name: pb_Mesh985952
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7907,7 +7908,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh736522
+  m_Name: pb_Mesh985938
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

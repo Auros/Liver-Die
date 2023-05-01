@@ -11,6 +11,9 @@ namespace LiverDie.Tutorial
         private CanvasGroup[] _disabledHudElements = null!;
 
         [SerializeField]
+        private Transform _wallTransform = null!;
+
+        [SerializeField]
         private GremlinLiverController _liverController = null!;
 
         [SerializeField]
@@ -33,6 +36,7 @@ namespace LiverDie.Tutorial
         {
             _liverController.LiverDecay = true;
             _tweenManagerIHardlyKnowHer.Run(0f, 1, 2.5f, UpdateAlpha, Easer.InOutSine);
+            _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 5f, UpdateWallPos, Easer.InOutSine);
             _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
         }
 
@@ -40,5 +44,8 @@ namespace LiverDie.Tutorial
         {
             foreach (var group in _disabledHudElements) group.alpha = alpha;
         }
+
+        private void UpdateWallPos(float x)
+            => _wallTransform.localPosition = _wallTransform.localPosition.WithX(x);
     }
 }
