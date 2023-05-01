@@ -3374,11 +3374,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f70d7a8aeda26747a445c1fbcb65057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entries: 13
+  _entries: 8
   _entryTemplate: {fileID: 7229479923124124455, guid: 8a1461641142f3748b1061e83e3cb82c,
     type: 3}
   _entrySpacing: -69
-  _entryBaseY: 0
+  _entryBaseY: 261
 --- !u!1 &4495056098951969834
 GameObject:
   m_ObjectHideFlags: 0
