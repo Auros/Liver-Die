@@ -2123,7 +2123,7 @@ MonoBehaviour:
   _liverController: {fileID: 0}
   _normalBeatScale: 1.1
   _bigBeatScale: 1.25
-  _beatsPerMinute: 100
+  _beatsPerMinute: 120
 --- !u!1 &5818838533416355645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,7 +2310,7 @@ MonoBehaviour:
   _liverController: {fileID: 0}
   _normalBeatScale: 1.1
   _bigBeatScale: 1.25
-  _beatsPerMinute: 100
+  _beatsPerMinute: 120
 --- !u!225 &5438461932714702659
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3517,7 +3517,7 @@ MonoBehaviour:
   _liverController: {fileID: 0}
   _normalBeatScale: 1.1
   _bigBeatScale: 1.25
-  _beatsPerMinute: 100
+  _beatsPerMinute: 120
 --- !u!225 &5223700121893864967
 CanvasGroup:
   m_ObjectHideFlags: 0
