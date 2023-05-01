@@ -1,4 +1,5 @@
-﻿using LiverDie.Gremlin;
+﻿using Cysharp.Threading.Tasks;
+using LiverDie.Gremlin;
 using LiverDie.Gremlin.Health;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,7 +43,7 @@ namespace LiverDie.UI
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
             foreach (var group in _disabledHudElements) group.alpha = 0;
-            _boardController.SendScore(Mathf.RoundToInt(_liverController.StopTimer()*1000), _counterController.Livers, LiverboardController.SessionID);
+            _boardController.SendScore(Mathf.RoundToInt(_liverController.StopTimer()*1000), _counterController.Livers, LiverboardController.SessionID).Forget();
         }
 
         private void OnDestroy()

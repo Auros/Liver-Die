@@ -26,7 +26,7 @@ namespace LiverDie
                 return _guid;
             }
         }
-        private static string _name;
+        private static string? _name;
         [SerializeField]
         private string _liverboardURL = null!;
         [SerializeField]
@@ -72,13 +72,92 @@ namespace LiverDie
             _leaderboardEntrySpawner.gameObject.SetActive(false);
             _loadingObject.gameObject.SetActive(false);
         }
+
         public void SetName()
         {
-            LiverboardController._name = _nameTextField.text;
+            _name = _nameTextField.text;
         }
+
         public async UniTask SendScore(int time, int livers, string uid, bool loadLeaderboard = true)
         {
+            _loadingObject.gameObject.SetActive(true);
+            _loadingObject.text = "LOADING...";
+
+            _leaderboardEntrySpawner.gameObject.SetActive(false);
+
+            if (_name == null)
+            {
+                _namePrompt.SetActive(true);
+                await UniTask.WaitUntil(() => _name != null);
+                _namePrompt.SetActive(false);
+            }
+
+            if (_name is null)
+            {
+                Debug.LogWarning("No name provided.");
+                return;
+            }
+
+            SendData sendData = new(uid, _name, livers, time);
+            var sendPayload = JsonConvert.SerializeObject(sendData);
+
+            UploadHandlerRaw upload = new(Encoding.UTF8.GetBytes(sendPayload));
+            var download = new DownloadHandlerBuffer();
+
+            using UnityWebRequest request = new(_liverboardURL, "POST", download, upload);
+            request.SetRequestHeader( "Content-Type", "application/json");
+            request.timeout = 15;
+
+            UnityWebRequest? response = null;
             try
+            {
+                response = await request.SendWebRequest();
+
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning(e);
+                _loadingObject.text = "Failed to connect!";
+                return;
+            }
+
+            if (response is null)
+            {
+                Debug.LogWarning("Failed to acquire response");
+                return;
+            }
+
+            if (!loadLeaderboard)
+                return;
+
+            var ourEntry = JsonConvert.DeserializeObject<EntryData>(request.downloadHandler.text);
+
+            var data = await UnityWebRequest.Get($"{_liverboardURL}/?limit={_leaderboardEntrySpawner.LeaderboardEntries.Count}&offset={Math.Clamp(ourEntry.offset - _offsetFromRank, 0, int.MaxValue)}").SendWebRequest();
+            if (data.result is not UnityWebRequest.Result.Success)
+            {
+                _loadingObject.text = "Failed to get scores!";
+                return;
+            }
+
+            var entries = JsonConvert.DeserializeObject<List<EntryData>>(data.downloadHandler.text)!;
+            for (int i = 0; i < _leaderboardEntrySpawner.LeaderboardEntries.Count; i++)
+            {
+                if (i >= entries.Count)
+                {
+                    _leaderboardEntrySpawner.LeaderboardEntries[i].WipeEntry();
+                }
+                else
+                {
+                    var entry = entries[i];
+                    _leaderboardEntrySpawner.LeaderboardEntries[i].FillEntry(entry.rank, entry.name, entry.livers,
+                        entry.time, entry.uid == ourEntry.uid);
+                }
+            }
+
+            _leaderboardEntrySpawner.gameObject.SetActive(true);
+            _loadingObject.gameObject.SetActive(false);
+
+            /*try
             {
                 _loadingObject.gameObject.SetActive(true);
                 _loadingObject.text = "LOADING...";
@@ -92,8 +171,6 @@ namespace LiverDie
 
                 var cts = new CancellationTokenSource();
                 cts.CancelAfterSlim(TimeSpan.FromSeconds(15)); // 5sec timeout.
-
-
 
                 var req = new UnityWebRequest();
                 req.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(val));
@@ -155,7 +232,7 @@ namespace LiverDie
             }
             catch
             {
-            }
+            }*/
         }
     }
 }
