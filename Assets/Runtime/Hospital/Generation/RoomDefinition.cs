@@ -5,8 +5,11 @@ using JetBrains.Annotations;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
 using LiverDie.NPC;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace LiverDie.Hospital.Generation
 {
@@ -67,34 +70,6 @@ namespace LiverDie.Hospital.Generation
             foreach (var npc in GetComponentsInChildren<NpcDefinition>(true))
             {
                 npc.gameObject.SetActive(true);
-            }
-        }
-
-        public List<Material> GetMaterials()
-        {
-            return RendererInfos.SelectMany(x => x.Materials).ToList();
-        }
-
-        public void SetMaterials(List<Material> materials)
-        {
-            // might not perform great but its probably fine!!
-            foreach(var material in materials)
-            {
-                foreach (var rendererInfo in RendererInfos)
-                {
-                    for (int i = 0; i < rendererInfo.Materials.Count; i++)
-                    {
-                        var rendererMaterial = rendererInfo.Materials[i];
-                        if (rendererMaterial == null) continue;
-                        if (material.name.StartsWith(rendererMaterial.name))
-                        {
-                            // replace
-                            Debug.Log("REEEEEEEEEEEPLACE");
-                            Debug.Log(material.color);
-                            rendererInfo.Renderer.materials[i] = material;
-                        }
-                    }
-                }
             }
         }
     }

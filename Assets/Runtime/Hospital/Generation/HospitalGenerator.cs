@@ -217,6 +217,7 @@ namespace LiverDie
                 var segment = _segmentPool.Get();
                 var targetPos = GetSegmentOffset(segmentPosition, segmentCount is not 0 ? targetDirection : oldSegmentDirection);
                 segment.SetWalls(targetDirection, oldSegmentDirection, segmentCount is 0);
+                _swappingController.SetColorOfCorridorSegment(segment);
                 corridorSegments.Add(segment);
 
                 segment.transform.SetLocalPositionAndRotation(targetPos, Quaternion.identity);

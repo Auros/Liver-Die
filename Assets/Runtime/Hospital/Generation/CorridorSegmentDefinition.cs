@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using LiverDie.Gremlin;
+using LiverDie.Hospital.Data;
 using LiverDie.NPC;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using LiverDie.Hospital.Generation;
+using UnityEditor;
+#endif
 
 namespace LiverDie.Hospital.Generation
 {
@@ -46,6 +53,9 @@ namespace LiverDie.Hospital.Generation
 
         [SerializeField]
         private RailPairDefinition _westRailPair = null!;
+
+        [SerializeField]
+        public List<RendererInfo> RendererInfos = new();
 
         public bool IsStart { get; private set; }
 
@@ -184,3 +194,33 @@ namespace LiverDie.Hospital.Generation
         }
     }
 }
+
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(CorridorSegmentDefinition))]
+public class CorridorSegmentEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        var room = target as CorridorSegmentDefinition;
+        if (GUILayout.Button("SET RENDERERPROPERTIES (DESTRUCTIVE!!!!!)"))
+        {
+            foreach (var renderer in room.RendererInfos)
+            {
+                renderer.Materials = renderer.Renderer.sharedMaterials.ToList();
+                var indices = new List<int>();
+                for (int i = 0; i < renderer.Materials.Count; i++)
+                {
+                    indices.Add(i);
+                }
+
+                renderer.MaterialIndices = indices;
+            }
+        }
+    }
+}
+#endif
+
+

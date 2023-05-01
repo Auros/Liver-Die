@@ -45,8 +45,9 @@ namespace LiverDie.Runtime.Hospital.Generation
         {
         }
 
-        public void SetColorOfRoom(RoomDefinition room)
+        private void Recolor(List<RendererInfo> rendererInfos)
         {
+
             if (_currentHueDelta == 0) return;
 
             ColoredMaterialInfo? materialInfo = _coloredMaterials.FirstOrDefault(x => x.HueDelta == _currentHueDelta);
@@ -56,10 +57,10 @@ namespace LiverDie.Runtime.Hospital.Generation
                 _coloredMaterials.Add(materialInfo);
             }
 
-            Debug.Log("HUH");
-            foreach (var rendererInfo in room.RendererInfos)
+            foreach (var rendererInfo in rendererInfos)
             {
-                Debug.Log("RENDDD");
+                if (rendererInfo == null || !rendererInfo.Renderer.gameObject.activeSelf) continue;
+
                 for (int i = 0; i < rendererInfo.Materials.Count; i++)
                 {
                     var mat = rendererInfo.Materials[i];
@@ -85,6 +86,16 @@ namespace LiverDie.Runtime.Hospital.Generation
                     rendererInfo.Renderer.materials[i].SetColor(_baseColorProperty, newColor);
                 }
             }
+        }
+
+        public void SetColorOfCorridorSegment(CorridorSegmentDefinition corridorSegment)
+        {
+            Recolor(corridorSegment.RendererInfos);
+        }
+
+        public void SetColorOfRoom(RoomDefinition room)
+        {
+            Recolor(room.RendererInfos);
         }
     }
 }
