@@ -54,6 +54,7 @@ namespace LiverDie.Tutorial
         // only triggers on the first delivery
         private void DialogueEventIntermediate_OnNpcDelivered(Runtime.Dialogue.NpcDeliveredEvent obj)
         {
+            _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
             TutorialFinishAsync().Forget();
         }
 
@@ -61,19 +62,20 @@ namespace LiverDie.Tutorial
         {
             await _titleDropController.TitleDropAsync();
 
-            _liverController.LiverDecay = true;
-            _liverController.StartTimer();
-            _ = _tweenManagerIHardlyKnowHer.Run(0f, 1, 2.5f, UpdateAlpha, Easer.InOutSine);
-            _ = _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 10f, UpdateWallPos, Easer.InOutSine);
-            _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
             _musicController.DisableOverride();
             _doorSfx.Play();
+            _ = _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 10f, UpdateWallPos, Easer.InOutSine);
 
             foreach (var receptionist in _receptionists)
             {
                 if (receptionist == null || !receptionist.Interactable) continue;
                 receptionist.ChangeDialogue(_receptionistSecondaryDialogue);
             }
+
+            await _tweenManagerIHardlyKnowHer.Run(0f, 1, 2.5f, UpdateAlpha, Easer.InOutSine);
+
+            _liverController.LiverDecay = true;
+            _liverController.StartTimer();
         }
 
         private void UpdateAlpha(float alpha)
