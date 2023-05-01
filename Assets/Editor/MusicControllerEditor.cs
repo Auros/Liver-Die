@@ -1,27 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using LiverDie.Audio;
+﻿using LiverDie.Audio;
 using UnityEditor;
 using UnityEngine;
 
-namespace LiverDie
+namespace LiverDie.Editor
 {
     [CustomEditor(typeof(MusicController))]
-    public class MusicControllerEditor : Editor
+    public class MusicControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-            if(EditorApplication.isPlaying)
+            if (EditorApplication.isPlaying)
             {
-                if(GUILayout.Button("Up by 5"))
+                if (GUILayout.Button("Up by 5"))
                 {
-                    MusicController controller = (MusicController)target;
+                    var controller = (MusicController)target;
                     controller.IncrementPercent(5);
                 }
                 if (GUILayout.Button("Down by 5"))
                 {
-                    MusicController controller = (MusicController)target;
+                    var controller = (MusicController)target;
                     controller.DecrementPercent(5);
                 }
 
