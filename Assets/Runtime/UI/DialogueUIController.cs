@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AuraTween;
 using Cysharp.Threading.Tasks;
 using LiverDie.Audio;
 using LiverDie.Gremlin;
@@ -11,6 +12,7 @@ using LiverDie.Runtime.Intermediate;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace LiverDie.UI
 {
@@ -18,12 +20,16 @@ namespace LiverDie.UI
     {
         private LiverInput _liverInput = null!;
 
+        [SerializeField]
+        private TweenManager _tweenManager = null!;
         // for getting camera based raycasts
         [SerializeField]
         private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         [SerializeField]
         private GameObject _interactPrompt = null!;
+        [SerializeField]
+        private GameObject _deliverPrompt = null!;
 
         [SerializeField]
         private GameObject _dialogueBox = null!;
@@ -40,6 +46,14 @@ namespace LiverDie.UI
 
         [SerializeField]
         private float _charactersPerMinute = 300;
+
+        [SerializeField]
+        private float _deliverPromptDelay = 2;
+        [SerializeField]
+        private float _deliverPromptIn = 3;
+        [SerializeField]
+        private float _deliverPromptScaleAmount = 0.75f;
+        
 
         // Start is called before the first frame update
         private NpcDefinition? _npcDefinition = null;
@@ -58,6 +72,7 @@ namespace LiverDie.UI
             _dialogueEventIntermediate.OnNpcDelivered += OnNpcDelivered;
 
             _interactPrompt.SetActive(false);
+            _deliverPrompt.SetActive(false);
             _dialogueBox.SetActive(false);
         }
 
@@ -159,6 +174,28 @@ namespace LiverDie.UI
                 }
 
                 // TODO: make "press e to deliver" prompt slowly get bigger
+                await UniTask.Delay(TimeSpan.FromSeconds(_deliverPromptDelay));
+                Image deliverImage = _deliverPrompt.GetComponent<Image>();
+                TextMeshProUGUI deliverText = _deliverPrompt.GetComponentInChildren<TextMeshProUGUI>();
+                _deliverPrompt.SetActive(true);
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                _tweenManager.Run(0, 1, _deliverPromptIn, x =>
+                {
+                    Color col = deliverImage.color;
+                    col.a = x;
+                    deliverImage.color = col;
+
+                    col = deliverText.color;
+                    col.a = x;
+                    deliverText.color = col;
+                }, Easer.FastLinear);
+                Vector2 size = new Vector2(_deliverPromptScaleAmount, _deliverPromptScaleAmount);
+                _tweenManager.Run(size, Vector2.one, _deliverPromptIn, x =>
+                {
+                    _deliverPrompt.transform.localScale = x;
+                }, Easer.FastLinear);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
                 await UniTask.WaitUntil(() => _finishRequested);
 
                 // clean up
@@ -177,6 +214,7 @@ namespace LiverDie.UI
 
             _dialogueBox.SetActive(false);
             _interactPrompt.SetActive(false);
+            _deliverPrompt.SetActive(false);
             _npcDefinition = null;
         }
     }
