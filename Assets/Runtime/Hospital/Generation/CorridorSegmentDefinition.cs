@@ -127,5 +127,10 @@ namespace LiverDie.Hospital.Generation
                 _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
             };
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            print(other.name);
+        }
     }
 }
