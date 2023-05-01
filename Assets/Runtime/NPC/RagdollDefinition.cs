@@ -50,8 +50,12 @@ namespace LiverDie.NPC
             _animator.enabled = false;
             _animator.Update(0);
 
-            _ragdollRigidbody.AddExplosionForce(_deathExplosionForce, position, _deathExplosionRadius);
-            _ragdollRigidbody.AddForce(velocity);
+            var rigidbodies = transform.GetComponentsInChildren<Rigidbody>();
+            foreach(var rigidbody in rigidbodies)
+            {
+                rigidbody.AddExplosionForce(_deathExplosionForce, position, _deathExplosionRadius);
+                rigidbody.AddForce(velocity);
+            }
 
             var deathParticlesMain = _deathParticles.main;
             var deathParticleStartSpeed = deathParticlesMain.startSpeed;
