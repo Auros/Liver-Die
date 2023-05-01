@@ -96,7 +96,7 @@ MonoBehaviour:
     IsSilly: 1
     IsReplace: 0
     IsFade: 1
-  _musicVolume: 0.1
+  _musicVolume: 1
   _fadeDuration: 0.2
   _dialogueEventIntermediate: {fileID: 0}
   _mixerGroup: {fileID: 685609681937235141, guid: e32bc2a0a0b4ddb4884a1f48f1a1d230,

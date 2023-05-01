@@ -3442,6 +3442,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2726265250800307717, guid: 46d6333ea10aed240aba3c9bc62dc068,
         type: 3}
+      propertyPath: _tweenManager
+      value: 
+      objectReference: {fileID: 1571544397}
+    - target: {fileID: 2726265250800307717, guid: 46d6333ea10aed240aba3c9bc62dc068,
+        type: 3}
+      propertyPath: _liverController
+      value: 
+      objectReference: {fileID: 1169758036}
+    - target: {fileID: 2726265250800307717, guid: 46d6333ea10aed240aba3c9bc62dc068,
+        type: 3}
       propertyPath: _dialogueEventIntermediate
       value: 
       objectReference: {fileID: 1876525164}

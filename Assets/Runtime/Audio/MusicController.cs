@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AuraTween;
 using Cysharp.Threading.Tasks;
+using LiverDie.Gremlin.Health;
 using LiverDie.Runtime.Intermediate;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -94,6 +95,8 @@ namespace LiverDie.Audio
         private float _maxPercent = 100;
         [SerializeField]
         private TweenManager _tweenManager = null!;
+        [SerializeField]
+        private GremlinLiverController _liverController;
         [SerializeField]
         private List<StemContainer> _stems = new List<StemContainer>();
         //[SerializeField]
@@ -245,13 +248,11 @@ namespace LiverDie.Audio
 
         private void Update()
         {
-            //testing code
-            //Debug.Log(_currentPercent);
-            /*
-            if (Time.unscaledTime < _audioFadeTime) return;
-
-            var t = Mathf.Clamp01((_audioFadeTime + _fadeDuration - Time.unscaledTime) / _fadeDuration);
-            _drumLine.volume = Mathf.SmoothStep(_musicVolume, 0, 1 - t); */
+            if(!_isOverride)
+            {
+                SetPercent(_liverController.LiverAmount * 100);
+                //Debug.Log(_liverController.LiverAmount);
+            }
         }
 
         private void OnDestroy()
