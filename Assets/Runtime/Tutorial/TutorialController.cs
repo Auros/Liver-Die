@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using AuraTween;
 using LiverDie.Audio;
 using LiverDie.Dialogue.Data;
@@ -29,10 +29,10 @@ namespace LiverDie.Tutorial
         private TweenManager _tweenManagerIHardlyKnowHer = null!;
 
         [SerializeField]
-        private List<NpcDefinition> _receptionists;
+        private NpcDefinition[] _receptionists = Array.Empty<NpcDefinition>();
 
         [SerializeField]
-        private DialogueScriptableObject _receptionistSecondaryDialogue;
+        private DialogueScriptableObject _receptionistSecondaryDialogue = null!;
 
         [SerializeField]
         private AudioSource _doorSfx = null!;

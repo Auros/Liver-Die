@@ -9,7 +9,7 @@ namespace LiverDie.UI
     public class PauseController : MonoBehaviour, LiverInput.IPauseActions
     {
         [SerializeField]
-        private SettingsManager _settingsManager;
+        private SettingsManager _settingsManager = null!;
         [SerializeField]
         private GremlinController _gremlinController = null!;
         [SerializeField]
@@ -30,7 +30,7 @@ namespace LiverDie.UI
             _liverInput = new LiverInput();
             _liverInput.Pause.AddCallbacks(this);
             _liverInput.Enable();
-            
+
         }
 
         public void Pause()

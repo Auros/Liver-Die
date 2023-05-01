@@ -25,8 +25,10 @@ namespace LiverDie.Audio
                 }
             }
         }
+
         [SerializeField]
-        private AudioMixerGroup _sfxMixerGroup;
+        private AudioMixerGroup _sfxMixerGroup = null!;
+
         [SerializeField]
         private float _volume = 1f;
 
