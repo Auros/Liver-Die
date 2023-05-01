@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LiverDie.Dialogue.Data;
 using LiverDie.NPC;
 using UnityEngine;
@@ -34,27 +35,8 @@ namespace LiverDie.NPC
         [SerializeField]
         private DialogueScriptableObject? _dialogue = null;
 
-        // main rigidbody
-        [SerializeField]
-        private Rigidbody _ragdollRigidbody = null!;
-
         [SerializeField]
         public List<Rigidbody> Rigidbodies;
-
-        [SerializeField]
-        private ParticleSystem _deathParticles = null!;
-
-        [SerializeField]
-        private float _deathParticleMinForce = 1f;
-
-        [SerializeField]
-        private float _deathParticleMaxForce = 2f;
-
-        [SerializeField]
-        private float _deathExplosionForce = 1f;
-
-        [SerializeField]
-        private float _deathExplosionRadius = 5f;
 
         [SerializeField]
         private RagdollDefinition _ragdollPrefab = null!;
@@ -107,6 +89,13 @@ namespace LiverDie.NPC
 
                 Destroy(this.gameObject);
             }
+        }
+
+        public async void ChangeDialogue(DialogueScriptableObject dialogue)
+        {
+            // prevent crash lol
+            await Task.Delay(150);
+            _dialogue = dialogue;
         }
     }
 }
