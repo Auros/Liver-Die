@@ -30,6 +30,7 @@ namespace LiverDie.UI
             _liverInput = new LiverInput();
             _liverInput.Pause.AddCallbacks(this);
             _liverInput.Enable();
+            
         }
 
         public void Pause()
@@ -55,8 +56,7 @@ namespace LiverDie.UI
         {
             Vector2 vec = new Vector2(0, 0);
             Vector2 vec2 = new Vector2(_settingsOffset, 0);
-            _pauseHud.localPosition = vec2;
-            //_tweenManager.Run(vec, vec2, _settingAnimationTime, x => _pauseHud.localPosition = x, Easer.OutExpo);
+            _tweenManager.Run(vec, vec2, _settingAnimationTime, x => _pauseHud.localPosition = x, Easer.OutExpo);
             _settingsManager.LoadSettings();
         }
         public void HowToPlay() => Application.OpenURL("https://en.wikipedia.org/wiki/Acute_liver_failure");
@@ -86,9 +86,9 @@ namespace LiverDie.UI
         {
             Vector2 vec = new Vector2(0, 0);
             Vector2 vec2 = new Vector2(_settingsOffset, 0);
-            _pauseHud.localPosition = vec;
+            //_pauseHud.localPosition = vec;
 
-            //_tweenManager.Run(vec2, vec, _settingAnimationTime, x => _pauseHud.localPosition = x, Easer.OutExpo);
+            _tweenManager.Run(vec2, vec, _settingAnimationTime, x => _pauseHud.localPosition = x, Easer.OutExpo);
         }
     }
 }
