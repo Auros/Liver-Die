@@ -247,6 +247,7 @@ namespace LiverDie.Gremlin
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.gameObject.layer == 4) return;
             IsGrounded = true;
             _closestGroundPoint = transform.position.WithY(other.ClosestPointOnBounds(transform.position).y);
             _rigidbody.velocity = _rigidbody.velocity.WithY(0f);
@@ -254,6 +255,7 @@ namespace LiverDie.Gremlin
 
         private void OnTriggerStay(Collider other)
         {
+            if (other.gameObject.layer == 4) return;
             IsGrounded = true;
             _closestGroundPoint = transform.position.WithY(other.ClosestPointOnBounds(transform.position).y);
             _rigidbody.velocity = _rigidbody.velocity.WithY(0f);
