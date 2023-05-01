@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.TextCore.Text;
 
 namespace LiverDie.Audio
@@ -24,7 +25,8 @@ namespace LiverDie.Audio
                 }
             }
         }
-
+        [SerializeField]
+        private AudioMixerGroup _sfxMixerGroup;
         [SerializeField]
         private float _volume = 1f;
 
@@ -88,7 +90,7 @@ namespace LiverDie.Audio
         {
             var source = gameObject.AddComponent<AudioSource>();
             source.volume = Volume;
-
+            source.outputAudioMixerGroup = _sfxMixerGroup;
             return source;
         }
     }
