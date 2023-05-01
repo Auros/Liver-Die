@@ -6,6 +6,7 @@ using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
@@ -38,6 +39,18 @@ namespace LiverDie
         [SerializeField]
         private float _defaultRoomSpawnProbability = 0.5f;
 
+        [SerializeField]
+        private int _initialCorridorSegmentPoolSize;
+
+        [SerializeField]
+        private int _initialRoomPoolSizePerRoom;
+
+        [SerializeField]
+        private UnityEvent<int> _onCorridorStartup = new();
+
+        [SerializeField]
+        private UnityEvent<int> _onCorridorShutdown = new();
+
         private CorridorState? _nextCorridor;
         private CorridorState? _currentCorridor;
         private CorridorState? _previousCorridor;
@@ -68,6 +81,13 @@ namespace LiverDie
                 defaultCapacity: 250
             );
 
+            using (ListPool<CorridorSegmentDefinition>.Get(out var prespawned))
+            {
+                for (int i = 0; i < _initialCorridorSegmentPoolSize; i++)
+                    prespawned.Add(_segmentPool.Get());
+                prespawned.ForEach(_segmentPool.Release);
+            }
+
             // Setup the object pools for the rooms at the start.
             _roomPools = new Dictionary<RoomScriptableObject, IObjectPool<RoomDefinition>>(_roomSpawningOptions.Length);
             foreach (var option in _roomSpawningOptions)
@@ -83,8 +103,17 @@ namespace LiverDie
                     Destroy
                 );
 
+                using (ListPool<RoomDefinition>.Get(out var prespawned))
+                {
+                    for (int i = 0; i < _initialRoomPoolSizePerRoom; i++)
+                        prespawned.Add(pool.Get());
+
+                    prespawned.ForEach(pool.Release);
+                }
+
                 _roomPools[room] = pool;
             }
+
         }
 
         private void Start()
@@ -119,6 +148,7 @@ namespace LiverDie
                 for (int i = 0; i < rooms.Count; i++)
                     _roomPools[rooms[i].Template].Release(rooms[i]);
 
+                _onCorridorShutdown.Invoke(_previousCorridor.Generation);
                 _previousCorridor.Dispose();
             }
 
@@ -156,6 +186,8 @@ namespace LiverDie
 
         private CorridorState GenerateCorridor(int generation, Vector3 startPosition, CorridorState? previousCorridor, float roomSpawnProbability)
         {
+            _onCorridorStartup.Invoke(generation);
+
             var segmentPosition = startPosition;
             var oldSegmentDirection = previousCorridor?.Direction ?? _startDirection;
             var targetDirection = previousCorridor is not null ? GetNewRandomDirection(oldSegmentDirection) : _startDirection;
