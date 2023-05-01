@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace LiverDie
+namespace LiverDie.Hospital.Items
 {
     public class XRayController : MonoBehaviour
     {
@@ -15,6 +13,8 @@ namespace LiverDie
         private AudioSource _audioSource = null!;
 
         private CancellationTokenSource _cts = new();
+
+        private void OnEnable() => _xrayGameObject.SetActive(false);
 
         private void OnTriggerEnter(Collider other)
         {
