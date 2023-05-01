@@ -54,6 +54,7 @@ namespace LiverDie.Tutorial
         // only triggers on the first delivery
         private void DialogueEventIntermediate_OnNpcDelivered(Runtime.Dialogue.NpcDeliveredEvent obj)
         {
+            _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
             TutorialFinishAsync().Forget();
         }
 
@@ -61,7 +62,6 @@ namespace LiverDie.Tutorial
         {
             await _titleDropController.TitleDropAsync();
 
-            _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
             _musicController.DisableOverride();
             _doorSfx.Play();
             _ = _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 10f, UpdateWallPos, Easer.InOutSine);
