@@ -2,6 +2,7 @@
 using System.Threading;
 using AuraTween;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using LiverDie.Gremlin.Health;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,7 +14,7 @@ namespace LiverDie.UI
         [SerializeField]
         private TweenManager _tweenManager = null!;
 
-        [SerializeField]
+        [SerializeField, UsedImplicitly]
         private GremlinLiverController _liverController = null!;
 
         [SerializeField]

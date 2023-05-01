@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using LiverDie.Gremlin;
+using LiverDie.NPC;
 using UnityEngine;
 
 namespace LiverDie.Hospital.Generation
