@@ -326,7 +326,7 @@ MonoBehaviour:
   _deathParticles: {fileID: 9088601936282637488}
   _deathParticleMinForce: 1
   _deathParticleMaxForce: 2
-  _deathExplosionForce: 100
+  _deathExplosionForce: 30
   _deathExplosionRadius: 50
 --- !u!95 &3224526075379688328
 Animator:
