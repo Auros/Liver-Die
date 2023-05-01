@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Transactions;
 using LiverDie.NPC;
 using LiverDie.Runtime.Dialogue;
 using LiverDie.Runtime.Intermediate;
@@ -74,6 +75,10 @@ namespace LiverDie.Gremlin
         private LiverInput _liverInput = null!;
         private Vector2 _moveDirection;
         private NpcDefinition? _selectedNpc = null;
+        private Vector3 _closestGroundPoint;
+
+        [SerializeField]
+        private bool _notInJump = true;
 
         private void Start()
         {
@@ -94,14 +99,13 @@ namespace LiverDie.Gremlin
 
         private void FixedUpdate()
         {
-            // Ground check
-            var blueRay256 = new Ray(_cameraTransform.position, Vector3.down);
-            IsGrounded = Physics.Raycast(blueRay256, out var groundHit, transform.localScale.y + 0.1f, 1 << 0 | 1 << 6);
+            if (!_notInJump && !IsGrounded)
+                _notInJump = true;
 
-            if (IsGrounded)
-                transform.position = transform.position.WithY(groundHit.point.y);
-            else
+            if (!IsGrounded)
                 _rigidbody.velocity = _rigidbody.velocity.WithY(_rigidbody.velocity.y - _gravityAcceleration * Time.fixedDeltaTime);
+            else if (_notInJump) // prevents height from resetting at beginning of the jump
+                transform.position = transform.position.WithY(_closestGroundPoint.y + 0.09f);
 
             var npcRaycast = Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _npcInteractRange * transform.localScale.y, 1 << 31);
             if (_selectedNpc == null && npcRaycast)
@@ -141,6 +145,8 @@ namespace LiverDie.Gremlin
                 GroundMovement();
             else
                 AirMovement();
+
+            IsGrounded = false;
         }
 
         private void GroundMovement()
@@ -201,7 +207,9 @@ namespace LiverDie.Gremlin
         {
             if (!context.performed || !IsGrounded) return;
 
+            transform.position = transform.position.WithY(transform.position.y + 0.1f);
             _rigidbody.velocity += _rigidbody.velocity.WithY(_jumpVelocity).OnlyY();
+            _notInJump = false; // exists to prevent ground hover height from being set before player has left the ground in a jump
         }
 
         public void OnDeliver(InputAction.CallbackContext context)
@@ -218,6 +226,20 @@ namespace LiverDie.Gremlin
 
             _finishRequested = true;*/
 
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            IsGrounded = true;
+            _closestGroundPoint = transform.position.WithY(other.ClosestPointOnBounds(transform.position).y);
+            _rigidbody.velocity = _rigidbody.velocity.WithY(0f);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            IsGrounded = true;
+            _closestGroundPoint = transform.position.WithY(other.ClosestPointOnBounds(transform.position).y);
+            _rigidbody.velocity = _rigidbody.velocity.WithY(0f);
         }
 
         private void OnDestroy()
