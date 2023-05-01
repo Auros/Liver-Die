@@ -3,28 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using LiverDie.Gremlin.Health;
 using LiverDie.Hospital.Data;
-using LiverDie.Hospital.Generation;
 using LiverDie.Runtime.Dialogue;
 using LiverDie.Runtime.Intermediate;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace LiverDie.Runtime.Hospital.Generation
+namespace LiverDie.Hospital.Generation
 {
     public class MaterialSwappingController : MonoBehaviour
     {
-        private List<ColoredMaterialInfo> _coloredMaterials = new();
-
-        private float _currentHueDelta = 0;
-        private int _liverCount = 0;
-
-        private int _baseColorProperty = Shader.PropertyToID("_BaseColor");
-
-        [SerializeField]
-        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
+        private bool _locked;
+        private int _liverCount;
+        private float _currentHueDelta;
+        private float _previousHueDelta;
+        private readonly List<ColoredMaterialInfo> _coloredMaterials = new();
+        private readonly int _baseColorProperty = Shader.PropertyToID("_BaseColor");
 
         [SerializeField]
         private int _roomColorChangeEveryXLivers = 5;
+
+        [SerializeField]
+        private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
         public void Start()
         {
@@ -35,22 +33,24 @@ namespace LiverDie.Runtime.Hospital.Generation
         {
             _liverCount++;
 
-            if (_liverCount % _roomColorChangeEveryXLivers == 0)
-            {
-                _currentHueDelta = Random.value;
-            }
+            if (_liverCount % _roomColorChangeEveryXLivers != 0 && !_locked)
+                return;
+
+            _previousHueDelta = _currentHueDelta;
+            _currentHueDelta = (_currentHueDelta + 0.2f) % 1f;
+            Lock();
         }
 
         private void OnLiverUpdate(LiverUpdateEvent ctx)
         {
         }
 
-        private void Recolor(List<RendererInfo> rendererInfos)
+        private void Recolor(List<RendererInfo> rendererInfos, float progress = 1f)
         {
+            if (_currentHueDelta == 0)
+                return;
 
-            if (_currentHueDelta == 0) return;
-
-            ColoredMaterialInfo? materialInfo = _coloredMaterials.FirstOrDefault(x => x.HueDelta == _currentHueDelta);
+            var materialInfo = _coloredMaterials.FirstOrDefault(x => Math.Abs(x.HueDelta - _currentHueDelta) < 0.01f);
             if (materialInfo == null)
             {
                 materialInfo = new ColoredMaterialInfo();
@@ -64,10 +64,15 @@ namespace LiverDie.Runtime.Hospital.Generation
                 for (int i = 0; i < rendererInfo.Materials.Count; i++)
                 {
                     var mat = rendererInfo.Materials[i];
-                    if (mat == null) continue;
 
-                    Color.RGBToHSV(mat.GetColor(_baseColorProperty), out float H, out float S, out float V);
-                    Color newColor = Color.HSVToRGB(_currentHueDelta, S, V);
+                    if (mat == null)
+                        continue;
+
+                    Color.RGBToHSV(mat.GetColor(_baseColorProperty), out float _, out float s, out float v);
+                    var first = _currentHueDelta > _previousHueDelta ? _currentHueDelta : _previousHueDelta;
+                    var second = _currentHueDelta > _previousHueDelta ? _previousHueDelta : _currentHueDelta;
+                    var newColor = Color.HSVToRGB(Mathf.Lerp(first, second, progress), s, v);
+
                     /*Material? swappedMaterial = null;
 
                     if (swappedMaterial == null)
@@ -88,14 +93,24 @@ namespace LiverDie.Runtime.Hospital.Generation
             }
         }
 
-        public void SetColorOfCorridorSegment(CorridorSegmentDefinition corridorSegment)
+        public void SetColorOfCorridorSegment(CorridorSegmentDefinition corridorSegment, float transition)
         {
-            Recolor(corridorSegment.RendererInfos);
+            Recolor(corridorSegment.RendererInfos, 1f - transition);
         }
 
-        public void SetColorOfRoom(RoomDefinition room)
+        public void SetColorOfRoom(RoomDefinition room, float transition)
         {
-            Recolor(room.RendererInfos);
+            Recolor(room.RendererInfos, 1f - transition);
+        }
+
+        public void Lock()
+        {
+            _locked = true;
+        }
+
+        public void Unlock()
+        {
+            _locked = false;
         }
     }
 }

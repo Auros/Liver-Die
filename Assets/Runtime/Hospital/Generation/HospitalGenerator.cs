@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using LiverDie.Gremlin;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
-using LiverDie.Runtime.Hospital.Generation;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
@@ -220,7 +219,6 @@ namespace LiverDie
                 var segment = _segmentPool.Get();
                 var targetPos = GetSegmentOffset(segmentPosition, segmentCount is not 0 ? targetDirection : oldSegmentDirection);
                 segment.SetWalls(targetDirection, oldSegmentDirection, segmentCount is 0);
-                _swappingController.SetColorOfCorridorSegment(segment);
                 corridorSegments.Add(segment);
 
                 segment.transform.SetLocalPositionAndRotation(targetPos, Quaternion.identity);
@@ -229,6 +227,10 @@ namespace LiverDie
                 segmentPosition = targetPos;
                 segmentCount++;
             }
+
+            if (corridorSegments.Count > 0)
+                for (int i = 0; i < segmentCount; i++)
+                    _swappingController.SetColorOfCorridorSegment(corridorSegments[i], i / (segmentCount - 1f));
 
             if (corridorSegments.Count > 1)
                 corridorSegments[^1].IsEnd = true;
@@ -356,7 +358,7 @@ namespace LiverDie
                 segment.SetToDoor(adjacancy);
 
                 definition.MoveTo(segment.GetEntranceLocation(adjacancy));
-                _swappingController.SetColorOfRoom(definition);
+                _swappingController.SetColorOfRoom(definition, corridorIndex / (corridorSegments.Count - 1f));
 
                 for (float i = 0; i < length; i += rail.SampleDistance)
                     rail.AddDepthSample(i + startRailPos, depth);
@@ -392,12 +394,12 @@ namespace LiverDie
             if (_nextCorridor is null || _nextCorridor.Generation != definition.Generation || !definition.IsStart)
                 return;
 
+            _swappingController.Unlock();
             AdvanceCorridor();
         }
 
         public void Exited(GremlinController player, CorridorSegmentDefinition definition)
         {
-
         }
 
         private static SegmentDirection GetNewRandomDirection(SegmentDirection oldDirection)

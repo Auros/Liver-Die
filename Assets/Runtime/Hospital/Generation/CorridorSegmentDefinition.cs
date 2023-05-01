@@ -183,11 +183,13 @@ namespace LiverDie.Hospital.Generation
 
         public void RemoveExitListener(IPlayerExitListener listener) => _exitListeners.Remove(listener);
 
+        [PublicAPI]
         public interface IPlayerEnterListener
         {
             void Entered(GremlinController player, CorridorSegmentDefinition definition);
         }
 
+        [PublicAPI]
         public interface IPlayerExitListener
         {
             void Exited(GremlinController player, CorridorSegmentDefinition definition);
@@ -207,7 +209,7 @@ public class CorridorSegmentEditor : Editor
         var room = target as CorridorSegmentDefinition;
         if (GUILayout.Button("SET RENDERERPROPERTIES (DESTRUCTIVE!!!!!)"))
         {
-            foreach (var renderer in room.RendererInfos)
+            foreach (var renderer in room!.RendererInfos)
             {
                 renderer.Materials = renderer.Renderer.sharedMaterials.ToList();
                 var indices = new List<int>();
