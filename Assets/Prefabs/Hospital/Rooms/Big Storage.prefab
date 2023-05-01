@@ -7554,7 +7554,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4575
+  m_VersionIndex: 4578
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -10054,6 +10054,31 @@ MonoBehaviour:
   _roomRoot: {fileID: 2589159574266220895}
   _roomBounds: {fileID: 2589159575097837374}
   _entranceDefinition: {fileID: 2589159574468674162}
+  RendererInfos:
+  - Renderer: {fileID: 5109598668432186410}
+    Materials:
+    - {fileID: 2100000, guid: 0270e2ca2041f1c44813c1e75cb9081b, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 1998716320457891166}
+    Materials:
+    - {fileID: 2100000, guid: 69420955373f54f489eb3648a2239802, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 8306165100173536289}
+    Materials:
+    - {fileID: 2100000, guid: 69420955373f54f489eb3648a2239802, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 6904088142883317961}
+    Materials:
+    - {fileID: 2100000, guid: 69420955373f54f489eb3648a2239802, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 1078996281988679036}
+    Materials:
+    - {fileID: 2100000, guid: 69420955373f54f489eb3648a2239802, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 4962228347139266836}
+    Materials:
+    - {fileID: 2100000, guid: 69420955373f54f489eb3648a2239802, type: 2}
+    MaterialIndices: 00000000
 --- !u!1 &2589159574468674160
 GameObject:
   m_ObjectHideFlags: 0

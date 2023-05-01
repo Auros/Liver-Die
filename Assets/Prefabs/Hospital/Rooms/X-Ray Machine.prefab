@@ -3063,6 +3063,27 @@ MonoBehaviour:
   _roomRoot: {fileID: 2589159574266220895}
   _roomBounds: {fileID: 2589159575097837374}
   _entranceDefinition: {fileID: 2589159574468674162}
+  RendererInfos:
+  - Renderer: {fileID: 5401655951044499359}
+    Materials:
+    - {fileID: 2100000, guid: 9b280e946d6c3bc479a2a64145ae070e, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 8359548130926649893}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 5887289515732694067}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 2917251627216840950}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 7392567455390623936}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
 --- !u!1 &2589159574468674160
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,6 +3571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1557d2b8d844f68f2f0f109923b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bakedTarget: {fileID: 0}
 --- !u!1 &3035231030684744535
 GameObject:
   m_ObjectHideFlags: 0

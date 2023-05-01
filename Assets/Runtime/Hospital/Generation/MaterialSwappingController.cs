@@ -18,6 +18,8 @@ namespace LiverDie.Runtime.Hospital.Generation
         private float _currentHueDelta = 0;
         private int _liverCount = 0;
 
+        private int _baseColorProperty = Shader.PropertyToID("_BaseColor");
+
         [SerializeField]
         private DialogueEventIntermediate _dialogueEventIntermediate = null!;
 
@@ -63,24 +65,24 @@ namespace LiverDie.Runtime.Hospital.Generation
                     var mat = rendererInfo.Materials[i];
                     if (mat == null) continue;
 
-                    Color.RGBToHSV(mat.GetColor("_BaseColor"), out float H, out float S, out float V);
+                    Color.RGBToHSV(mat.GetColor(_baseColorProperty), out float H, out float S, out float V);
                     Color newColor = Color.HSVToRGB(_currentHueDelta, S, V);
-                    /* Material? swappedMaterial = null;
+                    /*Material? swappedMaterial = null;
 
                     if (swappedMaterial == null)
                     {
                         swappedMaterial = Instantiate(mat);
                         // do color
-                        Color.RGBToHSV(swappedMaterial.GetColor("_BaseColor"), out float H, out float S, out float V);
 
-                        newColor = Color.HSVToRGB(_currentHueDelta, S, V);
-                        swappedMaterial.SetColor("_BaseColor", newColor.Value);
-                        swappedMaterial.SetColor("_Color", newColor.Value);
+                        swappedMaterial.color = newColor;
+                        swappedMaterial.SetColor("_BaseColor", newColor);
                         materialInfo.Materials.Add(swappedMaterial);
                     }
-                    rendererInfo.Renderer.materials[i] = swappedMaterial; */
+                    rendererInfo.Renderer.materials[i] = swappedMaterial;*/
+
+                    // this is NOT as efficent as it could be
                     rendererInfo.Renderer.materials[i].color = newColor;
-                    rendererInfo.Renderer.materials[i].SetColor("_BaseColor", newColor);
+                    rendererInfo.Renderer.materials[i].SetColor(_baseColorProperty, newColor);
                 }
             }
         }

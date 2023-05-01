@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1557d2b8d844f68f2f0f109923b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bakedTarget: {fileID: 0}
 --- !u!1 &1986083496939505633
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,6 +2328,35 @@ MonoBehaviour:
   _roomRoot: {fileID: 2589159574266220895}
   _roomBounds: {fileID: 2589159575097837374}
   _entranceDefinition: {fileID: 2589159574468674162}
+  RendererInfos:
+  - Renderer: {fileID: 494935325158617040}
+    Materials:
+    - {fileID: 2100000, guid: 9b280e946d6c3bc479a2a64145ae070e, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 2867719382001946954}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 1550654007055636201}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 3610327339140836291}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 1228978916364525407}
+    Materials:
+    - {fileID: 2100000, guid: ecf223775c496d147b55be8e272c09a9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 7364153361781545948}
+    Materials:
+    - {fileID: 2100000, guid: 58f4c05d444b6dd4daa80055efc0d5e9, type: 2}
+    MaterialIndices: 00000000
+  - Renderer: {fileID: 5845515190580135165}
+    Materials:
+    - {fileID: 2100000, guid: b24f214e0c54e964884bc6e56ae68d3a, type: 2}
+    MaterialIndices: 00000000
 --- !u!1 &2589159574468674160
 GameObject:
   m_ObjectHideFlags: 0
@@ -5307,6 +5337,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6873982090329802871}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &7364153361781545948 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4132035331123680171, guid: d62bb596fe3223942b7fdb6553dfa76f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6873982090329802871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6944733319164104410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5396,6 +5432,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6234339ea4163af4a8b3ebed95f5aa9a, type: 3}
+--- !u!23 &5845515190580135165 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3566806035273697831, guid: 6234339ea4163af4a8b3ebed95f5aa9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6944733319164104410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7608141012955952601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 717530128800381699, guid: 6234339ea4163af4a8b3ebed95f5aa9a,
