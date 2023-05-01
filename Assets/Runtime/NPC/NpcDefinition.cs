@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LiverDie.Dialogue.Data;
 using LiverDie.NPC;
 using UnityEngine;
@@ -90,8 +91,10 @@ namespace LiverDie.NPC
             }
         }
 
-        public void ChangeDialogue(DialogueScriptableObject dialogue)
+        public async void ChangeDialogue(DialogueScriptableObject dialogue)
         {
+            // prevent crash lol
+            await Task.Delay(150);
             _dialogue = dialogue;
         }
     }
