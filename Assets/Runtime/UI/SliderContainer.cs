@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,19 +8,25 @@ namespace LiverDie
     public class SliderContainer : MonoBehaviour
     {
         [SerializeField]
-        private Slider _slider;
+        private Slider _slider = null!;
+
         [SerializeField]
-        private TextMeshProUGUI _textMeshPro;
-        public float SliderValue { get { return _slider.value; } set { _slider.value = value; } }
-        // Start is called before the first frame update
-        void Start()
+        private TextMeshProUGUI _textMeshPro = null!;
+
+        private float _lastValue;
+
+        public float SliderValue
         {
-            SliderValue = 1;
+            get => _slider.value;
+            set => _slider.value = value;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
+            if (Math.Abs(_lastValue - SliderValue) < 0.01f)
+                return;
+
+            _lastValue = SliderValue;
             _textMeshPro.text = $"{Mathf.RoundToInt(_slider.value * 100)}%";
         }
     }
