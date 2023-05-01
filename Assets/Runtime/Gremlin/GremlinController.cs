@@ -1,6 +1,4 @@
-﻿using System;
-using System.Transactions;
-using LiverDie.NPC;
+﻿using LiverDie.NPC;
 using LiverDie.Runtime.Dialogue;
 using LiverDie.Runtime.Intermediate;
 using UnityEngine;
@@ -48,10 +46,19 @@ namespace LiverDie.Gremlin
         private float _airAcceleration = 0.5f;
 
         [SerializeField]
+        private float _sprintAcceleration = 1f;
+
+        [SerializeField]
+        private float _sprintVelocityBoost = 5f;
+
+        [SerializeField]
         private float _maxVelocityGround = 3f;
 
         [SerializeField]
-        private float _maxVelocityAir = 2.5f;
+        private float _maxVelocityAir = 3.5f;
+
+        [SerializeField]
+        private float _sprintMaxVelocityIncrease = 2f;
 
         [SerializeField]
         private float _groundFriction = 1f;
@@ -141,15 +148,18 @@ namespace LiverDie.Gremlin
             if (!IsMoving)
                 _moveDirection = Vector2.zero;
 
+            bool sprintPressed = _liverInput.Gremlin.Sprint.IsInProgress();
+            float sprintAcceleration = sprintPressed ? _sprintAcceleration : 0f;
+
             if (IsGrounded)
-                GroundMovement();
+                GroundMovement(sprintAcceleration, _maxVelocityGround + (sprintPressed ? _sprintMaxVelocityIncrease : 0f));
             else
-                AirMovement();
+                AirMovement(sprintAcceleration, _maxVelocityAir + (sprintPressed ? _sprintMaxVelocityIncrease : 0f));
 
             IsGrounded = false;
         }
 
-        private void GroundMovement()
+        private void GroundMovement(float sprintBoost, float maxVelocity)
         {
             var speed = _rigidbody.velocity.magnitude;
             if (speed != 0)
@@ -162,23 +172,23 @@ namespace LiverDie.Gremlin
             Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
             var accelDirection = Vector3.Normalize((_moveDirection.x * (cameraYaw * Vector3.right)) + (_moveDirection.y * (cameraYaw * Vector3.forward)));
             float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
-            float acceleration = _groundAcceleration * Time.fixedDeltaTime;
+            float acceleration = (_groundAcceleration + sprintBoost) * Time.fixedDeltaTime;
 
-            if (projectedVelocity + acceleration > _maxVelocityGround)
-                acceleration = _maxVelocityGround - projectedVelocity;
+            if (projectedVelocity + acceleration > maxVelocity)
+                acceleration = maxVelocity - projectedVelocity;
 
             _rigidbody.velocity += accelDirection * acceleration;
         }
 
-        private void AirMovement()
+        private void AirMovement(float sprintBoost, float maxVelocity)
         {
             Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
             var accelDirection = Vector3.Normalize((_moveDirection.x * (cameraYaw * Vector3.right)) + (_moveDirection.y * (cameraYaw * Vector3.forward)));
             float projectedVelocity = Vector3.Dot(_rigidbody.velocity, accelDirection);
-            float acceleration = _airAcceleration * Time.fixedDeltaTime;
+            float acceleration = (_airAcceleration + sprintBoost) * Time.fixedDeltaTime;
 
-            if (projectedVelocity + acceleration > _maxVelocityAir)
-                acceleration = _maxVelocityAir - projectedVelocity;
+            if (projectedVelocity + acceleration > maxVelocity)
+                acceleration = maxVelocity - projectedVelocity;
 
             _rigidbody.velocity += accelDirection * acceleration;
         }
@@ -225,7 +235,14 @@ namespace LiverDie.Gremlin
             /*if (!_talking || _npcDefinition == null) return;
 
             _finishRequested = true;*/
+        }
 
+        public void OnSprint(InputAction.CallbackContext context)
+        {
+            if (!context.performed || !IsGrounded) return;
+
+            Quaternion cameraYaw = Quaternion.AngleAxis(_cameraTransform.localEulerAngles.y, Vector3.up);
+            _rigidbody.velocity = _rigidbody.velocity + (_sprintVelocityBoost * (cameraYaw * Vector3.forward));
         }
 
         private void OnTriggerEnter(Collider other)

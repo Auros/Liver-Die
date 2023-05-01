@@ -1,6 +1,9 @@
-﻿using AuraTween;
+﻿using System.Collections.Generic;
+using AuraTween;
 using LiverDie.Audio;
+using LiverDie.Dialogue.Data;
 using LiverDie.Gremlin.Health;
+using LiverDie.NPC;
 using LiverDie.Runtime.Intermediate;
 using UnityEngine;
 
@@ -25,6 +28,12 @@ namespace LiverDie.Tutorial
         [SerializeField]
         private TweenManager _tweenManagerIHardlyKnowHer = null!;
 
+        [SerializeField]
+        private List<NpcDefinition> _receptionists;
+
+        [SerializeField]
+        private DialogueScriptableObject _receptionistSecondaryDialogue;
+
         private void Start()
         {
             _musicController.OverridePercent(15);
@@ -43,6 +52,12 @@ namespace LiverDie.Tutorial
             _tweenManagerIHardlyKnowHer.Run(2.326909f, -6.764f, 5f, UpdateWallPos, Easer.InOutSine);
             _dialogueEventIntermediate.OnNpcDelivered -= DialogueEventIntermediate_OnNpcDelivered;
             _musicController.DisableOverride();
+
+            foreach (var receptionist in _receptionists)
+            {
+                if (receptionist == null || !receptionist.Interactable) continue;
+                receptionist.ChangeDialogue(_receptionistSecondaryDialogue);
+            }
         }
 
         private void UpdateAlpha(float alpha)

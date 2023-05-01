@@ -55,6 +55,15 @@ namespace LiverDie
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7225ef1-6b39-4117-883b-e3d2e16b1a95"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,28 @@ namespace LiverDie
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d87edb9d-e10c-4649-8630-798b1c153d1d"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5323f5d9-43d6-4a28-9276-08ebc2f58732"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -326,6 +357,7 @@ namespace LiverDie
             m_Gremlin_Movement = m_Gremlin.FindAction("Movement", throwIfNotFound: true);
             m_Gremlin_Look = m_Gremlin.FindAction("Look", throwIfNotFound: true);
             m_Gremlin_Jump = m_Gremlin.FindAction("Jump", throwIfNotFound: true);
+            m_Gremlin_Sprint = m_Gremlin.FindAction("Sprint", throwIfNotFound: true);
             // Dialogue
             m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
             m_Dialogue_Talk = m_Dialogue.FindAction("Talk", throwIfNotFound: true);
@@ -400,6 +432,7 @@ namespace LiverDie
         private readonly InputAction m_Gremlin_Movement;
         private readonly InputAction m_Gremlin_Look;
         private readonly InputAction m_Gremlin_Jump;
+        private readonly InputAction m_Gremlin_Sprint;
         public struct GremlinActions
         {
             private @LiverInput m_Wrapper;
@@ -407,6 +440,7 @@ namespace LiverDie
             public InputAction @Movement => m_Wrapper.m_Gremlin_Movement;
             public InputAction @Look => m_Wrapper.m_Gremlin_Look;
             public InputAction @Jump => m_Wrapper.m_Gremlin_Jump;
+            public InputAction @Sprint => m_Wrapper.m_Gremlin_Sprint;
             public InputActionMap Get() { return m_Wrapper.m_Gremlin; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -425,6 +459,9 @@ namespace LiverDie
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
 
             private void UnregisterCallbacks(IGremlinActions instance)
@@ -438,6 +475,9 @@ namespace LiverDie
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
+                @Sprint.started -= instance.OnSprint;
+                @Sprint.performed -= instance.OnSprint;
+                @Sprint.canceled -= instance.OnSprint;
             }
 
             public void RemoveCallbacks(IGremlinActions instance)
@@ -606,6 +646,7 @@ namespace LiverDie
             void OnMovement(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnSprint(InputAction.CallbackContext context);
         }
         public interface IDialogueActions
         {
