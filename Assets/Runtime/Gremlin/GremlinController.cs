@@ -65,10 +65,10 @@ namespace LiverDie.Gremlin
         private float _npcInteractRange = 10f;
 
         [Header("Camera Parameters"), SerializeField]
-        private float _horizontalSensitivity = 30f;
+        public float HorizontalSensitivity = 30f;
 
         [SerializeField]
-        private float _verticalSensitivity = 30f;
+        public float VerticalSensitivity = 30f;
 
         private bool _isFocused = false;
         private LiverInput _liverInput = null!;
@@ -190,8 +190,8 @@ namespace LiverDie.Gremlin
             var delta = context.ReadValue<Vector2>();
 
             var cameraAngle = _cameraTransform.localEulerAngles;
-            cameraAngle.y += delta.x * Time.deltaTime * _horizontalSensitivity;
-            cameraAngle.x += delta.y * Time.deltaTime * -_verticalSensitivity;
+            cameraAngle.y += delta.x * Time.deltaTime * HorizontalSensitivity;
+            cameraAngle.x += delta.y * Time.deltaTime * -VerticalSensitivity;
             cameraAngle.x = cameraAngle.x > 180 ? cameraAngle.x - 360 : cameraAngle.x; // no idea what this check is here for but i'm scared to remove it -Rabbit
             cameraAngle.x = Mathf.Clamp(cameraAngle.x, -80, 80);
             _cameraTransform.localEulerAngles = cameraAngle;
