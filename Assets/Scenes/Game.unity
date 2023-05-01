@@ -8362,7 +8362,7 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
@@ -8417,37 +8417,52 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[1].time
-      value: 13.492666
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[2].time
+      value: 16.035147
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _branchProbabilityCurve.m_Curve.Array.data[3].time
       value: 35.228516
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[1].value
-      value: 0.14191583
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[2].value
+      value: 0.49094537
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _branchProbabilityCurve.m_Curve.Array.data[3].value
       value: 0.9999205
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[1].inSlope
-      value: 0.010517998
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[2].inSlope
+      value: 0.08134771
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _branchProbabilityCurve.m_Curve.Array.data[3].inSlope
       value: 0.0854115
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[0].outSlope
-      value: 0.010517998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
@@ -8457,16 +8472,26 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[1].outSlope
-      value: 0.015332273
+      value: 0.08134771
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[2].inWeight
-      value: 0.02743915
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[2].outSlope
+      value: 0.015332273
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _branchProbabilityCurve.m_Curve.Array.data[3].inWeight
+      value: 0.02743915
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _branchProbabilityCurve.m_Curve.Array.data[3].outSlope
       value: 0.0854115
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
@@ -8477,17 +8502,17 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[2].outWeight
-      value: 1
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[1].tangentMode
-      value: 5
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.data[2].tangentMode
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521239, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
