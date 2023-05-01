@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using LiverDie.Gremlin;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
@@ -379,33 +378,6 @@ namespace LiverDie
             return target;
         }
 
-#if UNITY_EDITOR
-
-        [SerializeField]
-        private bool _advance;
-
-        private void OnValidate()
-        {
-            if (!_advance || !Application.isPlaying)
-                return;
-
-            void ValidationSync()
-            {
-                EditorApplication.delayCall -= ValidationSync;
-                AdvanceCorridor();
-            }
-            EditorApplication.delayCall += ValidationSync;
-            _advance = false;
-        }
-
-#endif
-
-        private static SegmentDirection GetNewRandomDirection(SegmentDirection oldDirection)
-        {
-            var (a, b) = oldDirection.GetAdjacant();
-            return UnityEngine.Random.Range(0, 2) == 0 ? a : b;
-        }
-
         public void Entered(GremlinController player, CorridorSegmentDefinition definition)
         {
             if (_nextCorridor is null || _nextCorridor.Generation != definition.Generation || !definition.IsStart)
@@ -417,6 +389,12 @@ namespace LiverDie
         public void Exited(GremlinController player, CorridorSegmentDefinition definition)
         {
 
+        }
+
+        private static SegmentDirection GetNewRandomDirection(SegmentDirection oldDirection)
+        {
+            var (a, b) = oldDirection.GetAdjacant();
+            return UnityEngine.Random.Range(0, 2) == 0 ? a : b;
         }
     }
 }
