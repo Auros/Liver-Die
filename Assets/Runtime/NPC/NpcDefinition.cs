@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LiverDie.Dialogue.Data;
 using LiverDie.NPC;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 #if UNITY_EDITOR
@@ -33,10 +34,11 @@ namespace LiverDie.NPC
         private GameObject _liver = null!;
 
         [SerializeField]
-        private DialogueScriptableObject? _dialogue = null;
+        private DialogueScriptableObject? _dialogue;
 
         [SerializeField]
-        public List<Rigidbody> Rigidbodies;
+        [FormerlySerializedAs("Rigidbodies")]
+        public Rigidbody[] _rigidbodies = Array.Empty<Rigidbody>();
 
         [SerializeField]
         private RagdollDefinition _ragdollPrefab = null!;
@@ -114,19 +116,16 @@ public class MyScriptEditor : Editor
         var npc = target as NpcDefinition;
         if (GUILayout.Button("SET RIGIDBODIES (DESTRUCTIVE!!!!!)"))
         {
-            npc.Rigidbodies = npc.GetComponentsInChildren<Rigidbody>().ToList();
+            npc!._rigidbodies = npc.GetComponentsInChildren<Rigidbody>().ToArray();
         }
-        if (GUILayout.Button("DESTROY RIGIDBODIES (DESTRUCTIVE!!!!!) THIS CANNOT BE UNDONE"))
+
+        if (!GUILayout.Button("DESTROY RIGIDBODIES (DESTRUCTIVE!!!!!) THIS CANNOT BE UNDONE"))
+            return;
+
+        foreach (var rigidBody in npc!._rigidbodies)
         {
-            foreach(Rigidbody rigidBody in npc.Rigidbodies)
-            {
-                var comp = rigidBody.gameObject.GetComponent<CharacterJoint>();
-                if (comp != null)
-                {
-                    DestroyImmediate(comp);
-                }
-                DestroyImmediate(rigidBody);
-            }
+            var comp = rigidBody.gameObject.GetComponent<CharacterJoint>();
+            DestroyImmediate(comp != null ? comp : rigidBody);
         }
     }
 }
