@@ -20,6 +20,12 @@ namespace LiverDie.NPC
         private Color _baseShoeColor = new Color(42/255f, 34/255f, 34/255f);
 
         [SerializeField]
+        private bool _forceShirtColor = false;
+
+        [SerializeField]
+        private Color _forcedShirtColor = new Color(42/255f, 34/255f, 34/255f);
+
+        [SerializeField]
         private SkinnedMeshRenderer _renderer = null!;
 
         [SerializeField]
@@ -67,7 +73,14 @@ namespace LiverDie.NPC
             Color.RGBToHSV(_basePantsColor, out float pantsH, out float pantsS, out float pantsV);
             Color.RGBToHSV(_baseShoeColor, out float shoeH, out float shoeS, out float shoeV);
 
-            _renderer.materials[1].color = Color.HSVToRGB(Random.value, shirtS, shirtV);
+            if (_forceShirtColor)
+            {
+                _renderer.materials[1].color = _forcedShirtColor;
+            }
+            else
+            {
+                _renderer.materials[1].color = Color.HSVToRGB(Random.value, shirtS, shirtV);
+            }
             _renderer.materials[2].color = Color.HSVToRGB(Random.value, pantsS, pantsV);
             _renderer.materials[3].color = Color.HSVToRGB(Random.value, shoeS, shoeV);
 
