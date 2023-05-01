@@ -3,6 +3,7 @@ using AuraTween;
 using LiverDie.Gremlin;
 using LiverDie.Runtime.Intermediate;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 namespace LiverDie.UI
@@ -25,6 +26,13 @@ namespace LiverDie.UI
         private float _settingsOffset = 1920;
         [SerializeField]
         private float _settingAnimationTime = 1.2f;
+        [SerializeField]
+        private AudioMixer _mixer = null!;
+        [SerializeField]
+        private float _lowpassAmount = 377;
+        [SerializeField]
+        private float _normalLowpassAmount = 22000;
+
         private LiverInput _liverInput = null!;
         private bool _isPaused = false;
         private bool _pauseBlocked = false;
@@ -48,6 +56,7 @@ namespace LiverDie.UI
             _canvasGroup.alpha = 1f;
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
+            _mixer.SetFloat("LowPass", _lowpassAmount);
         }
 
         public void Unpause()
@@ -58,6 +67,7 @@ namespace LiverDie.UI
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+            _mixer.SetFloat("LowPass", _normalLowpassAmount);
         }
         public void SettingsMenu()
         {

@@ -6689,6 +6689,9 @@ MonoBehaviour:
   _pauseHud: {fileID: 7064792755578508452}
   _settingsOffset: -1920
   _settingAnimationTime: 1.2
+  _mixer: {fileID: 24100000, guid: e32bc2a0a0b4ddb4884a1f48f1a1d230, type: 2}
+  _lowpassAmount: 377
+  _normalLowpassAmount: 22000
 --- !u!225 &7038561252272957564
 CanvasGroup:
   m_ObjectHideFlags: 0
