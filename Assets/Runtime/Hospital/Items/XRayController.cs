@@ -29,6 +29,7 @@ namespace LiverDie
             _cts.Cancel();
             _cts.Dispose();
             _cts = new();
+            _audioSource.Stop();
         }
 
         private async UniTask XRayAsync(CancellationToken cancelToken = default)
@@ -38,7 +39,7 @@ namespace LiverDie
             _xrayGameObject.SetActive(true);
             _audioSource.Play();
 
-            await UniTask.Delay(1000);
+            await UniTask.Delay(1000, cancellationToken: cancelToken).SuppressCancellationThrow();
             _audioSource.Stop();
         }
     }
