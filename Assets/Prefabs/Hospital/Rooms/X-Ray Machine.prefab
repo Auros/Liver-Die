@@ -3355,7 +3355,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 134
+  m_VersionIndex: 137
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3550,6 +3550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1557d2b8d844f68f2f0f109923b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bakedTarget: {fileID: 0}
 --- !u!1 &3035231030684744535
 GameObject:
   m_ObjectHideFlags: 0

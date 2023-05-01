@@ -135,7 +135,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh150188
+  m_Name: pb_Mesh1881726
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -525,7 +525,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh150326
+  m_Name: pb_Mesh1881864
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2433,7 +2433,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh150122
+  m_Name: pb_Mesh1881660
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7283,7 +7283,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149958
+  m_Name: pb_Mesh1881496
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8092,7 +8092,7 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
@@ -8156,6 +8156,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[10]._room
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c4ef0b4c8b44e6468e97be51acf3267,
+        type: 2}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
       propertyPath: _branchProbabilityCurve.m_Curve.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -8207,6 +8213,11 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _roomSpawningOptions.Array.data[9]._weight
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[10]._weight
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
@@ -8699,7 +8710,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh149944
+  m_Name: pb_Mesh1881482
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
