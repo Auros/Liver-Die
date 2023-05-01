@@ -8082,7 +8082,7 @@ PrefabInstance:
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: _defaultRoomSpawnProbability
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
