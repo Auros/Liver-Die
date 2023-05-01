@@ -3154,6 +3154,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hospital Generator
       objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawnProbability
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[3]._room
+      value: 
+      objectReference: {fileID: 11400000, guid: 025d0b9156ce80d4b91987f2e062bca2,
+        type: 2}
+    - target: {fileID: 5953106879475521238, guid: b32f94a2712e73f4fa1f9d27e351ede0,
+        type: 3}
+      propertyPath: _roomSpawningOptions.Array.data[3]._weight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5953106879475521239, guid: b32f94a2712e73f4fa1f9d27e351ede0,
         type: 3}
       propertyPath: m_RootOrder

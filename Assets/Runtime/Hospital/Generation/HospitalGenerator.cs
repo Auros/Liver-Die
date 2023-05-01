@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
@@ -33,6 +34,9 @@ namespace LiverDie
 
         [SerializeField]
         private RoomSpawnInfo[] _roomSpawningOptions = Array.Empty<RoomSpawnInfo>();
+
+        [SerializeField]
+        private float _defaultRoomSpawnProbability = 0.5f;
 
         private CorridorState? _nextCorridor;
         private CorridorState? _currentCorridor;
@@ -83,9 +87,15 @@ namespace LiverDie
             _segmentPool.Clear();
         }
 
+        /// <summary>
+        /// Advance the hospital to the next corridor.
+        /// </summary>
+        /// <param name="roomSpawnProbability">The probability (0.0-1.0) that a room at a given point will spawn.</param>
         [PublicAPI]
-        public void AdvanceCorridor()
+        public void AdvanceCorridor(float? roomSpawnProbability = null)
         {
+            roomSpawnProbability ??= _defaultRoomSpawnProbability;
+
             // Despawn the old corridor
             if (_previousCorridor is not null)
             {
@@ -125,13 +135,13 @@ namespace LiverDie
             if (_currentCorridor is null)
             {
                 var startPos = _generationZeroStartReference.localPosition;
-                _currentCorridor = GenerateCorridor(0, startPos, null);
+                _currentCorridor = GenerateCorridor(0, startPos, null, roomSpawnProbability.Value);
             }
 
-            _nextCorridor = GenerateCorridor(_currentCorridor.Generation + 1, _currentCorridor.End, _currentCorridor);
+            _nextCorridor = GenerateCorridor(_currentCorridor.Generation + 1, _currentCorridor.End, _currentCorridor, roomSpawnProbability.Value);
         }
 
-        private CorridorState GenerateCorridor(int generation, Vector3 startPosition, CorridorState? previousCorridor)
+        private CorridorState GenerateCorridor(int generation, Vector3 startPosition, CorridorState? previousCorridor, float roomSpawnProbability)
         {
             var segmentPosition = startPosition;
             var oldSegmentDirection = previousCorridor?.Direction ?? _startDirection;
@@ -162,11 +172,14 @@ namespace LiverDie
                 corridorSegments.Add(segment);
 
                 segment.transform.SetLocalPositionAndRotation(targetPos, Quaternion.identity);
+                segment.Position = segmentCount * _segmentLength;
                 segment.Generation = generation;
                 segmentPosition = targetPos;
                 segmentCount++;
             }
 
+            if (corridorSegments.Count > 1)
+                corridorSegments[^1].IsEnd = true;
 
             // Calculate the length of each rail for this segment.
             var railLength = _segmentLength * corridorSegments.Count;
@@ -196,14 +209,28 @@ namespace LiverDie
 
                 // Build a weighted list of the potential room options.
                 var options = ListPool<RoomScriptableObject>.Get();
+                float weightMin = _roomSpawningOptions[0].Weight;
+
+                // ReSharper disable once LoopCanBeConvertedToQuery
                 foreach (var option in _roomSpawningOptions)
-                    for (int i = 0; i < option.Weight; i++)
+                    if (weightMin > option.Weight && option.Weight > 0)
+                        weightMin = option.Weight;
+
+                foreach (var option in _roomSpawningOptions)
+                {
+                    // Skip things with no weights
+                    if (0 >= option.Weight)
+                        continue;
+
+                    var representation = weightMin * option.Weight;
+                    for (int i = 0; i < representation; i++)
                         options.Add(option.Room);
+                }
 
                 // Generate the rooms!
                 var (leftAdjacant, rightAdjacant) = targetDirection.GetAdjacant();
-                GenerateRoomsOnRail(state.LeftRail, false, generation, path, rightAdjacant, path is SegmentPath.Left ? previousCorridor : null, corridorSegments, rooms, options);
-                GenerateRoomsOnRail(state.RightRail, true, generation, path, leftAdjacant, path is SegmentPath.Right ? previousCorridor : null, corridorSegments, rooms, options);
+                GenerateRoomsOnRail(state.LeftRail, false, generation, path, rightAdjacant, path is SegmentPath.Left ? previousCorridor : null, roomSpawnProbability, corridorSegments, rooms, options);
+                GenerateRoomsOnRail(state.RightRail, true, generation, path, leftAdjacant, path is SegmentPath.Right ? previousCorridor : null, roomSpawnProbability, corridorSegments, rooms, options);
 
                 ListPool<RoomScriptableObject>.Release(options);
             }
@@ -216,55 +243,61 @@ namespace LiverDie
             return segmentPosition + _segmentLength * segmentDirection.ToNormalizedVector();
         }
 
-        private void GenerateRoomsOnRail(Rail rail, bool isRight, int generation, SegmentPath path, SegmentDirection adjacancy, CorridorState? previousCorridor,
+        private void GenerateRoomsOnRail(Rail rail, bool isRight, int generation, SegmentPath path, SegmentDirection adjacancy, CorridorState? previousCorridor, float roomSpawnProbability,
             IReadOnlyList<CorridorSegmentDefinition> corridorSegments, ICollection<RoomDefinition> definitions, IReadOnlyList<RoomScriptableObject> options)
         {
             int attempts = 0;
             const int maxRoomCount = 100; // Just in case something goes horribly wrong, always have exit conditions for while loops.
             while (GetRandomValidRoom(rail, options) is { } roomSo && maxRoomCount >= attempts)
             {
+                attempts++;
+
+                bool doNotSpawn = false;
                 var startRailPos = rail.Lower;
+                var depth = roomSo.Prefab.Depth;
+                var length = roomSo.Prefab.Length;
+                var padding = length % _segmentLength;
 
                 // Collision check around inner corners to prevent rooms from colliding.
                 if (previousCorridor is not null)
                 {
                     var depthRail = path is SegmentPath.Left ? previousCorridor.LeftRail : previousCorridor.RightRail;
                     var start = previousCorridor.Length - depthRail.SampleDistance;
-                    var end = previousCorridor.Length - roomSo.Prefab.Depth;
+                    var end = previousCorridor.Length - depth;
 
-                    bool failedDepthCheck = false;
                     for (float i = start; i >= end; i -= depthRail.SampleDistance)
                     {
                         var depthAt = depthRail.Evaluate(i);
                         if (startRailPos > depthAt)
                             continue;
 
-                        failedDepthCheck = true;
+                        doNotSpawn = true;
                         break;
-                    }
-
-                    if (failedDepthCheck)
-                    {
-                        rail.Lower += roomSo.Prefab.Length;
-                        continue;
                     }
                 }
 
-                attempts++;
+                if (doNotSpawn || UnityEngine.Random.value > roomSpawnProbability)
+                {
+                    rail.Lower += padding + length;
+                    continue;
+                }
+
                 var pool = _roomPools[roomSo];
                 var definition = pool.Get();
                 definition.name = $"Room [Gen {generation}] ({roomSo.RoomName})";
+                length = definition.Length;
+                depth = definition.Depth;
 
                 definition.Template = roomSo;
                 definitions.Add(definition);
 
                 var entranceOffset = definition.EntranceOffsetLength;
                 if (isRight)
-                    entranceOffset = definition.Length - entranceOffset;
+                    entranceOffset = length - entranceOffset;
 
                 var railDoorLocation = entranceOffset + rail.Lower;
 
-                rail.Lower += definition.Length;
+                rail.Lower += length + padding;
                 var corridorIndex = (int)(railDoorLocation / _segmentLength);
 
                 var segment = corridorSegments[corridorIndex];
@@ -272,8 +305,8 @@ namespace LiverDie
 
                 definition.MoveTo(segment.GetEntranceLocation(adjacancy));
 
-                for (float i = 0; i < definition.Size.x; i += rail.SampleDistance)
-                    rail.AddDepthSample(i + startRailPos, definition.Size.z);
+                for (float i = 0; i < length; i += rail.SampleDistance)
+                    rail.AddDepthSample(i + startRailPos, depth);
             }
         }
 

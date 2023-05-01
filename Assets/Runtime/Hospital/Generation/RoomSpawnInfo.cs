@@ -7,12 +7,12 @@ namespace LiverDie.Hospital.Generation
     public class RoomSpawnInfo
     {
         [SerializeField]
-        private int _weight = 1;
+        private float _weight = 1;
 
         [SerializeField]
         private RoomScriptableObject _room = null!;
 
-        public int Weight => _weight;
+        public float Weight => _weight;
 
         public RoomScriptableObject Room => _room;
     }
