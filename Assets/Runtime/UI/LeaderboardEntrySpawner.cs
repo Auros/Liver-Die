@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace LiverDie
@@ -15,24 +14,39 @@ namespace LiverDie
         [SerializeField]
         private float _entryBaseY = 0;
         private List<LeaderboardEntry> _leaderboardEntries = null;
+
         public List<LeaderboardEntry> LeaderboardEntries
         {
             get
             {
-                if(_leaderboardEntries == null)
+                if (_leaderboardEntries == null)
                 {
                     FillEntries();
                 }
                 return _leaderboardEntries;
             }
         }
-        void Start()
+        private void Start()
         {
-            if(_leaderboardEntries == null)
+            if (_leaderboardEntries == null)
             {
                 Debug.Log("ohno");
             }
         }
+
+        private void OnDestroy()
+        {
+            if (_leaderboardEntries == null)
+                return;
+
+            for (int i = 0; i < _leaderboardEntries.Count; i++)
+            {
+                Destroy(_leaderboardEntries[i].gameObject);
+            }
+            _leaderboardEntries.Clear();
+            _leaderboardEntries = null;
+        }
+
         private void FillEntries()
         {
             _leaderboardEntries = new List<LeaderboardEntry>();
@@ -48,17 +62,7 @@ namespace LiverDie
         }
         public void ClearEntries()
         {
-            foreach (LeaderboardEntry entry in _leaderboardEntries) entry.WipeEntry();
+            foreach (var entry in _leaderboardEntries) entry.WipeEntry();
         }
-        ~LeaderboardEntrySpawner()
-        {
-            for (int i = 0; i < _leaderboardEntries.Count; i++)
-            {
-                Destroy(_leaderboardEntries[i].gameObject);
-            }
-            _leaderboardEntries.Clear();
-            _leaderboardEntries = null;
-        }
-        // Update is called once per frame
     }
 }
