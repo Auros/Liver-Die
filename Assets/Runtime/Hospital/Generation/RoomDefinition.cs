@@ -87,7 +87,7 @@ public class RoomEditor : Editor
         var room = target as RoomDefinition;
         if (GUILayout.Button("SET RENDERERPROPERTIES (DESTRUCTIVE!!!!!)"))
         {
-            foreach (var renderer in room.RendererInfos)
+            foreach (var renderer in room!.RendererInfos)
             {
                 renderer.Materials = renderer.Renderer.sharedMaterials.ToList();
                 var indices = new List<int>();
