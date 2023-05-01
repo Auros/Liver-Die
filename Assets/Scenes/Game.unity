@@ -135,7 +135,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh986196
+  m_Name: pb_Mesh225010
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1895,6 +1895,7 @@ MonoBehaviour:
   - {fileID: 140435743}
   _wallTransform: {fileID: 1394682083}
   _liverController: {fileID: 1169758036}
+  _musicController: {fileID: 1205713003}
   _dialogueEventIntermediate: {fileID: 1876525164}
   _tweenManagerIHardlyKnowHer: {fileID: 1571544397}
 --- !u!1 &382668414
@@ -4866,6 +4867,18 @@ Transform:
   m_Father: {fileID: 1447951184}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+--- !u!114 &1205713003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2726265250800307717, guid: 46d6333ea10aed240aba3c9bc62dc068,
+    type: 3}
+  m_PrefabInstance: {fileID: 849786100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34093b95fa79d3241a4559a1cd9485d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1258871317
 GameObject:
   m_ObjectHideFlags: 0
