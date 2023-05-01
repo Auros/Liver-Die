@@ -851,6 +851,11 @@ PrefabInstance:
       propertyPath: _gremlinController
       value: 
       objectReference: {fileID: 1146836072}
+    - target: {fileID: 221654569093778666, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _postProcessingController
+      value: 
+      objectReference: {fileID: 988786586}
     - target: {fileID: 692187673755622685, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: _dialogueEvent
@@ -861,6 +866,11 @@ PrefabInstance:
       propertyPath: _gremlinController
       value: 
       objectReference: {fileID: 1146836072}
+    - target: {fileID: 692187673755622685, guid: c9161eecd324f694482d65972e99c6e0,
+        type: 3}
+      propertyPath: _postProcessingController
+      value: 
+      objectReference: {fileID: 988786586}
     - target: {fileID: 866528503308712411, guid: c9161eecd324f694482d65972e99c6e0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4631,6 +4641,7 @@ GameObject:
   - component: {fileID: 988786583}
   - component: {fileID: 988786585}
   - component: {fileID: 988786586}
+  - component: {fileID: 988786587}
   m_Layer: 0
   m_Name: PostProcess
   m_TagString: Untagged
@@ -4700,7 +4711,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blurVolume: {fileID: 988786585}
-  _tweenManager: {fileID: 1571544397}
+  _tweenManager: {fileID: 988786587}
+--- !u!114 &988786587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988786582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df931618c3507ac4fabf909d6fa79062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultTweenCapacity: 100
+  _timeSource: 1
 --- !u!1 &989833201
 GameObject:
   m_ObjectHideFlags: 0

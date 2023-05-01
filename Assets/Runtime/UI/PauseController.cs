@@ -32,6 +32,8 @@ namespace LiverDie.UI
         private float _lowpassAmount = 377;
         [SerializeField]
         private float _normalLowpassAmount = 22000;
+        [SerializeField]
+        private PostProcessingController _postProcessingController = null!;
 
         private LiverInput _liverInput = null!;
         private bool _isPaused = false;
@@ -52,6 +54,7 @@ namespace LiverDie.UI
             if (_pauseBlocked) return;
             Time.timeScale = 0f;
             _gremlinController.IsFocused = false;
+            _postProcessingController.Blur(0f);
             _isPaused = true;
             _canvasGroup.alpha = 1f;
             _canvasGroup.interactable = true;
@@ -63,6 +66,7 @@ namespace LiverDie.UI
         {
             Time.timeScale = 1f;
             _gremlinController.IsFocused = true;
+            _postProcessingController.UnBlur(0f);
             _isPaused = false;
             _canvasGroup.alpha = 0f;
             _canvasGroup.interactable = false;
