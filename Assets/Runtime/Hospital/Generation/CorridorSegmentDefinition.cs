@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
+using LiverDie.Gremlin;
 using UnityEngine;
 
 namespace LiverDie.Hospital.Generation
@@ -50,6 +52,9 @@ namespace LiverDie.Hospital.Generation
 
         public float Position { get; set; }
 
+        private readonly List<IPlayerEnterListener> _enterListeners = new(1);
+        private readonly List<IPlayerExitListener> _exitListeners = new(1);
+
         [PublicAPI]
         public int Generation
         {
@@ -61,8 +66,11 @@ namespace LiverDie.Hospital.Generation
             }
         }
 
-        public void SetWalls(SegmentDirection direction, SegmentDirection oldDirection, bool isStart, bool ignoreDoors = false)
+        public void SetWalls(SegmentDirection direction, SegmentDirection oldDirection, bool isStart, bool ignoreDoors = false, bool startOfGeneration = false)
         {
+            if (isStart)
+                _ = true;
+
             IsStart = isStart;
             var opposite = direction.GetOpposite();
             var (adjacant1, adjacant2) = direction.GetAdjacant();
@@ -91,7 +99,8 @@ namespace LiverDie.Hospital.Generation
 
             // First Node, hide the entry point
             if (direction == oldDirection && isStart)
-                wall2.State = WallDefinition.WallState.Invisible;
+                wall2.State = startOfGeneration ? WallDefinition.WallState.Invisible : WallDefinition.WallState.Solid;
+
         }
 
         public RailPairDefinition GetRailPair(SegmentDirection direction)
@@ -126,6 +135,44 @@ namespace LiverDie.Hospital.Generation
                 SegmentDirection.West => _westWall,
                 _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
             };
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player"))
+                return;
+
+            var player = other.GetComponent<GremlinController>();
+            foreach (var listener in _enterListeners)
+                listener.Entered(player, this);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.CompareTag("Player"))
+                return;
+
+            var player = other.GetComponent<GremlinController>();
+            foreach (var listener in _exitListeners)
+                listener.Exited(player, this);
+        }
+
+        public void AddEnterListener(IPlayerEnterListener listener) => _enterListeners.Add(listener);
+
+        public void AddExitListener(IPlayerExitListener listener) => _exitListeners.Add(listener);
+
+        public void RemoveEnterListener(IPlayerEnterListener listener) => _enterListeners.Remove(listener);
+
+        public void RemoveExitListener(IPlayerExitListener listener) => _exitListeners.Remove(listener);
+
+        public interface IPlayerEnterListener
+        {
+            void Entered(GremlinController player, CorridorSegmentDefinition definition);
+        }
+
+        public interface IPlayerExitListener
+        {
+            void Exited(GremlinController player, CorridorSegmentDefinition definition);
         }
     }
 }

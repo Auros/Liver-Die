@@ -3558,7 +3558,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4708272478794961996}
   - component: {fileID: 4708272478794961999}
-  m_Layer: 0
+  - component: {fileID: 5739384615764790674}
+  m_Layer: 4
   m_Name: Corridor Segment Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3608,6 +3609,19 @@ MonoBehaviour:
   _eastRailPair: {fileID: 4897904071326665317}
   _southRailPair: {fileID: 2544399214165940482}
   _westRailPair: {fileID: 3523947725135737902}
+--- !u!65 &5739384615764790674
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4708272478794961997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 2.5, y: 2.5, z: 2.5}
 --- !u!1 &4708272478892295732
 GameObject:
   m_ObjectHideFlags: 0

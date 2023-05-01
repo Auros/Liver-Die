@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using JetBrains.Annotations;
+using LiverDie.Gremlin;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
 using UnityEditor;
@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 
 namespace LiverDie
 {
-    public class HospitalGenerator : MonoBehaviour
+    public class HospitalGenerator : MonoBehaviour, CorridorSegmentDefinition.IPlayerEnterListener, CorridorSegmentDefinition.IPlayerExitListener
     {
         [Min(0.01f), SerializeField]
         private float _segmentLength = 5f;
@@ -52,8 +52,18 @@ namespace LiverDie
         {
             _segmentPool = new ObjectPool<CorridorSegmentDefinition>(
                 () => Instantiate(_segmentPrefab, transform),
-                segment => segment.gameObject.SetActive(true),
-                segment => segment.gameObject.SetActive(false),
+                segment =>
+                {
+                    segment.AddEnterListener(this);
+                    segment.AddExitListener(this);
+                    segment.gameObject.SetActive(true);
+                },
+                segment =>
+                {
+                    segment.RemoveExitListener(this);
+                    segment.RemoveEnterListener(this);
+                    segment.gameObject.SetActive(false);
+                },
                 Destroy,
                 defaultCapacity: 250
             );
@@ -136,6 +146,9 @@ namespace LiverDie
             {
                 var startPos = _generationZeroStartReference.localPosition;
                 _currentCorridor = GenerateCorridor(0, startPos, null, roomSpawnProbability.Value);
+                var direciion = _currentCorridor.Direction;
+                if (_currentCorridor.CorridorSegments.Count is not 0)
+                    _currentCorridor.CorridorSegments[0].SetWalls(direciion, direciion, true, false, true);
             }
 
             _nextCorridor = GenerateCorridor(_currentCorridor.Generation + 1, _currentCorridor.End, _currentCorridor, roomSpawnProbability.Value);
@@ -359,6 +372,19 @@ namespace LiverDie
         {
             var (a, b) = oldDirection.GetAdjacant();
             return UnityEngine.Random.Range(0, 2) == 0 ? a : b;
+        }
+
+        public void Entered(GremlinController player, CorridorSegmentDefinition definition)
+        {
+            if (_nextCorridor is null || _nextCorridor.Generation != definition.Generation || !definition.IsStart)
+                return;
+
+            AdvanceCorridor();
+        }
+
+        public void Exited(GremlinController player, CorridorSegmentDefinition definition)
+        {
+
         }
     }
 }
