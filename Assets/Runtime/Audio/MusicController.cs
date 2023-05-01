@@ -50,7 +50,6 @@ namespace LiverDie.Audio
             }
             public void Play(float fadeTime)
             {
-                Debug.Log($"Playing {Enum.GetName(typeof(Stem), StemType)}");
                 if(IsTweening)
                 {
                     _currentTween.Cancel();
@@ -62,7 +61,6 @@ namespace LiverDie.Audio
             public void Stop(float fadeTime)
             {
                 if (AlwaysPlaying) return;
-                Debug.Log($"Stopping {Enum.GetName(typeof(Stem), StemType)}");
 
                 if (IsTweening)
                 {
@@ -102,9 +100,6 @@ namespace LiverDie.Audio
         //[SerializeField]
         private List<StemContainer> _normalStems = new List<StemContainer>();
         private List<StemContainer> _sillyStems = new List<StemContainer>();
-        private List<(bool, StemContainer)> _beatChangeQueue;
-        // I dont know if we actually need this
-        private List<AudioSource> _sources = null!;
 
         [SerializeField]
         private float _musicVolume = 0.5f;
@@ -118,8 +113,6 @@ namespace LiverDie.Audio
         private AudioMixerGroup _mixerGroup = null!;
         private int _activatedStems = 0;
         private int _activatedSillyStems = 0;
-        private float _precentInterval;
-        private float _sillyPercentInterval;
         private float _currentPercent;
         private float _overidePercent;
         private bool _isOverride;
@@ -145,10 +138,6 @@ namespace LiverDie.Audio
                     container.PlayImmediate();
                 }
             }
-            _sillyPercentInterval = (1f / (float)_sillyStems.Count) * 50;
-            _precentInterval = (1f / (float)_stems.Count) * 50;
-            //_synthLine.volume = _musicVolume;
-            //_dialogueEventIntermediate.OnNpcDelivered += DialogueEventIntermediate_OnNpcDelivered;
         }
         public void SetPercent(float percent)
         {
@@ -223,7 +212,6 @@ namespace LiverDie.Audio
                     }
                 }
                 int activations = Mathf.RoundToInt(_normalStems.Count*(percent / 50f));
-                Debug.Log($"activations = {activations}, {percent / 50f}");
                 if (activations != _activatedStems)
                 {
                     for (int i = 0; i < _normalStems.Count; i++)
