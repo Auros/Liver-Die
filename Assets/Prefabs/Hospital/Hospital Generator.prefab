@@ -82,6 +82,7 @@ MonoBehaviour:
   _startDirection: 0
   _segmentPrefab: {fileID: 4708272478794961999, guid: c4994cca5dfb110438915bfc4c38db6b,
     type: 3}
+  _swappingController: {fileID: 0}
   _branchProbabilityCurve:
     serializedVersion: 2
     m_Curve:
@@ -133,7 +134,14 @@ MonoBehaviour:
   - _weight: 1
     _room: {fileID: 11400000, guid: 375f08449f28e89428e70108f2d6d5a8, type: 2}
   _defaultRoomSpawnProbability: 0.5
-  _advance: 0
+  _initialCorridorSegmentPoolSize: 0
+  _initialRoomPoolSizePerRoom: 0
+  _onCorridorStartup:
+    m_PersistentCalls:
+      m_Calls: []
+  _onCorridorShutdown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1426106118944161100
 PrefabInstance:
   m_ObjectHideFlags: 0

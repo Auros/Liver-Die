@@ -4,8 +4,9 @@ using JetBrains.Annotations;
 using LiverDie.Gremlin;
 using LiverDie.Hospital.Data;
 using LiverDie.Hospital.Generation;
-using UnityEditor;
+using LiverDie.Runtime.Hospital.Generation;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
@@ -27,6 +28,9 @@ namespace LiverDie
         private CorridorSegmentDefinition _segmentPrefab = null!;
 
         [SerializeField]
+        private MaterialSwappingController _swappingController = null!;
+
+        [SerializeField]
         private AnimationCurve _branchProbabilityCurve = new();
 
         [SerializeField]
@@ -37,6 +41,18 @@ namespace LiverDie
 
         [SerializeField]
         private float _defaultRoomSpawnProbability = 0.5f;
+
+        [SerializeField]
+        private int _initialCorridorSegmentPoolSize;
+
+        [SerializeField]
+        private int _initialRoomPoolSizePerRoom;
+
+        [SerializeField]
+        private UnityEvent<int> _onCorridorStartup = new();
+
+        [SerializeField]
+        private UnityEvent<int> _onCorridorShutdown = new();
 
         private CorridorState? _nextCorridor;
         private CorridorState? _currentCorridor;
@@ -68,6 +84,13 @@ namespace LiverDie
                 defaultCapacity: 250
             );
 
+            using (ListPool<CorridorSegmentDefinition>.Get(out var prespawned))
+            {
+                for (int i = 0; i < _initialCorridorSegmentPoolSize; i++)
+                    prespawned.Add(_segmentPool.Get());
+                prespawned.ForEach(_segmentPool.Release);
+            }
+
             // Setup the object pools for the rooms at the start.
             _roomPools = new Dictionary<RoomScriptableObject, IObjectPool<RoomDefinition>>(_roomSpawningOptions.Length);
             foreach (var option in _roomSpawningOptions)
@@ -83,8 +106,17 @@ namespace LiverDie
                     Destroy
                 );
 
+                using (ListPool<RoomDefinition>.Get(out var prespawned))
+                {
+                    for (int i = 0; i < _initialRoomPoolSizePerRoom; i++)
+                        prespawned.Add(pool.Get());
+
+                    prespawned.ForEach(pool.Release);
+                }
+
                 _roomPools[room] = pool;
             }
+
         }
 
         private void Start()
@@ -95,6 +127,9 @@ namespace LiverDie
         private void OnDestroy()
         {
             _segmentPool.Clear();
+            _previousCorridor?.Dispose();
+            _currentCorridor?.Dispose();
+            _nextCorridor?.Dispose();
         }
 
         /// <summary>
@@ -119,6 +154,7 @@ namespace LiverDie
                 for (int i = 0; i < rooms.Count; i++)
                     _roomPools[rooms[i].Template].Release(rooms[i]);
 
+                _onCorridorShutdown.Invoke(_previousCorridor.Generation);
                 _previousCorridor.Dispose();
             }
 
@@ -156,6 +192,8 @@ namespace LiverDie
 
         private CorridorState GenerateCorridor(int generation, Vector3 startPosition, CorridorState? previousCorridor, float roomSpawnProbability)
         {
+            _onCorridorStartup.Invoke(generation);
+
             var segmentPosition = startPosition;
             var oldSegmentDirection = previousCorridor?.Direction ?? _startDirection;
             var targetDirection = previousCorridor is not null ? GetNewRandomDirection(oldSegmentDirection) : _startDirection;
@@ -182,6 +220,7 @@ namespace LiverDie
                 var segment = _segmentPool.Get();
                 var targetPos = GetSegmentOffset(segmentPosition, segmentCount is not 0 ? targetDirection : oldSegmentDirection);
                 segment.SetWalls(targetDirection, oldSegmentDirection, segmentCount is 0);
+                _swappingController.SetColorOfCorridorSegment(segment);
                 corridorSegments.Add(segment);
 
                 segment.transform.SetLocalPositionAndRotation(targetPos, Quaternion.identity);
@@ -317,6 +356,7 @@ namespace LiverDie
                 segment.SetToDoor(adjacancy);
 
                 definition.MoveTo(segment.GetEntranceLocation(adjacancy));
+                _swappingController.SetColorOfRoom(definition);
 
                 for (float i = 0; i < length; i += rail.SampleDistance)
                     rail.AddDepthSample(i + startRailPos, depth);
@@ -347,33 +387,6 @@ namespace LiverDie
             return target;
         }
 
-#if UNITY_EDITOR
-
-        [SerializeField]
-        private bool _advance;
-
-        private void OnValidate()
-        {
-            if (!_advance || !Application.isPlaying)
-                return;
-
-            void ValidationSync()
-            {
-                EditorApplication.delayCall -= ValidationSync;
-                AdvanceCorridor();
-            }
-            EditorApplication.delayCall += ValidationSync;
-            _advance = false;
-        }
-
-#endif
-
-        private static SegmentDirection GetNewRandomDirection(SegmentDirection oldDirection)
-        {
-            var (a, b) = oldDirection.GetAdjacant();
-            return UnityEngine.Random.Range(0, 2) == 0 ? a : b;
-        }
-
         public void Entered(GremlinController player, CorridorSegmentDefinition definition)
         {
             if (_nextCorridor is null || _nextCorridor.Generation != definition.Generation || !definition.IsStart)
@@ -385,6 +398,12 @@ namespace LiverDie
         public void Exited(GremlinController player, CorridorSegmentDefinition definition)
         {
 
+        }
+
+        private static SegmentDirection GetNewRandomDirection(SegmentDirection oldDirection)
+        {
+            var (a, b) = oldDirection.GetAdjacant();
+            return UnityEngine.Random.Range(0, 2) == 0 ? a : b;
         }
     }
 }

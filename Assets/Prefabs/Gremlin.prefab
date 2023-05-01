@@ -631,6 +631,12 @@ MonoBehaviour:
   _jumpVelocity: 5
   _gravityAcceleration: 9.8
   _npcInteractRange: 2
+  _interactableLayers:
+    serializedVersion: 2
+    m_Bits: 2151677952
+  _blockingLayers:
+    serializedVersion: 2
+    m_Bits: 4194304
   HorizontalSensitivity: 30
   VerticalSensitivity: 30
   _notInJump: 1

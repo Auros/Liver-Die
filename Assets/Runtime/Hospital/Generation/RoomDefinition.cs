@@ -1,7 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using LiverDie.Hospital.Data;
+using LiverDie.Hospital.Generation;
+using LiverDie.NPC;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace LiverDie.Hospital.Generation
 {
@@ -16,6 +24,9 @@ namespace LiverDie.Hospital.Generation
 
         [SerializeField]
         private EntranceDefinition _entranceDefinition = null!;
+
+        [SerializeField]
+        public List<RendererInfo> RendererInfos = new();
 
         [PublicAPI]
         public Vector3 Size => _roomBounds.size;
@@ -53,5 +64,42 @@ namespace LiverDie.Hospital.Generation
         }
 
         private Transform GetRoomRoot() => _roomRoot ? _roomRoot : transform;
+
+        private void OnEnable()
+        {
+            foreach (var npc in GetComponentsInChildren<NpcDefinition>(true))
+            {
+                npc.gameObject.SetActive(true);
+            }
+        }
     }
 }
+
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(RoomDefinition))]
+public class RoomEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        var room = target as RoomDefinition;
+        if (GUILayout.Button("SET RENDERERPROPERTIES (DESTRUCTIVE!!!!!)"))
+        {
+            foreach (var renderer in room.RendererInfos)
+            {
+                renderer.Materials = renderer.Renderer.sharedMaterials.ToList();
+                var indices = new List<int>();
+                for (int i = 0; i < renderer.Materials.Count; i++)
+                {
+                    indices.Add(i);
+                }
+
+                renderer.MaterialIndices = indices;
+            }
+        }
+    }
+}
+#endif
+
