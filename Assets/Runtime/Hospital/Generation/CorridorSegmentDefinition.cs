@@ -48,6 +48,8 @@ namespace LiverDie.Hospital.Generation
 
         public bool IsEnd { get; set; }
 
+        public float Position { get; set; }
+
         [PublicAPI]
         public int Generation
         {
