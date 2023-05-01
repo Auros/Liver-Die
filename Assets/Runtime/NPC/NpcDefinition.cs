@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using LiverDie.Dialogue.Data;
 using LiverDie.NPC;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 #if UNITY_EDITOR
@@ -15,9 +14,9 @@ namespace LiverDie.NPC
     // handles visuals, liver, whatever
     public class NpcDefinition : MonoBehaviour
     {
-        private Color _baseShirtColor = new Color(231/255f, 63/255f, 87/255f);
-        private Color _basePantsColor = new Color(71/255f, 55/255f, 46/255f);
-        private Color _baseShoeColor = new Color(42/255f, 34/255f, 34/255f);
+        private static readonly Color _baseShirtColor = new(231 / 255f, 63 / 255f, 87 / 255f);
+        private static readonly Color _basePantsColor = new(71 / 255f, 55 / 255f, 46 / 255f);
+        private static readonly Color _baseShoeColor = new(42 / 255f, 34 / 255f, 34 / 255f);
 
         [SerializeField]
         private SkinnedMeshRenderer _renderer = null!;
@@ -26,14 +25,15 @@ namespace LiverDie.NPC
         private GameObject _liver = null!;
 
         [SerializeField]
-        private DialogueScriptableObject? _dialogue = null;
+        private DialogueScriptableObject? _dialogue;
 
         // main rigidbody
         [SerializeField]
         private Rigidbody _ragdollRigidbody = null!;
 
         [SerializeField]
-        public List<Rigidbody> Rigidbodies;
+        [FormerlySerializedAs("Rigidbodies")]
+        public Rigidbody[] _rigidbodies = Array.Empty<Rigidbody>();
 
         [SerializeField]
         private ParticleSystem _deathParticles = null!;
@@ -51,16 +51,19 @@ namespace LiverDie.NPC
         private float _deathExplosionRadius = 5f;
 
         public bool HasDialogue => _dialogue;
+
         public string Name => _dialogue ? _dialogue!.Name : string.Empty;
+
         public string[] Dialogue => _dialogue ? _dialogue!.Dialogue : Array.Empty<string>();
 
         public bool Interactable { get; private set; } = true;
 
         private void Start()
         {
-            foreach (var rigidbody in Rigidbodies)
+            foreach (var body in _rigidbodies)
             {
-                rigidbody.isKinematic = true;
+                body.detectCollisions = false;
+                body.isKinematic = true;
             }
 
             Color.RGBToHSV(_baseShirtColor, out float shirtH, out float shirtS, out float shirtV);
@@ -81,9 +84,10 @@ namespace LiverDie.NPC
             _liver.SetActive(false);
             Interactable = false;
 
-            foreach (var rigidbody in Rigidbodies)
+            foreach (var body in _rigidbodies)
             {
-                rigidbody.isKinematic = false;
+                body.isKinematic = false;
+                body.detectCollisions = true;
             }
 
             var animator = gameObject.GetComponent<Animator>();
@@ -98,9 +102,11 @@ namespace LiverDie.NPC
             deathParticleStartSpeed.constantMax = _deathParticleMaxForce;
             deathParticleStartSpeed.mode = ParticleSystemCurveMode.TwoConstants;
 
-            var relativePosition = _deathParticles.transform.position - position;
-            var awayPosition = _deathParticles.transform.position - relativePosition;
-            _deathParticles.transform.rotation = Quaternion.LookRotation(awayPosition, _deathParticles.transform.up);
+            var particleTransform = _deathParticles.transform;
+            var particlePosition = particleTransform.position;
+            var relativePosition = particlePosition - position;
+            var awayPosition = particlePosition - relativePosition;
+            _deathParticles.transform.rotation = Quaternion.LookRotation(awayPosition, particleTransform.up);
 
             _deathParticles.Play();
         }
@@ -118,7 +124,7 @@ public class MyScriptEditor : Editor
         var npc = target as NpcDefinition;
         if (GUILayout.Button("SET RIGIDBODIES (DESTRUCTIVE!!!!!)"))
         {
-            npc.Rigidbodies = npc.GetComponentsInChildren<Rigidbody>().ToList();
+            npc!._rigidbodies = npc.GetComponentsInChildren<Rigidbody>().ToArray();
         }
     }
 }
