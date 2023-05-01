@@ -28,6 +28,8 @@ namespace LiverDie.UI
         private float _lowpassAmount = 377;
         [SerializeField]
         private float _normalLowpassAmount = 22000;
+        [SerializeField]
+        private PostProcessingController _postProcessingController = null!;
 
         public void Restart()
         {
@@ -50,6 +52,7 @@ namespace LiverDie.UI
             _canvasGroup.alpha = 1;
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
+            _postProcessingController.Blur(0f);
             foreach (var group in _disabledHudElements) group.alpha = 0;
             _mixer.SetFloat("LowPass", _lowpassAmount);
             _boardController.SendScore(Mathf.RoundToInt(_liverController.StopTimer()*1000), _counterController.Livers, LiverboardController.SessionID).Forget();

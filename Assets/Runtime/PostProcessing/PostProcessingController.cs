@@ -15,11 +15,11 @@ namespace LiverDie
         // Start is called before the first frame update
         public void Blur(float time)
         {
-            _tweenManager.Run(0, 1, time, (x) => { _blurVolume.weight = x; }, Easer.FastLinear);
+            _tweenManager.Run(0, 1, time, (x) => { _blurVolume.weight = x; }, Easer.InOutSine);
         }
         public void UnBlur(float time)
         {
-            _tweenManager.Run(1, 0, time, (x) => { _blurVolume.weight = x; }, Easer.FastLinear);
+            _tweenManager.Run(1, 0, time, (x) => { _blurVolume.weight = x; }, Easer.InOutSine);
         }
     }
 }
