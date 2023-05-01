@@ -28,20 +28,11 @@ namespace LiverDie.UI
         private CancellationTokenSource _beatCancelSource = new();
 
         private float _beatLength;
-        private Tween? _activeTween;
 
         private void Start()
         {
             _beatLength = 60 / _beatsPerMinute / 2;
-            _liverController.OnLiverDecayed += OnLiverDecayed;
             UniTask.Void(BeatLoop);
-        }
-
-        // we are dead
-        private void OnLiverDecayed()
-        {
-            _activeTween?.Cancel();
-            _beatCancelSource.Cancel();
         }
 
         private async UniTaskVoid BeatLoop()
@@ -57,12 +48,8 @@ namespace LiverDie.UI
                         return;
 
                     var beatScale = i == 0 ? _bigBeatScale : _normalBeatScale;
-                    var tween = _tweenManager.Run(beatScale, 1f, _beatLength, LiverBeat, Easer.OutSine);
 
-                    _activeTween = tween;
-                    await tween;
-                    _activeTween = null;
-
+                    await _tweenManager.Run(beatScale, 1f, _beatLength, LiverBeat, Easer.OutSine);
                     await UniTask.Delay(delay, true, cancellationToken: token);
                 }
             }
@@ -73,7 +60,6 @@ namespace LiverDie.UI
         private void OnDestroy()
         {
             _beatCancelSource.Dispose();
-            _liverController.OnLiverDecayed -= OnLiverDecayed;
         }
     }
 }
