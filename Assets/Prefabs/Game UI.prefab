@@ -902,7 +902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2817,7 +2817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4202,6 +4202,7 @@ MonoBehaviour:
   _mixer: {fileID: 24100000, guid: e32bc2a0a0b4ddb4884a1f48f1a1d230, type: 2}
   _lowpassAmount: 377
   _normalLowpassAmount: 22000
+  _postProcessingController: {fileID: 0}
 --- !u!225 &5662628281025975448
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4624,8 +4625,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7822271530761172082}
   m_HandleRect: {fileID: 4207909900987303309}
   m_Direction: 2
-  m_Value: 1.0000011
-  m_Size: 0.4154826
+  m_Value: 1.000001
+  m_Size: 0.41548258
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5032,7 +5033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5837,8 +5838,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 222030431107841}
   m_HandleRect: {fileID: 2201329183051562777}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6874,6 +6875,7 @@ MonoBehaviour:
   _objectiveText: {fileID: 3103479637446805725}
   _thudClip: {fileID: 8300000, guid: db12ebbc3648bfc48b3892808e60b4e0, type: 3}
   _audioPool: {fileID: 4487750748517357710}
+  _flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &3103479637446805725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7298,6 +7300,7 @@ MonoBehaviour:
   _mixer: {fileID: 24100000, guid: e32bc2a0a0b4ddb4884a1f48f1a1d230, type: 2}
   _lowpassAmount: 377
   _normalLowpassAmount: 22000
+  _postProcessingController: {fileID: 0}
 --- !u!225 &7038561252272957564
 CanvasGroup:
   m_ObjectHideFlags: 0

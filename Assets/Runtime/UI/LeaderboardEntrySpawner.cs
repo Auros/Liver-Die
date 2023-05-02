@@ -26,13 +26,6 @@ namespace LiverDie
                 return _leaderboardEntries;
             }
         }
-        private void Start()
-        {
-            if (_leaderboardEntries == null)
-            {
-                Debug.Log("ohno");
-            }
-        }
 
         private void OnDestroy()
         {
