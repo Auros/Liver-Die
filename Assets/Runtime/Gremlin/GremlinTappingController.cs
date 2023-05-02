@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace LiverDie.Gremlin
 {
@@ -8,26 +9,44 @@ namespace LiverDie.Gremlin
         private GremlinController _gremlinController = null!;
 
         [SerializeField]
-        private AudioSource _audioSource = null!;
+        private Rigidbody _gremlinRigidbody = null!;
+
+        [SerializeField]
+        private float _stepsPerMeter = 3;
 
         private bool _cachedState = true;
+        private AudioSource[] _audioSources;
+        private float _timeSinceLastStep = 0f;
+
+        private void Start()
+        {
+            _audioSources = GetComponentsInChildren<AudioSource>();
+        }
 
         private void Update()
         {
             var shouldStep = _gremlinController.IsGrounded && _gremlinController.IsMoving;
 
-            if (_cachedState == shouldStep) return;
+            _timeSinceLastStep += Time.deltaTime;
 
-            _cachedState = shouldStep;
+            // speed * stepspermeter = stepspersecond, 1/stepspersecond = time between steps
+            if (_timeSinceLastStep > 1 / (_gremlinRigidbody.velocity.magnitude * _stepsPerMeter))
+            {
+                PlayRandomStep();
+                _timeSinceLastStep = 0;
+            }
+        }
 
-            if (shouldStep)
+        private void PlayRandomStep()
+        {
+            var availableSources = _audioSources.Where(x => !x.isPlaying).ToArray();
+            if (!availableSources.Any())
             {
-                _audioSource.Play();
+                Debug.Log("no step audio sources available to step");
+                return;
             }
-            else
-            {
-                _audioSource.Stop();
-            }
+            var step = Random.Range(0, availableSources.Length - 1);
+            availableSources[step].Play();
         }
     }
 }
