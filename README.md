@@ -16,15 +16,15 @@ Mouse sensitivity and Audio settings can be changed by pressing TAB
 - ESC/Tab: Pause
 
 ### Credits
-Auros (Programming)
-Caeden117 (Programming, SFX)
-Bobbie (Visuals, Programming)
-Rabbit (Visuals, Programming)
-Goobwabber (Programming)
-Rea Koehler (Programming)
-laurn (Music)
-raftario (Music, SFX, Liverboard Backend)
-Lulu (Liverboard Backend)
+- Auros (Programming)
+- Caeden117 (Programming, SFX)
+- Bobbie (Visuals, Programming)
+- Rabbit (Visuals, Programming)
+- Goobwabber (Programming)
+- Rea Koehler (Programming)
+- laurn (Music)
+- raftario (Music, SFX, Liverboard Backend)
+- Lulu (Liverboard Backend)
 
 ## Build
 
