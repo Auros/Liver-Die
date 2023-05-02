@@ -30,7 +30,7 @@ namespace LiverDie.Gremlin
             _timeSinceLastStep += Time.deltaTime;
 
             // speed * stepspermeter = stepspersecond, 1/stepspersecond = time between steps
-            if (_timeSinceLastStep > 1 / (_gremlinRigidbody.velocity.magnitude * _stepsPerMeter))
+            if (shouldStep && (_timeSinceLastStep > 1 / (_gremlinRigidbody.velocity.magnitude * _stepsPerMeter)))
             {
                 PlayRandomStep();
                 _timeSinceLastStep = 0;
