@@ -62,6 +62,8 @@ namespace LiverDie.UI
 
             foreach (var section in sections)
             {
+                await UniTask.Delay(250);
+
                 if (token.IsCancellationRequested) return;
 
                 _objectiveText.text += section;
@@ -70,7 +72,6 @@ namespace LiverDie.UI
                 var tween = _tweenManager.Run(_flashColor, Color.white, 0.2f, UpdateTextColor, Easer.InQuint);
                 tween.SetOnCancel(ResetTextColor);
                 await _tweenManager.Run(1.5f * Vector3.one, Vector3.one, 0.25f, UpdateScale, Easer.OutSine);
-                await UniTask.Delay(250);
             }
 
             _shouldThud = true;
