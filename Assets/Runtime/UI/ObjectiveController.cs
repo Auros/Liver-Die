@@ -28,9 +28,12 @@ namespace LiverDie.UI
         [SerializeField]
         private AudioPool _audioPool = null!;
 
-        private CancellationTokenSource? _cts = null!;
+        [SerializeField]
+        private Color _flashColor = Color.red;
 
-        private bool _shouldThud = false;
+        private CancellationTokenSource? _cts;
+
+        private bool _shouldThud;
 
         private void Start()
         {
@@ -64,6 +67,8 @@ namespace LiverDie.UI
                 _objectiveText.text += section;
 
                 if (_shouldThud) _audioPool.Play(_thudClip);
+                var tween = _tweenManager.Run(_flashColor, Color.white, 0.2f, UpdateTextColor, Easer.InQuint);
+                tween.SetOnCancel(ResetTextColor);
                 await _tweenManager.Run(1.5f * Vector3.one, Vector3.one, 0.25f, UpdateScale, Easer.OutSine);
                 await UniTask.Delay(250);
             }
@@ -72,6 +77,10 @@ namespace LiverDie.UI
         }
 
         private void UpdateScale(Vector3 scale) => transform.localScale = scale;
+
+        private void UpdateTextColor(Color color) => _objectiveText.color = color;
+
+        private void ResetTextColor() => _objectiveText.color = Color.white;
 
         private void OnDestroy()
         {

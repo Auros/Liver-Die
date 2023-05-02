@@ -32,6 +32,11 @@ namespace LiverDie
         [SerializeField]
         private CanvasGroup[] _allGameElements = null!;
 
+        [SerializeField]
+        private PostProcessingController _postProcessingController = null!;
+
+        [SerializeField]
+        private float _blurtime = 1f;
         public async UniTask TitleDropAsync()
         {
             var currentAlphas = new float[_allGameElements.Length];
@@ -50,7 +55,7 @@ namespace LiverDie
                 _ = _tweenManager.Run(currentAlphas[i], 0, _fadeDuration,
                     a => element.alpha = a, Easer.InOutSine);
             }
-
+            _postProcessingController.Blur(_blurtime);
             await UniTask.Delay(fadeTimeSpan);
 
             for (var i = 0; i < _titleDropElements.Length; i++)
@@ -64,6 +69,14 @@ namespace LiverDie
                     (a) => element.color = element.color.WithA(a), Easer.InExpo);
 
                 _audioPool.Play(_thudClip);
+
+                for (var j = 0; j <= i; j++)
+                {
+                    var subelement = _titleDropElements[j];
+
+                    _ = _tweenManager.Run(1.1f * Vector3.one, Vector3.one, _dropDuration,
+                        (s) => subelement.transform.localScale = s, Easer.InSine);
+                }
             }
 
             await UniTask.Delay(fadeTimeSpan);
@@ -86,7 +99,7 @@ namespace LiverDie
                 _ = _tweenManager.Run(1f, 0f, _fadeDuration,
                     (a) => element.color = element.color.WithA(a), Easer.InExpo);
             }
-
+            _postProcessingController.UnBlur(_fadeDuration);
             await UniTask.Delay(fadeTimeSpan);
         }
     }
