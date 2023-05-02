@@ -55,7 +55,6 @@ namespace LiverDie.Audio
 
             public void Play(float fadeTime)
             {
-                Debug.Log($"Playing {Enum.GetName(typeof(Stem), StemType)}");
                 if (IsTweening)
                 {
                     _currentTween?.Cancel();
@@ -69,8 +68,6 @@ namespace LiverDie.Audio
             {
                 if (AlwaysPlaying)
                     return;
-
-                Debug.Log($"Stopping {Enum.GetName(typeof(Stem), StemType)}");
 
                 if (IsTweening)
                 {
